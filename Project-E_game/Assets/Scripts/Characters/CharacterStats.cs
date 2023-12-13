@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class CharacterStats : MonoBehaviour
@@ -12,20 +13,25 @@ public class CharacterStats : MonoBehaviour
     [Header("Basic Stats")]
     public float shardPower;
     public float poise;
-    [SerializeField] private float health;
+    public float health;
     [SerializeField] private float maxHealth;
-    [SerializeField] private float damage;
- 
+
+    [Header("Detection")]
+    public float detectionRadius;
+    public float maxDetectionRadius = 50f;
+
     [Header("Posture Stats")]
     [SerializeField] private float posture;
     [SerializeField] private float maxPosture = 100f;
     [SerializeField] private float postureRegenerationRate = 1f;
+    [SerializeField] private float recoveryBaseDelay = 1f;
 
     [Header("Components")]
     public Rigidbody2D rb;
     public Animator animator;
 
     public enum DamageType { Physical, Magical }
+    private bool isPostureBroken = false;
 
     void Start()
     {
@@ -33,16 +39,21 @@ public class CharacterStats : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         StartCoroutine(PostureRegeneration());
+        detectionRadius = CalculateDetectionRadius(shardPower);
     }
-
+    float CalculateDetectionRadius(float power)
+    {
+        return Mathf.Clamp(power / 2, 1, 10);
+    }
     private IEnumerator PostureRegeneration()
     {
         while (true)
         {
-            if (posture < maxPosture)
+            if (posture < maxPosture && !isPostureBroken)
             {
                 float healthFactor = health / maxHealth;
-                posture = Mathf.Min(posture + (postureRegenerationRate * healthFactor * Time.deltaTime), maxPosture);
+                float poiseFactor = 1 + (poise / 2); // Adjust this to balance the influence of poise
+                posture = Mathf.Min(posture + (postureRegenerationRate * healthFactor * poiseFactor * Time.deltaTime), maxPosture);
             }
             yield return null;
         }
@@ -55,8 +66,22 @@ public class CharacterStats : MonoBehaviour
         if (posture <= 0)
         {
             TriggerPostureBreak();
-            posture = maxPosture;
+            StartCoroutine(PostureRecoveryDelay());
         }
+    }
+
+    private IEnumerator PostureRecoveryDelay()
+    {
+        isPostureBroken = true;
+
+        // Calculate delay based on health and poise
+        float healthFactor = health / maxHealth;
+        float poiseFactor = 1 + (poise / 2); 
+        float finalDelay = recoveryBaseDelay / (healthFactor * poiseFactor);
+
+        yield return new WaitForSeconds(finalDelay);
+        isPostureBroken = false;
+        StartCoroutine(PostureRegeneration());
     }
 
     private void TriggerPostureBreak()
@@ -98,5 +123,16 @@ public class CharacterStats : MonoBehaviour
     private void TriggerHitReaction()
     {
         Debug.Log(gameObject.name + " took damage.");
+    }
+    public void UpdateShardPower(float newShardPower)
+    {
+        shardPower = newShardPower;
+        // Recalculate detection radius based on new shard power
+        detectionRadius = CalculateDetectionRadius(shardPower);
+    }
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, detectionRadius);
     }
 }

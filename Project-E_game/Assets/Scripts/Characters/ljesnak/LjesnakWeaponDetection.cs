@@ -5,6 +5,27 @@ using UnityEngine;
 public class LjesnakWeaponDetection : MonoBehaviour
 {
     public float weaponDamage;
+    public float duration;
+    [SerializeField] float baseForce = 100f;
+
+    Animator animator;
+
+    private void Start()
+    {
+        animator = GetComponent<Animator>();
+        AnimationClip[] clips = animator.runtimeAnimatorController.animationClips;
+        foreach (AnimationClip clip in clips)
+        {
+            if (clip.name == "stabMotion")
+            {
+                duration = clip.length;
+            }
+            else if (clip.name == "swipeMotion")
+            {
+                duration = clip.length;
+            }
+        }
+    }
 
     void OnTriggerEnter2D(Collider2D other)
     {
@@ -39,7 +60,8 @@ public class LjesnakWeaponDetection : MonoBehaviour
 
     float CalculateKnockbackForce(CharacterStats targetStats)
     {
-
-        return 500f / targetStats.poise; 
+        float poiseFactor = Mathf.Clamp(1 - (targetStats.poise / 100f), 0.1f, 1f);
+        return baseForce * poiseFactor;
     }
 }
+
