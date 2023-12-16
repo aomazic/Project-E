@@ -17,11 +17,9 @@ public class ljesnakController : MonoBehaviour
 
     [Header("References")]
     [SerializeField] GameObject attackPoolManager;
-    [SerializeField] SpriteRenderer spriteRenderer;
     private AttackPool swipeAttackPool;
     private AttackPool stabAttackPool;
     private CharacterStats ljesnakStats;
-    private Rigidbody2D rb;
     private Dictionary<Collider2D, CharacterStats> characterStatsCache = new Dictionary<Collider2D, CharacterStats>();
     private float lastAttackTime = 0;
 
@@ -44,7 +42,6 @@ public class ljesnakController : MonoBehaviour
             }
         }
         ljesnakStats = GetComponent<CharacterStats>();
-        rb = GetComponent<Rigidbody2D>();
         StartCoroutine(DetectionCoroutine());
     }
 
@@ -73,20 +70,17 @@ public class ljesnakController : MonoBehaviour
     {
         Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, ljesnakStats.maxDetectionRadius, characterLayer);
         Transform target = FindHighestShardPower(hitColliders, ljesnakStats.detectionRadius);
-
         if (target != null && target != transform)
         {
+            ljesnakStats.animator.SetBool("IsMoving", true);
             directionToTarget = (target.position - transform.position).normalized;
-            if (directionToTarget.x > 0)
-            {
-                spriteRenderer.flipX = false;
-            }
-            else
-            {
-                spriteRenderer.flipX = true;
-            }
             MoveTowards();
             DecideAttack();
+        }
+        else
+        {
+            ljesnakStats.animator.SetBool("IsMoving", false);
+            directionToTarget = Vector3.zero;
         }
     }
 
@@ -135,8 +129,19 @@ public class ljesnakController : MonoBehaviour
 
     void MoveTowards()
     {
+        if (Mathf.Abs(directionToTarget.x) > Mathf.Abs(directionToTarget.y))
+        {
+            // Horizontal movement
+            ljesnakStats.animator.SetInteger("Direction", directionToTarget.x > 0 ? 2 : 3); // Right : Left
+        }
+        else if (Mathf.Abs(directionToTarget.y) > 0)
+        {
+            // Vertical movement
+            ljesnakStats.animator.SetInteger("Direction", directionToTarget.y > 0 ? 1 : 0); // Up : Down
+        }
+
         
-        rb.MovePosition(rb.position + (Vector2)directionToTarget * moveSpeed * Time.deltaTime);
+        ljesnakStats.rb.MovePosition(ljesnakStats.rb.position + (Vector2)directionToTarget * moveSpeed * Time.deltaTime);
     }
 
     void SwipeAttack()

@@ -51,7 +51,6 @@ public class LjesnakWeaponDetection : MonoBehaviour
             float forceStrength = CalculateKnockbackForce(targetStats);
             targetStats.rb.AddForce(forceDirection * forceStrength);
         }
-
         if (targetStats.animator != null)
         {
             targetStats.animator.SetTrigger("Interrupt");
