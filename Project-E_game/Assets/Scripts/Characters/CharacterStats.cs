@@ -2,29 +2,36 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class CharacterStats : MonoBehaviour
 {
     public event Action<float> OnHealthChanged;
     public event Action<float> OnPostureChanged;
     public event Action<CharacterStats> OnDeath;
-
+    [Header("Events")]
+    public UnityEvent OnStunned;
+    public UnityEvent OnStunRecovered;
 
     [Header("Basic Stats")]
-    public float shardPower;
-    public float poise;
+    public float shardPower = 10;
+    public float poise = 20;
     public float health;
-    [SerializeField] private float maxHealth;
+    [SerializeField] private float maxHealth = 100f;
 
     [Header("Detection")]
     public float detectionRadius;
     public float maxDetectionRadius = 50f;
 
     [Header("Posture Stats")]
-    [SerializeField] private float posture;
+    [SerializeField] private float posture = 40;
     [SerializeField] private float maxPosture = 100f;
     [SerializeField] private float postureRegenerationRate = 1f;
     [SerializeField] private float recoveryBaseDelay = 1f;
+
+    [Header("Stun Settings")]
+    [SerializeField] private float poiseFactor = 0.1f;
+    [SerializeField] private float baseStunDuration = 0.1f;
 
     [Header("Components")]
     public Rigidbody2D rb;
@@ -43,7 +50,13 @@ public class CharacterStats : MonoBehaviour
     }
     float CalculateDetectionRadius(float power)
     {
-        return Mathf.Clamp(power / 2, 1, 10);
+        power = Mathf.Abs(power);
+
+        float baseRadius = 1f;
+
+        float scaledRadius = baseRadius + Mathf.Log(power);
+
+        return scaledRadius;
     }
     private IEnumerator PostureRegeneration()
     {
@@ -87,11 +100,33 @@ public class CharacterStats : MonoBehaviour
     private void TriggerPostureBreak()
     {
         Debug.Log(gameObject.name + " posture broken.");
+        Stun(CalculateStunDurationBasedOnPoise());
+    }
+
+    public void Stun(float duration)
+    {
+        OnStunned?.Invoke(); // Trigger event when stunned
+
         if (animator != null)
         {
             animator.SetTrigger("Stunned");
         }
+        StartCoroutine(EndStun(duration));
     }
+
+    private float CalculateStunDurationBasedOnPoise()
+    {
+        float stunDuration = baseStunDuration + (poiseFactor * poise);
+        return stunDuration;
+    }
+
+
+    private IEnumerator EndStun(float duration)
+    {
+        yield return new WaitForSeconds(duration);
+        OnStunRecovered?.Invoke();
+    }
+
 
     public bool IsKnockbackImmune(DamageType damageType, float damageAmount)
     {
