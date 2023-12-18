@@ -1,1 +1,0 @@
-swipe anim duration 0s, fix taj cijeli dio
