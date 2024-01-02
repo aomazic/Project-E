@@ -5,6 +5,12 @@ TagManager:
   serializedVersion: 2
   tags:
   - Creature
+  - Target
+  - Prop
+  - World
+  - Wall
+  - Stairs
+  - Ground
   layers:
   - Default
   - TransparentFX

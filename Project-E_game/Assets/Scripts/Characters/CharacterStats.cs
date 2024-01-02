@@ -3,8 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-
-public class CharacterStats : MonoBehaviour
+using Unity.MLAgents;
+using Unity.MLAgents.Actuators;
+using Unity.MLAgents.Sensors;
+public class CharacterStats : Agent
 {
     public event Action<float> OnHealthChanged;
     public event Action<float> OnPostureChanged;
@@ -24,7 +26,7 @@ public class CharacterStats : MonoBehaviour
     public float maxDetectionRadius = 50f;
 
     [Header("Posture Stats")]
-    [SerializeField] private float posture = 40;
+    public float posture = 40;
     [SerializeField] private float maxPosture = 100f;
     [SerializeField] private float postureRegenerationRate = 1f;
     [SerializeField] private float recoveryBaseDelay = 1f;
@@ -40,13 +42,25 @@ public class CharacterStats : MonoBehaviour
     public enum DamageType { Physical, Magical }
     private bool isPostureBroken = false;
 
-    void Start()
+    private float initalShardPower;
+
+    public override void Initialize()
     {
+        initalShardPower = shardPower;
         health = maxHealth;
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         StartCoroutine(PostureRegeneration());
         detectionRadius = CalculateDetectionRadius(shardPower);
+    }
+    public override void OnEpisodeBegin()
+    {
+        health = maxHealth;
+        posture = maxPosture;
+        isPostureBroken = false;
+        shardPower = initalShardPower;
+        detectionRadius = CalculateDetectionRadius(shardPower);
+        gameObject.SetActive(true);
     }
     float CalculateDetectionRadius(float power)
     {
@@ -101,12 +115,14 @@ public class CharacterStats : MonoBehaviour
 
     private void TriggerPostureBreak()
     {
+        AddReward(-2f);
         Debug.Log(gameObject.name + " posture broken.");
-        Stun(CalculateStunDurationBasedOnPoise());
+        Stunned(CalculateStunDurationBasedOnPoise());
     }
 
-    public void Stun(float duration)
+    public void Stunned(float duration)
     {
+        AddReward(-1.0f);
         OnStunned?.Invoke(); // Trigger event when stunned
 
         if (animator != null)
@@ -137,6 +153,7 @@ public class CharacterStats : MonoBehaviour
 
     public void ApplyDamage(float damageAmount)
     {
+        AddReward(-0.5f);
         health -= damageAmount;
         OnHealthChanged?.Invoke(health);
 
@@ -152,9 +169,15 @@ public class CharacterStats : MonoBehaviour
 
     private void Die()
     {
+        // Stop all coroutines
+        StopAllCoroutines();
+
+        AddReward(-2f);
         OnDeath?.Invoke(this);
         Debug.Log(gameObject.name + " has died.");
-        Destroy(gameObject);
+
+        // Set the GameObject to inactive
+        gameObject.SetActive(false);
     }
 
     private void TriggerHitReaction()

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 
@@ -15,6 +16,9 @@ public class LjesnakWeaponDetection : MonoBehaviour
     [Header("Caching")]
     private Dictionary<Collider2D, CharacterStats> statsCache = new Dictionary<Collider2D, CharacterStats>();
     private CharacterStats characterStats;
+
+    [SerializeField] ljesnakController ljesnakController;
+    private bool attackHit = false;
 
     private void Start()
     {
@@ -34,8 +38,13 @@ public class LjesnakWeaponDetection : MonoBehaviour
 
         if (targetStats != null)
         {
+            attackHit = true;
             targetStats.ApplyDamage(weaponDamage);
             targetStats.ApplyPostureDamage(weaponDamage);
+            if(!targetStats.IsKnockbackImmune(CharacterStats.DamageType.Physical, weaponDamage))
+            {
+                ApplyKnockback(other, targetStats);
+            }
             if (targetStats.health <= 0)
             {
                 float shardPowerGain = targetStats.shardPower * 0.1f;
@@ -45,7 +54,9 @@ public class LjesnakWeaponDetection : MonoBehaviour
                 {
                     characterStats.GainShardPowerAndHealth(shardPowerGain, healthGain);
                 }
+                ljesnakController.OnEnemySlain(shardPowerGain);
             }
+            ljesnakController.OnAttackHitTarget();
         }
     }
 
@@ -59,7 +70,7 @@ public class LjesnakWeaponDetection : MonoBehaviour
             float forceStrength = CalculateKnockbackForce(targetStats.poise, attackImpact);
             targetStats.rb.AddForce(forceDirection * forceStrength);
         }
-        targetStats.Stun(CalculateKnockbackStunDuration(targetStats.poise, attackImpact));
+        targetStats.Stunned(CalculateKnockbackStunDuration(targetStats.poise, attackImpact));
     }
 
     float CalculateKnockbackForce(float targetPoise, float attackImpact)
@@ -93,5 +104,10 @@ public class LjesnakWeaponDetection : MonoBehaviour
         {
             transform.parent.gameObject.SetActive(false);
         }
+        if (!attackHit)
+        {
+            ljesnakController.OnAttackMissed();
+        }
+        attackHit = false;
     }
 }
