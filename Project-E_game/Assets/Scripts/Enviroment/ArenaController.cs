@@ -57,7 +57,21 @@ public class ArenaController : MonoBehaviour
         do
         {
             potentialPosition = RandomPosition(arenaMin, arenaMax);
+
+            // Check if the potential position is free of obstacles
             positionFree = !Physics2D.OverlapCircle(potentialPosition, spawnRadius);
+            foreach (Transform child in transform)
+            {
+                if (child.CompareTag("Prop"))
+                {
+                    float distanceToObstacle = Vector3.Distance(potentialPosition, child.position);
+                    if (distanceToObstacle < spawnRadius)
+                    {
+                        positionFree = false;
+                    }
+                }
+            }
+
             attempts++;
         } while (!positionFree && attempts < maxSpawnAttempts);
 

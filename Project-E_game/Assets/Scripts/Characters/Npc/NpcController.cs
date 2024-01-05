@@ -25,6 +25,7 @@ public class NpcController : Agent
     // Movement Settings
     [Header("Movement")]
     [SerializeField] private float moveSpeed = 1f;
+    Vector2 dirToGo;
 
     // Visual Feedback for NPC Actions
     [Header("Visual Feedback")]
@@ -50,6 +51,7 @@ public class NpcController : Agent
     }
     public override void CollectObservations(VectorSensor sensor)
     {
+        sensor.AddObservation(dirToGo);
         sensor.AddObservation(transform.position);
         sensor.AddObservation(goal.position);
     }
@@ -92,22 +94,11 @@ public class NpcController : Agent
     public override void OnActionReceived(ActionBuffers actionBuffers)
     {
         MoveAgent(actionBuffers.DiscreteActions);
-        if (goal != null && isIdle)
-        {
-            AddReward(-0.01f);
-        }
-        float distanceToGoal = Vector3.Distance(transform.position, goal.position);
-
-        AddReward(-0.001f * distanceToGoal);
     }
 
     void MoveAgent(ActionSegment<int> actions)
     {
         var moveAction = actions[0];
-
-        Vector2 dirToGo = Vector2.zero;
-
-        isIdle = false;
 
         // Define movement based on actions
         switch (moveAction)
@@ -137,7 +128,6 @@ public class NpcController : Agent
                 dirToGo = new Vector2(-1, -1).normalized;
                 break;
             case 9:
-                isIdle = true;
                 dirToGo = Vector2.zero;
                 break;
         }
