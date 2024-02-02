@@ -100,7 +100,7 @@ GameObject:
   - component: {fileID: 2577585254963922476}
   m_Layer: 20
   m_Name: PF Props Crate
-  m_TagString: Prop
+  m_TagString: MovableProp
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -23,7 +23,7 @@ public class ArenaController : MonoBehaviour
         // Clear out old obstacles first
         foreach (Transform child in transform)
         {
-            if (child.CompareTag("Prop"))
+            if (child.CompareTag("Prop") || child.CompareTag("MovableProp"))
             {
                 Destroy(child.gameObject);
             }
@@ -57,9 +57,8 @@ public class ArenaController : MonoBehaviour
         do
         {
             potentialPosition = RandomPosition(arenaMin, arenaMax);
-
-            // Check if the potential position is free of obstacles
             positionFree = !Physics2D.OverlapCircle(potentialPosition, spawnRadius);
+
             foreach (Transform child in transform)
             {
                 if (child.CompareTag("Prop"))

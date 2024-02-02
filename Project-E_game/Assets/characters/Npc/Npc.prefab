@@ -310,6 +310,7 @@ MonoBehaviour:
   - Player
   - Creature
   - Target
+  - MovableProp
   m_RaysPerDirection: 6
   m_MaxRayDegrees: 85
   m_SphereCastRadius: 0.65

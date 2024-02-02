@@ -20,7 +20,9 @@ public class NpcController : Agent
     // NPC and Goal Settings
     [Header("Positioning")]
     [SerializeField] private Transform goal;
-    private bool isIdle = false;
+    [SerializeField] bool randomPos = false;
+    private Vector3 startingTargetPos;
+    private Vector3 startingNpcPos;
 
     // Movement Settings
     [Header("Movement")]
@@ -43,6 +45,8 @@ public class NpcController : Agent
     SpriteRenderer goalSpriteRenderer;
     public override void Initialize()
     {
+        startingNpcPos = transform.localPosition;
+        startingTargetPos = goal.localPosition;
         npcSpriteRenderer = GetComponent<SpriteRenderer>();
         goalSpriteRenderer = goal.GetComponent<SpriteRenderer>();
         npcAnimator = GetComponent<Animator>();
@@ -64,31 +68,37 @@ public class NpcController : Agent
         {
             arena.SpawnObstacles();
         }
+        if (!randomPos)
+        {
+            transform.localPosition = startingNpcPos;
+            goal.localPosition = startingTargetPos;
+        }
+        else
+        {
+            // Select random layers for NPC and goal
+            int npcLayerIndex = Random.Range(0, numberOfLayers);
+            int goalLayerIndex = Random.Range(0, numberOfLayers);
 
-        // Select random layers for NPC and goal
-        int npcLayerIndex = Random.Range(0, numberOfLayers);
-        int goalLayerIndex = Random.Range(0, numberOfLayers);
+            transform.SetParent(arenaLayers[npcLayerIndex].transform, false); // Set parent for NPC
+            goal.SetParent(arenaLayers[goalLayerIndex].transform, false); // Set parent for goal
 
-        transform.SetParent(arenaLayers[npcLayerIndex].transform, false); // Set parent for NPC
-        goal.SetParent(arenaLayers[goalLayerIndex].transform, false); // Set parent for goal
+            npcSpriteRenderer.sortingLayerName = arenaLayers[npcLayerIndex].sortingLayerName;
+            goalSpriteRenderer.sortingLayerName = arenaLayers[goalLayerIndex].sortingLayerName;
 
-        npcSpriteRenderer.sortingLayerName = arenaLayers[npcLayerIndex].sortingLayerName;
-        goalSpriteRenderer.sortingLayerName = arenaLayers[goalLayerIndex].sortingLayerName;
+            // Set actual layers for NPC and Goal
+            gameObject.layer = arenaLayers[npcLayerIndex].gameObject.layer;
+            goal.gameObject.layer = arenaLayers[goalLayerIndex].gameObject.layer;
 
-        // Set actual layers for NPC and Goal
-        gameObject.layer = arenaLayers[npcLayerIndex].gameObject.layer;
-        goal.gameObject.layer = arenaLayers[goalLayerIndex].gameObject.layer;
+            // Find positions in the selected layers
+            Vector3 npcPosition = arenaLayers[npcLayerIndex].FindFreePosition();
+            Vector3 goalPosition = arenaLayers[goalLayerIndex].FindFreePosition();
 
-        // Find positions in the selected layers
-        Vector3 npcPosition = arenaLayers[npcLayerIndex].FindFreePosition();
-        Vector3 goalPosition = arenaLayers[goalLayerIndex].FindFreePosition();
-
-        transform.localPosition = npcPosition;
-        goal.localPosition = goalPosition;
-
+            transform.localPosition = npcPosition;
+            goal.localPosition = goalPosition;
+        }
+    
         // Reset ray rotation
         raysRotation.eulerAngles = new Vector3(0, 0, 180);
-
     }
 
     public override void OnActionReceived(ActionBuffers actionBuffers)
@@ -190,21 +200,26 @@ public class NpcController : Agent
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Fail();
+        ChangeTilemapColor(failureColor);
+        AddReward(-0.5f);
     }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        AddReward(-0.1f * Time.fixedDeltaTime);
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        AddReward(0.1f);
+    }
+
     private void ReachGoal()
     {
         AddReward(1f);
         AddReward(0.001f * (this.MaxStep - this.StepCount));
         ChangeTilemapColor(successColor);
         EndEpisode();    
-    }
-
-    private void Fail()
-    {
-        AddReward(-1f);
-        ChangeTilemapColor(failureColor);
-        EndEpisode();
     }
 
     private void ChangeTilemapColor(Color newColor)
