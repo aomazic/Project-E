@@ -1,0 +1,1972 @@
+[
+    {
+      "character": {
+        "name": "Fiona",
+        "age": 29,
+        "interests": ["Farming", "Botany", "Cooking"],
+        "description": "Fiona is a skilled farmer who tends to her crops with care and expertise.",
+        "morning_routine": ["Fiona begins her day by tending to her fields and nurturing her plants."],
+        "evening_routine": ["Fiona spends her evenings harvesting her crops and experimenting with new recipes."]
+      },
+      "question": "what to do today",
+      "memory": [
+        {
+          "date_created": "2023-02-02 08:00:00",
+          "recency": 0.8,
+          "importance": 0.7,
+          "relevance": 0.9,
+          "activity": "Harvesting a bountiful crop of ripe tomatoes from her garden"
+        },
+        {
+          "date_created": "2023-02-01 10:00:00",
+          "recency": 0.7,
+          "importance": 0.6,
+          "relevance": 0.8,
+          "activity": "Discovering a new hybrid plant species with unique medicinal properties"
+        },
+        {
+          "date_created": "2023-01-31 12:00:00",
+          "recency": 0.6,
+          "importance": 0.5,
+          "relevance": 0.7,
+          "activity": "Preparing a hearty stew using fresh ingredients from her farm"
+        },
+        {
+          "date_created": "2023-01-30 14:00:00",
+          "recency": 0.5,
+          "importance": 0.4,
+          "relevance": 0.6,
+          "activity": "Constructing a new greenhouse to expand her farming operations"
+        },
+        {
+          "date_created": "2023-01-29 16:00:00",
+          "recency": 0.4,
+          "importance": 0.3,
+          "relevance": 0.5,
+          "activity": "Teaching local children about the importance of sustainable agriculture"
+        }
+      ],
+      "response": "Today calls for a day of labor on the farm. Whether it's planting seeds, tending to crops, or preparing meals from fresh produce, there's much to be done.",
+      "action": {
+        "type": "take",
+        "object": "shovel"
+      }
+    },
+    {
+      "character": {
+        "name": "Marcus",
+        "age": 31,
+        "interests": ["Smithing", "Blacksmithing", "Metallurgy"],
+        "description": "Marcus is a master blacksmith who forges weapons and armor with unparalleled skill.",
+        "morning_routine": ["Marcus begins his day by stoking the forge and preparing his tools for a day of smithing."],
+        "evening_routine": ["Marcus spends his evenings inspecting his creations and honing his craft."]
+      },
+      "question": "what to do today",
+      "memory": [
+        {
+          "date_created": "2023-02-02 07:00:00",
+          "recency": 0.9,
+          "importance": 0.8,
+          "relevance": 0.9,
+          "activity": "Forging a masterful sword for a noble knight"
+        },
+        {
+          "date_created": "2023-02-01 09:00:00",
+          "recency": 0.8,
+          "importance": 0.7,
+          "relevance": 0.8,
+          "activity": "Repairing a suit of armor damaged in battle"
+        },
+        {
+          "date_created": "2023-01-31 11:00:00",
+          "recency": 0.7,
+          "importance": 0.6,
+          "relevance": 0.7,
+          "activity": "Experimenting with new alloys to create stronger, lighter armor"
+        },
+        {
+          "date_created": "2023-01-30 13:00:00",
+          "recency": 0.6,
+          "importance": 0.5,
+          "relevance": 0.6,
+          "activity": "Crafting intricate jewelry as a gift for his beloved"
+        },
+        {
+          "date_created": "2023-01-29 15:00:00",
+          "recency": 0.5,
+          "importance": 0.4,
+          "relevance": 0.5,
+          "activity": "Teaching an apprentice the finer points of blacksmithing"
+        }
+      ],
+      "response": "Today is a day for the forge. There are swords to be tempered, armor to be shaped, and creations to be brought to life in the flames.",
+      "action": {
+        "type": "take",
+        "object": "hammer"
+      }
+    },
+    {
+      "character": {
+        "name": "Ana",
+        "age": 20,
+        "interests": ["writing", "reading"],
+        "description": "Ana is a friendly person who enjoys creative pursuits.",
+        "morning_routine": ["Ana starts her day with a light breakfast followed by some quiet time for reading."],
+        "evening_routine": ["Ana typically spends her evenings writing or crafting stories before retiring to bed."]
+      },
+      "question": "what to do today",
+      "memory": [
+        {
+          "date_created": "2023-02-02 01:00:00",
+          "recency": 0.8,
+          "importance": 0.6,
+          "relevance": 0.7,
+          "activity": "breaking fast"
+        },
+        {
+          "date_created": "2023-02-02 02:00:00",
+          "recency": 0.9,
+          "importance": 0.9,
+          "relevance": 0.8,
+          "activity": "working on a tale"
+        },
+        {
+          "date_created": "2023-02-02 03:00:00",
+          "recency": 0.7,
+          "importance": 0.5,
+          "relevance": 0.6,
+          "activity": "researching in the library"
+        },
+        {
+          "date_created": "2023-01-31 08:00:00",
+          "recency": 0.6,
+          "importance": 0.7,
+          "relevance": 0.7,
+          "activity": "meeting with a mentor for writing advice"
+        },
+        {
+          "date_created": "2023-01-30 20:00:00",
+          "recency": 0.5,
+          "importance": 0.6,
+          "relevance": 0.5,
+          "activity": "attending a book club discussion"
+        }
+      ],
+      "response": "A moment's respite is due. A visit to the tavern with a trusted companion may yield fruitful conversation.",
+      "action": {
+        "type": "move",
+        "location": "tavern",
+        "duration": 30
+      }
+    },
+    {
+      "character": {
+        "name": "Ivan",
+        "age": 23,
+        "interests": ["Spearplay", "eating", "drinking"],
+        "description": "Ivan is a simple type who loves to fighting and drinking",
+        "morning_routine": ["Ivan  starts his day with heavy  breakfast followed by morning training routine."],
+        "evening_routine": ["Ivan is working as a armed henchman so he spends his eavnings following varius orders from his employer"]
+      },
+      "question": "Up for a few rounds at the tavern later after sun sets",
+      "memory": [
+        {
+          "date_created": "2023-02-02 13:00:00",
+          "recency": 1,
+          "importance": 0.7,
+          "relevance": 0.9,
+          "activity": "Mislav asks a question"
+        },
+        {
+          "date_created": "2023-02-02 12:55:00",
+          "recency": 0.9,
+          "importance": 0.6,
+          "relevance": 0.8,
+          "activity": "Mislav is spotted"
+        },
+        {
+          "date_created": "2023-02-01 03:00:00",
+          "recency": 0.7,
+          "importance": 0.8,
+          "relevance": 0.7,
+          "activity": "Take a drink in tavern"
+        },
+        {
+          "date_created": "2023-01-31 10:00:00",
+          "recency": 0.8,
+          "importance": 0.9,
+          "relevance": 0.8,
+          "activity": "Discussing battle strategies with comrades"
+        },
+        {
+          "date_created": "2023-01-30 15:00:00",
+          "recency": 0.6,
+          "importance": 0.7,
+          "relevance": 0.6,
+          "activity": "Training new recruits"
+        }
+      ],
+      "response": "I don't know, I drank myself to death last night.",
+      "action": {
+        "type": "conversation"
+      }
+    },
+    {
+      "character": {
+        "name": "Elena",
+        "age": 25,
+        "interests": ["Alchemy", "Herbalism", "Exploration"],
+        "description": "Elena is a skilled alchemist who is always seeking new ingredients for her potions.",
+        "morning_routine": ["Elena begins her day by foraging for rare herbs in the forest."],
+        "evening_routine": ["Elena spends her evenings experimenting with new potion recipes in her laboratory."]
+      },
+      "question": "Greetings! Any interesting findings on your explorations today?",
+      "memory": [
+        {
+          "date_created": "2023-02-02 06:00:00",
+          "recency": 0.7,
+          "importance": 0.8,
+          "relevance": 0.9,
+          "activity": "Discovering a rare flower with healing properties"
+        },
+        {
+          "date_created": "2023-02-01 10:00:00",
+          "recency": 0.6,
+          "importance": 0.7,
+          "relevance": 0.8,
+          "activity": "Trading potions with a fellow alchemist"
+        },
+        {
+          "date_created": "2023-01-31 15:00:00",
+          "recency": 0.5,
+          "importance": 0.6,
+          "relevance": 0.7,
+          "activity": "Encountering a pack of wolves while exploring"
+        },
+        {
+          "date_created": "2023-01-30 09:00:00",
+          "recency": 0.4,
+          "importance": 0.5,
+          "relevance": 0.6,
+          "activity": "Finding a hidden cave with ancient runes"
+        },
+        {
+          "date_created": "2023-01-29 12:00:00",
+          "recency": 0.3,
+          "importance": 0.4,
+          "relevance": 0.5,
+          "activity": "Brewing a new potion for increased vitality"
+        }
+      ],
+      "response": "Indeed, I stumbled upon a fascinating flower with potent healing properties. It shall prove useful in my alchemical endeavors.",
+      "action": {
+        "type": "move",
+        "location": "forest",
+        "duration": 60
+      }
+    },
+    {
+      "character": {
+        "name": "Darius",
+        "age": 30,
+        "interests": ["Swordsmanship", "Strategy", "Leadership"],
+        "description": "Darius is a seasoned warrior who leads his troops with honor and valor.",
+        "morning_routine": ["Darius begins his day with rigorous sword training to maintain his skills."],
+        "evening_routine": ["Darius spends his evenings strategizing battle plans and reviewing troop formations."]
+      },
+      "question": "Good morrow, any news from the battlefield?",
+      "memory": [
+        {
+          "date_created": "2023-02-02 12:00:00",
+          "recency": 0.9,
+          "importance": 0.9,
+          "relevance": 1,
+          "activity": "Successfully repelling a raid on the village"
+        },
+        {
+          "date_created": "2023-02-01 14:00:00",
+          "recency": 0.8,
+          "importance": 0.8,
+          "relevance": 0.9,
+          "activity": "Training new recruits in basic combat maneuvers"
+        },
+        {
+          "date_created": "2023-01-31 16:00:00",
+          "recency": 0.7,
+          "importance": 0.7,
+          "relevance": 0.8,
+          "activity": "Scouting enemy movements along the border"
+        },
+        {
+          "date_created": "2023-01-30 18:00:00",
+          "recency": 0.6,
+          "importance": 0.6,
+          "relevance": 0.7,
+          "activity": "Leading a successful ambush against enemy forces"
+        },
+        {
+          "date_created": "2023-01-29 20:00:00",
+          "recency": 0.5,
+          "importance": 0.5,
+          "relevance": 0.6,
+          "activity": "Strategizing defensive measures for the upcoming siege"
+        }
+      ],
+      "response": "The village remains secure, and our troops stand ready to defend against any threat.",
+      "action": {
+        "type": "move",
+        "location": "barracks",
+        "duration": 45
+      }
+    },
+    {
+      "character": {
+        "name": "Liliana",
+        "age": 28,
+        "interests": ["Healing", "Nature", "Spirituality"],
+        "description": "Liliana is a compassionate healer who seeks harmony with the natural world.",
+        "morning_routine": ["Liliana begins her day with meditation and communing with nature."],
+        "evening_routine": ["Liliana spends her evenings tending to the sick and injured in her healing sanctuary."]
+      },
+      "question": "Blessings upon you! Have any new herbs revealed themselves to you today?",
+      "memory": [
+        {
+          "date_created": "2023-02-02 09:00:00",
+          "recency": 0.8,
+          "importance": 0.7,
+          "relevance": 0.9,
+          "activity": "Discovering a rare mushroom with potent healing properties"
+        },
+        {
+          "date_created": "2023-02-01 11:00:00",
+          "recency": 0.7,
+          "importance": 0.6,
+          "relevance": 0.8,
+          "activity": "Harvesting medicinal herbs in the forest"
+        },
+        {
+          "date_created": "2023-01-31 14:00:00",
+          "recency": 0.6,
+          "importance": 0.5,
+          "relevance": 0.7,
+          "activity": "Preparing herbal remedies for common ailments"
+        },
+        {
+          "date_created": "2023-01-30 16:00:00",
+          "recency": 0.5,
+          "importance": 0.4,
+          "relevance": 0.6,
+          "activity": "Attending a gathering of healers to exchange knowledge"
+        },
+        {
+          "date_created": "2023-01-29 18:00:00",
+          "recency": 0.4,
+          "importance": 0.3,
+          "relevance": 0.5,
+          "activity": "Using herbal incense in a purification ceremony"
+        }
+      ],
+      "response": "Indeed, a rare mushroom with remarkable healing properties has graced my path today. It shall aid in the mending of many wounds.",
+      "action": {
+        "type": "move",
+        "location": "healing sanctuary",
+        "duration": 60
+      }
+    },
+    {
+      "character": {
+        "name": "Gareth",
+        "age": 35,
+        "interests": ["Smithing", "Combat", "Honorable Conduct"],
+        "description": "Gareth is a master blacksmith who believes in the importance of craftsmanship and honor.",
+        "morning_routine": ["Gareth begins his day by stoking the forge and preparing his tools for the day's work."],
+        "evening_routine": ["Gareth spends his evenings refining his techniques and crafting weapons and armor for his clients."]
+      },
+      "question": "Hail, friend! Have any new designs taken form under your skilled hands today?",
+      "memory": [
+        {
+          "date_created": "2023-02-02 10:00:00",
+          "recency": 0.9,
+          "importance": 0.8,
+          "relevance": 0.9,
+          "activity": "Forging a custom sword for a noble warrior"
+        },
+        {
+          "date_created": "2023-02-01 12:00:00",
+          "recency": 0.8,
+          "importance": 0.7,
+          "relevance": 0.8,
+          "activity": "Crafting ornate armor for a royal ceremony"
+        },
+        {
+          "date_created": "2023-01-31 15:00:00",
+          "recency": 0.7,
+          "importance": 0.6,
+          "relevance": 0.7,
+          "activity": "Repairing weapons and armor damaged in battle"
+        },
+        {
+          "date_created": "2023-01-30 17:00:00",
+          "recency": 0.6,
+          "importance": 0.5,
+          "relevance": 0.6,
+          "activity": "Creating intricate engravings on a set of gauntlets"
+        },
+        {
+          "date_created": "2023-01-29 19:00:00",
+          "recency": 0.5,
+          "importance": 0.4,
+          "relevance": 0.5,
+          "activity": "Experimenting with alloy compositions for improved durability"
+        }
+      ],
+      "response": "Indeed, a new blade of exquisite craftsmanship has been born from the flames of the forge today. It shall serve its wielder well.",
+      "action": {
+        "type": "move",
+        "location": "forge",
+        "duration": 90
+      }
+    },
+    {
+      "character": {
+        "name": "Thalia",
+        "age": 22,
+        "interests": ["Archery", "Exploration", "Nature"],
+        "description": "Thalia is a skilled archer who feels most at home amidst the beauty of the wilderness.",
+        "morning_routine": ["Thalia starts her day with a light breakfast and practices her archery skills in the forest."],
+        "evening_routine": ["Thalia spends her evenings honing her tracking abilities and studying the flora and fauna of the forest."]
+      },
+      "question": "what to do today",
+      "memory": [
+        {
+          "date_created": "2023-02-02 07:00:00",
+          "recency": 0.8,
+          "importance": 0.7,
+          "relevance": 0.9,
+          "activity": "Tracking a rare species of deer through the woods"
+        },
+        {
+          "date_created": "2023-02-01 09:00:00",
+          "recency": 0.7,
+          "importance": 0.6,
+          "relevance": 0.8,
+          "activity": "Discovering a hidden waterfall deep in the forest"
+        },
+        {
+          "date_created": "2023-01-31 12:00:00",
+          "recency": 0.6,
+          "importance": 0.5,
+          "relevance": 0.7,
+          "activity": "Rescuing an injured bird and nursing it back to health"
+        },
+        {
+          "date_created": "2023-01-30 14:00:00",
+          "recency": 0.5,
+          "importance": 0.4,
+          "relevance": 0.6,
+          "activity": "Exploring a cave system for hidden treasures"
+        },
+        {
+          "date_created": "2023-01-29 16:00:00",
+          "recency": 0.4,
+          "importance": 0.3,
+          "relevance": 0.5,
+          "activity": "Participating in a archery competition and emerging victorious"
+        }
+      ],
+      "response": "A day of exploration beckons. Perhaps a journey deeper into the forest to uncover its secrets or a visit to the hidden grove rumored to hold ancient wisdom.",
+      "action": {
+        "type": "move",
+        "location": "forest",
+        "duration": 120
+      }
+    },
+    {
+      "character": {
+        "name": "Rhys",
+        "age": 27,
+        "interests": ["Magic", "History", "Academia"],
+        "description": "Rhys is a studious mage who delves into ancient texts in search of arcane knowledge.",
+        "morning_routine": ["Rhys begins his day with meditation and studies ancient tomes in his library."],
+        "evening_routine": ["Rhys spends his evenings experimenting with new spells and documenting his findings."]
+      },
+      "question": "what to do today",
+      "memory": [
+        {
+          "date_created": "2023-02-02 08:00:00",
+          "recency": 0.9,
+          "importance": 0.8,
+          "relevance": 0.9,
+          "activity": "Unraveling the secrets of an ancient spell scroll"
+        },
+        {
+          "date_created": "2023-02-01 10:00:00",
+          "recency": 0.8,
+          "importance": 0.7,
+          "relevance": 0.8,
+          "activity": "Conducting experiments with elemental magic"
+        },
+        {
+          "date_created": "2023-01-31 13:00:00",
+          "recency": 0.7,
+          "importance": 0.6,
+          "relevance": 0.7,
+          "activity": "Teaching novice mages the fundamentals of spellcasting"
+        },
+        {
+          "date_created": "2023-01-30 15:00:00",
+          "recency": 0.6,
+          "importance": 0.5,
+          "relevance": 0.6,
+          "activity": "Attending a lecture on magical history at the arcane academy"
+        },
+        {
+          "date_created": "2023-01-29 17:00:00",
+          "recency": 0.5,
+          "importance": 0.4,
+          "relevance": 0.5,
+          "activity": "Exploring ancient ruins in search of lost artifacts"
+        }
+      ],
+      "response": "Today calls for a deep dive into the mysteries of magic. Perhaps uncovering forgotten spells or delving into the history of legendary wizards.",
+      "action": {
+        "type": "move",
+        "location": "library",
+        "duration": 90
+      }
+    },
+    {
+      "character": {
+        "name": "Soren",
+        "age": 33,
+        "interests": ["Infiltration", "Espionage", "Intelligence Gathering"],
+        "description": "Soren is a cunning spy who excels in the art of stealth and deception.",
+        "morning_routine": ["Soren begins his day by analyzing intelligence reports and planning covert operations."],
+        "evening_routine": ["Soren spends his evenings infiltrating enemy compounds and gathering valuable information."]
+      },
+      "question": "what to do today",
+      "memory": [
+        {
+          "date_created": "2023-02-02 09:00:00",
+          "recency": 0.8,
+          "importance": 0.7,
+          "relevance": 0.9,
+          "activity": "Infiltrating a rival faction's headquarters to gather intel"
+        },
+        {
+          "date_created": "2023-02-01 11:00:00",
+          "recency": 0.7,
+          "importance": 0.6,
+          "relevance": 0.8,
+          "activity": "Eavesdropping on a secret meeting between enemy commanders"
+        },
+        {
+          "date_created": "2023-01-31 12:00:00",
+          "recency": 0.6,
+          "importance": 0.5,
+          "relevance": 0.7,
+          "activity": "Disguising himself as a servant to gain access to a noble's estate"
+        },
+        {
+          "date_created": "2023-01-30 14:00:00",
+          "recency": 0.5,
+          "importance": 0.4,
+          "relevance": 0.6,
+          "activity": "Intercepting a courier carrying sensitive documents"
+        },
+        {
+          "date_created": "2023-01-29 16:00:00",
+          "recency": 0.4,
+          "importance": 0.3,
+          "relevance": 0.5,
+          "activity": "Planting false information to mislead enemy operatives"
+        }
+      ],
+      "response": "Today calls for another daring mission into the heart of enemy territory. There are secrets to uncover and plans to disrupt.",
+      "action": {
+        "type": "move",
+        "location": "enemy territory",
+        "duration": 120
+      }
+    },
+    {
+      "character": {
+        "name": "Lyra",
+        "age": 25,
+        "interests": ["Diplomacy", "Politics", "Negotiation"],
+        "description": "Lyra is a skilled diplomat who navigates the complexities of political intrigue with grace and tact.",
+        "morning_routine": ["Lyra begins her day by reviewing diplomatic correspondence and preparing for negotiations."],
+        "evening_routine": ["Lyra spends her evenings attending diplomatic functions and fostering alliances."]
+      },
+      "question": "what to do today",
+      "memory": [
+        {
+          "date_created": "2023-02-02 08:00:00",
+          "recency": 0.9,
+          "importance": 0.8,
+          "relevance": 0.9,
+          "activity": "Conducting peace talks between warring factions"
+        },
+        {
+          "date_created": "2023-02-01 10:00:00",
+          "recency": 0.8,
+          "importance": 0.7,
+          "relevance": 0.8,
+          "activity": "Negotiating a trade agreement between neighboring kingdoms"
+        },
+        {
+          "date_created": "2023-01-31 11:00:00",
+          "recency": 0.7,
+          "importance": 0.6,
+          "relevance": 0.7,
+          "activity": "Mediating a dispute over territory rights"
+        },
+        {
+          "date_created": "2023-01-30 13:00:00",
+          "recency": 0.6,
+          "importance": 0.5,
+          "relevance": 0.6,
+          "activity": "Building diplomatic bridges with a reclusive kingdom"
+        },
+        {
+          "date_created": "2023-01-29 15:00:00",
+          "recency": 0.5,
+          "importance": 0.4,
+          "relevance": 0.5,
+          "activity": "Hosting a summit to address regional conflicts"
+        }
+      ],
+      "response": "Today presents another opportunity to engage in the delicate dance of diplomacy. There are negotiations to facilitate and alliances to strengthen.",
+      "action": {
+        "type": "move",
+        "location": "diplomatic chamber",
+        "duration": 90
+      }
+    },
+    {
+      "character": {
+        "name": "Cassius",
+        "age": 28,
+        "interests": ["Alchemy", "Experimentation", "Alchemy"],
+        "description": "Cassius is a dedicated alchemist who is endlessly curious about the mysteries of transmutation.",
+        "morning_routine": ["Cassius starts his day by brewing potions and conducting experiments in his laboratory."],
+        "evening_routine": ["Cassius spends his evenings refining his concoctions and studying alchemical texts."]
+      },
+      "question": "what to do today",
+      "memory": [
+        {
+          "date_created": "2023-02-02 09:00:00",
+          "recency": 0.8,
+          "importance": 0.7,
+          "relevance": 0.9,
+          "activity": "Successfully synthesizing a new type of healing elixir"
+        },
+        {
+          "date_created": "2023-02-01 11:00:00",
+          "recency": 0.7,
+          "importance": 0.6,
+          "relevance": 0.8,
+          "activity": "Conducting experiments to enhance the potency of fire-based potions"
+        },
+        {
+          "date_created": "2023-01-31 12:00:00",
+          "recency": 0.6,
+          "importance": 0.5,
+          "relevance": 0.7,
+          "activity": "Researching the properties of rare herbs for use in alchemical brews"
+        },
+        {
+          "date_created": "2023-01-30 14:00:00",
+          "recency": 0.5,
+          "importance": 0.4,
+          "relevance": 0.6,
+          "activity": "Experimenting with transmutation to create precious metals"
+        },
+        {
+          "date_created": "2023-01-29 16:00:00",
+          "recency": 0.4,
+          "importance": 0.3,
+          "relevance": 0.5,
+          "activity": "Developing a potion to enhance cognitive abilities"
+        }
+      ],
+      "response": "Today calls for further exploration of the alchemical arts. There are potions to brew, experiments to conduct, and mysteries to unravel.",
+      "action": {
+        "type": "move",
+        "location": "laboratory",
+        "duration": 120
+      }
+    },
+    {
+      "character": {
+        "name": "Astrid",
+        "age": 30,
+        "interests": ["Music", "Performance", "Entertainment"],
+        "description": "Astrid is a charismatic bard who captivates audiences with her enchanting melodies and captivating performances.",
+        "morning_routine": ["Astrid starts her day by practicing her songs and rehearsing her performances."],
+        "evening_routine": ["Astrid spends her evenings performing at taverns and entertaining patrons with her music."]
+      },
+      "question": "what to do today",
+      "memory": [
+        {
+          "date_created": "2023-02-02 10:00:00",
+          "recency": 0.9,
+          "importance": 0.8,
+          "relevance": 0.9,
+          "activity": "Entertaining a crowd with a rousing rendition of a traditional ballad"
+        },
+        {
+          "date_created": "2023-02-01 12:00:00",
+          "recency": 0.8,
+          "importance": 0.7,
+          "relevance": 0.8,
+          "activity": "Performing at a noble's banquet and receiving thunderous applause"
+        },
+        {
+          "date_created": "2023-01-31 13:00:00",
+          "recency": 0.7,
+          "importance": 0.6,
+          "relevance": 0.7,
+          "activity": "Busking in the town square and attracting a large audience"
+        },
+        {
+          "date_created": "2023-01-30 15:00:00",
+          "recency": 0.6,
+          "importance": 0.5,
+          "relevance": 0.6,
+          "activity": "Collaborating with other musicians to compose a new song"
+        },
+        {
+          "date_created": "2023-01-29 17:00:00",
+          "recency": 0.5,
+          "importance": 0.4,
+          "relevance": 0.5,
+          "activity": "Participating in a bardic competition and emerging victorious"
+        }
+      ],
+      "response": "Today offers another opportunity to share the gift of music with the world. Whether it's performing at a tavern or composing a new melody, the stage awaits.",
+      "action": {
+        "type": "move",
+        "location": "tavern",
+        "duration": 90
+      }
+    },
+    {
+      "character": {
+        "name": "Elena",
+        "age": 26,
+        "interests": ["Healing", "Nature", "Adventure"],
+        "description": "Elena is an adventurous healer who finds solace in nature's embrace.",
+        "morning_routine": ["Elena begins her day with a brisk walk in the forest, absorbing the healing energies of the natural world."],
+        "evening_routine": ["Elena spends her evenings tending to her garden and reflecting on the day's adventures."]
+      },
+      "question": "what to do today",
+      "memory": [
+        {
+          "date_created": "2023-02-02 08:00:00",
+          "recency": 0.8,
+          "importance": 0.7,
+          "relevance": 0.9,
+          "activity": "Discovering a hidden waterfall deep in the forest"
+        },
+        {
+          "date_created": "2023-02-01 10:00:00",
+          "recency": 0.7,
+          "importance": 0.6,
+          "relevance": 0.8,
+          "activity": "Healing a wounded animal and releasing it back into the wild"
+        },
+        {
+          "date_created": "2023-01-31 12:00:00",
+          "recency": 0.6,
+          "importance": 0.5,
+          "relevance": 0.7,
+          "activity": "Exploring a hidden cave and discovering rare medicinal herbs"
+        },
+        {
+          "date_created": "2023-01-30 14:00:00",
+          "recency": 0.5,
+          "importance": 0.4,
+          "relevance": 0.6,
+          "activity": "Rescuing a lost child and guiding them safely back to their village"
+        },
+        {
+          "date_created": "2023-01-29 16:00:00",
+          "recency": 0.4,
+          "importance": 0.3,
+          "relevance": 0.5,
+          "activity": "Performing a purification ritual to cleanse a cursed grove"
+        }
+      ],
+      "response": "Today calls for an adventure into the heart of nature. Whether it's exploring hidden wonders or aiding those in need, there are paths to tread and lives to touch.",
+      "action": {
+        "type": "move",
+        "location": "forest",
+        "duration": 120
+      }
+    },
+    {
+      "character": {
+        "name": "Gideon",
+        "age": 35,
+        "interests": ["Strategy", "Leadership", "Tactics"],
+        "description": "Gideon is a seasoned commander who leads his troops with wisdom and valor.",
+        "morning_routine": ["Gideon begins his day by reviewing maps and strategizing for upcoming battles."],
+        "evening_routine": ["Gideon spends his evenings training his soldiers and imparting his tactical knowledge."]
+      },
+      "question": "what to do today",
+      "memory": [
+        {
+          "date_created": "2023-02-02 07:00:00",
+          "recency": 0.9,
+          "importance": 0.8,
+          "relevance": 0.9,
+          "activity": "Successfully repelling a surprise attack by enemy forces"
+        },
+        {
+          "date_created": "2023-02-01 09:00:00",
+          "recency": 0.8,
+          "importance": 0.7,
+          "relevance": 0.8,
+          "activity": "Devising a diversionary tactic to draw enemy forces away from a strategic location"
+        },
+        {
+          "date_created": "2023-01-31 11:00:00",
+          "recency": 0.7,
+          "importance": 0.6,
+          "relevance": 0.7,
+          "activity": "Leading a successful reconnaissance mission deep into enemy territory"
+        },
+        {
+          "date_created": "2023-01-30 13:00:00",
+          "recency": 0.6,
+          "importance": 0.5,
+          "relevance": 0.6,
+          "activity": "Strategizing with allied commanders to coordinate a joint offensive"
+        },
+        {
+          "date_created": "2023-01-29 15:00:00",
+          "recency": 0.5,
+          "importance": 0.4,
+          "relevance": 0.5,
+          "activity": "Analyzing enemy troop movements and identifying vulnerabilities"
+        }
+      ],
+      "response": "Today requires a careful assessment of our strategic position and preparation for the challenges ahead. There are plans to refine and troops to train.",
+      "action": {
+        "type": "use",
+        "object": "bed",
+        "duration": 1000
+      }
+    },
+    {
+      "character": {
+        "name": "Fiona",
+        "age": 29,
+        "interests": ["Farming", "Botany", "Cooking"],
+        "description": "Fiona is a skilled farmer who tends to her crops with care and expertise.",
+        "morning_routine": ["Fiona begins her day by tending to her fields and nurturing her plants."],
+        "evening_routine": ["Fiona spends her evenings harvesting her crops and experimenting with new recipes."]
+      },
+      "question": "what to do today",
+      "memory": [
+        {
+          "date_created": "2023-02-02 08:00:00",
+          "recency": 0.8,
+          "importance": 0.7,
+          "relevance": 0.9,
+          "activity": "Harvesting a bountiful crop of ripe tomatoes from her garden"
+        },
+        {
+          "date_created": "2023-02-01 10:00:00",
+          "recency": 0.7,
+          "importance": 0.6,
+          "relevance": 0.8,
+          "activity": "Discovering a new hybrid plant species with unique medicinal properties"
+        },
+        {
+          "date_created": "2023-01-31 12:00:00",
+          "recency": 0.6,
+          "importance": 0.5,
+          "relevance": 0.7,
+          "activity": "Preparing a hearty stew using fresh ingredients from her farm"
+        },
+        {
+          "date_created": "2023-01-30 14:00:00",
+          "recency": 0.5,
+          "importance": 0.4,
+          "relevance": 0.6,
+          "activity": "Constructing a new greenhouse to expand her farming operations"
+        },
+        {
+          "date_created": "2023-01-29 16:00:00",
+          "recency": 0.4,
+          "importance": 0.3,
+          "relevance": 0.5,
+          "activity": "Teaching local children about the importance of sustainable agriculture"
+        }
+      ],
+      "response": "Today calls for a day of labor on the farm. Whether it's planting seeds, tending to crops, or preparing meals from fresh produce, there's much to be done.",
+      "action": {
+        "type": "take",
+        "object": "shovel"
+      }
+    },
+    {
+      "character": {
+        "name": "Marcus",
+        "age": 31,
+        "interests": ["Smithing", "Blacksmithing", "Metallurgy"],
+        "description": "Marcus is a master blacksmith who forges weapons and armor with unparalleled skill.",
+        "morning_routine": ["Marcus begins his day by stoking the forge and preparing his tools for a day of smithing."],
+        "evening_routine": ["Marcus spends his evenings inspecting his creations and honing his craft."]
+      },
+      "question": "what to do today",
+      "memory": [
+        {
+          "date_created": "2023-02-02 07:00:00",
+          "recency": 0.9,
+          "importance": 0.8,
+          "relevance": 0.9,
+          "activity": "Forging a masterful sword for a noble knight"
+        },
+        {
+          "date_created": "2023-02-01 09:00:00",
+          "recency": 0.8,
+          "importance": 0.7,
+          "relevance": 0.8,
+          "activity": "Repairing a suit of armor damaged in battle"
+        },
+        {
+          "date_created": "2023-01-31 11:00:00",
+          "recency": 0.7,
+          "importance": 0.6,
+          "relevance": 0.7,
+          "activity": "Experimenting with new alloys to create stronger, lighter armor"
+        },
+        {
+          "date_created": "2023-01-30 13:00:00",
+          "recency": 0.6,
+          "importance": 0.5,
+          "relevance": 0.6,
+          "activity": "Crafting intricate jewelry as a gift for his beloved"
+        },
+        {
+          "date_created": "2023-01-29 15:00:00",
+          "recency": 0.5,
+          "importance": 0.4,
+          "relevance": 0.5,
+          "activity": "Teaching an apprentice the finer points of blacksmithing"
+        }
+      ],
+      "response": "Today is a day for the forge. There are swords to be tempered, armor to be shaped, and creations to be brought to life in the flames.",
+      "action": {
+        "type": "take",
+        "object": "hammer"
+      }
+    },
+    {
+      "character": {
+        "name": "Elias",
+        "age": 35,
+        "interests": ["Exploration", "Survival", "Archaeology"],
+        "description": "Elias is an intrepid explorer who seeks ancient artifacts and hidden treasures.",
+        "morning_routine": ["Elias begins his day by preparing his gear and planning his exploration routes."],
+        "evening_routine": ["Elias spends his evenings documenting his findings and studying ancient texts."]
+      },
+      "question": "what to do today",
+      "memory": [
+        {
+          "date_created": "2023-02-02 08:00:00",
+          "recency": 0.8,
+          "importance": 0.7,
+          "relevance": 0.9,
+          "activity": "Discovering an ancient temple buried deep in the jungle"
+        },
+        {
+          "date_created": "2023-02-01 10:00:00",
+          "recency": 0.7,
+          "importance": 0.6,
+          "relevance": 0.8,
+          "activity": "Navigating treacherous terrain to uncover a hidden tomb"
+        },
+        {
+          "date_created": "2023-01-31 12:00:00",
+          "recency": 0.6,
+          "importance": 0.5,
+          "relevance": 0.7,
+          "activity": "Facing off against wild beasts to protect his expedition team"
+        },
+        {
+          "date_created": "2023-01-30 14:00:00",
+          "recency": 0.5,
+          "importance": 0.4,
+          "relevance": 0.6,
+          "activity": "Surviving a sudden storm while exploring a remote island"
+        },
+        {
+          "date_created": "2023-01-29 16:00:00",
+          "recency": 0.4,
+          "importance": 0.3,
+          "relevance": 0.5,
+          "activity": "Discovering a lost city hidden beneath the sands of the desert"
+        },
+        {
+          "date_created": "2023-02-02 08:00:00",
+          "recency": 0.9,
+          "importance": 0.8,
+          "relevance": 0.9,
+          "activity": "Raining heavily"
+        }
+      ],
+      "response": "Today offers another opportunity for discovery and adventure. Whether it's exploring uncharted territories or braving the elements, there are mysteries waiting to be unraveled.",
+      "action": {
+        "type": "take",
+        "object": "umbrella"
+      }
+    },
+    {
+      "character": {
+        "name": "Aria",
+        "age": 28,
+        "interests": ["Diplomacy", "Strategy", "Negotiation"],
+        "description": "Aria is a skilled diplomat who navigates the intricacies of politics with grace and finesse.",
+        "morning_routine": ["Aria begins her day by reviewing diplomatic reports and planning her negotiation strategies."],
+        "evening_routine": ["Aria spends her evenings attending formal receptions and engaging in diplomatic discussions."]
+      },
+      "question": "what to do today",
+      "memory": [
+        {
+          "date_created": "2023-02-02 07:00:00",
+          "recency": 0.9,
+          "importance": 0.8,
+          "relevance": 0.9,
+          "activity": "Negotiating a peace treaty between two warring factions"
+        },
+        {
+          "date_created": "2023-02-01 09:00:00",
+          "recency": 0.8,
+          "importance": 0.7,
+          "relevance": 0.8,
+          "activity": "Mediating a trade dispute between neighboring kingdoms"
+        },
+        {
+          "date_created": "2023-01-31 11:00:00",
+          "recency": 0.7,
+          "importance": 0.6,
+          "relevance": 0.7,
+          "activity": "Forming alliances with foreign powers to strengthen diplomatic ties"
+        },
+        {
+          "date_created": "2023-01-30 13:00:00",
+          "recency": 0.6,
+          "importance": 0.5,
+          "relevance": 0.6,
+          "activity": "Resolving a border dispute through skilled negotiation and compromise"
+        },
+        {
+          "date_created": "2023-01-29 15:00:00",
+          "recency": 0.5,
+          "importance": 0.4,
+          "relevance": 0.5,
+          "activity": "Attending a diplomatic summit to address regional conflicts"
+        },
+        {
+          "date_created": "2023-02-02 07:00:00",
+          "recency": 0.6,
+          "importance": 0.5,
+          "relevance": 0.7,
+          "activity": "Overcast skies with a chance of rain"
+        }
+      ],
+      "response": "Today presents an opportunity to further diplomatic relations and foster peace. Whether it's negotiating treaties or building alliances, there are diplomatic endeavors to pursue.",
+      "action": {
+        "type": "take",
+        "object": "notebook"
+      }
+    },
+    {
+      "character": {
+        "name": "Thorn",
+        "age": 30,
+        "interests": ["Alchemy", "Exploration", "Mysteries"],
+        "description": "Thorn is an enigmatic alchemist who delves into the secrets of the arcane.",
+        "morning_routine": ["Thorn begins his day by brewing potions and concocting elixirs in his laboratory."],
+        "evening_routine": ["Thorn spends his evenings studying ancient texts and unraveling mystical puzzles."]
+      },
+      "question": "what to do today",
+      "memory": [
+        {
+          "date_created": "2023-02-02 08:00:00",
+          "recency": 0.8,
+          "importance": 0.7,
+          "relevance": 0.9,
+          "activity": "Its sunny outside"
+        },
+        {
+          "date_created": "2023-02-01 10:00:00",
+          "recency": 0.7,
+          "importance": 0.6,
+          "relevance": 0.8,
+          "activity": "Unlocking the secrets of a forgotten potion recipe hidden in an ancient tome"
+        },
+        {
+          "date_created": "2023-01-31 12:00:00",
+          "recency": 0.6,
+          "importance": 0.5,
+          "relevance": 0.7,
+          "activity": "Exploring a mysterious cave filled with glowing mushrooms and magical artifacts"
+        },
+        {
+          "date_created": "2023-01-30 14:00:00",
+          "recency": 0.5,
+          "importance": 0.4,
+          "relevance": 0.6,
+          "activity": "Conducting experiments to create a potion of invisibility"
+        },
+        {
+          "date_created": "2023-01-29 16:00:00",
+          "recency": 0.4,
+          "importance": 0.3,
+          "relevance": 0.5,
+          "activity": "Battling a dark sorcerer to retrieve a powerful artifact"
+        }
+      ],
+      "response": "Today beckons with the promise of arcane discoveries and mystical pursuits. Whether it's uncovering ancient secrets or brewing potent elixirs, there are mysteries waiting to be unraveled.",
+      "action": {
+        "type": "take",
+        "object": "spellbook"
+      }
+    },
+    {
+      "character": {
+        "name": "Gwendolyn",
+        "age": 25,
+        "interests": ["Swordsmanship", "Adventuring", "Justice"],
+        "description": "Gwendolyn is a valiant warrior who fights for justice and defends the innocent.",
+        "morning_routine": ["Gwendolyn begins her day by honing her sword skills and training for battle."],
+        "evening_routine": ["Gwendolyn spends her evenings patrolling the streets and safeguarding her community."]
+      },
+      "question": "what to do today",
+      "memory": [
+        {
+          "date_created": "2023-02-02 07:00:00",
+          "recency": 0.9,
+          "importance": 0.8,
+          "relevance": 0.9,
+          "activity": "Foiling a bandit ambush and rescuing travelers on the road"
+        },
+        {
+          "date_created": "2023-02-01 09:00:00",
+          "recency": 0.8,
+          "importance": 0.7,
+          "relevance": 0.8,
+          "activity": "Its sunny outside"
+        },
+        {
+          "date_created": "2023-01-31 11:00:00",
+          "recency": 0.7,
+          "importance": 0.6,
+          "relevance": 0.7,
+          "activity": "Rescuing a kidnapped noble from a nefarious criminal syndicate"
+        },
+        {
+          "date_created": "2023-01-30 13:00:00",
+          "recency": 0.6,
+          "importance": 0.5,
+          "relevance": 0.6,
+          "activity": "Embarking on a quest to recover a stolen artifact of great importance"
+        },
+        {
+          "date_created": "2023-01-29 15:00:00",
+          "recency": 0.5,
+          "importance": 0.4,
+          "relevance": 0.5,
+          "activity": "Training a group of young recruits in the art of swordsmanship"
+        }
+      ],
+      "response": "Today calls for valor and bravery in the face of danger. Whether it's battling monsters or defending the innocent, there are challenges to overcome and justice to uphold.",
+      "action": {
+        "type": "take",
+        "object": "shield"
+      }
+    },
+    {
+      "character": {
+        "name": "Luther",
+        "age": 42,
+        "interests": ["Fishing", "Woodworking", "Storytelling"],
+        "description": "Luther is a seasoned fisherman who crafts wooden boats and spins tales of adventure.",
+        "morning_routine": ["Luther begins his day by setting out to sea in his trusty fishing boat."],
+        "evening_routine": ["Luther spends his evenings carving intricate designs into wood and recounting stories to eager listeners."]
+      },
+      "question": "what to do today",
+      "memory": [
+        {
+          "date_created": "2023-02-02 08:00:00",
+          "recency": 0.8,
+          "importance": 0.7,
+          "relevance": 0.9,
+          "activity": "Catching a variety of fish in calm waters under a clear sky"
+        },
+        {
+          "date_created": "2023-02-01 10:00:00",
+          "recency": 0.7,
+          "importance": 0.6,
+          "relevance": 0.8,
+          "activity": "Navigating through foggy conditions to find the perfect fishing spot"
+        },
+        {
+          "date_created": "2023-01-31 12:00:00",
+          "recency": 0.6,
+          "importance": 0.5,
+          "relevance": 0.7,
+          "activity": "Weathering a storm at sea and braving rough waters to return home"
+        },
+        {
+          "date_created": "2023-01-30 14:00:00",
+          "recency": 0.5,
+          "importance": 0.4,
+          "relevance": 0.6,
+          "activity": "Building a new fishing boat to replace his old one damaged in a previous storm"
+        },
+        {
+          "date_created": "2023-01-29 16:00:00",
+          "recency": 0.4,
+          "importance": 0.3,
+          "relevance": 0.5,
+          "activity": "Telling tales of legendary sea monsters and lost treasures to a captivated audience"
+        },
+        {
+          "date_created": "2023-02-02 08:00:00",
+          "recency": 0.9,
+          "importance": 0.8,
+          "relevance": 0.9,
+          "activity": "Clear sky with a gentle breeze"
+        }
+      ],
+      "response": "Today offers another opportunity for adventure on the high seas. Whether it's fishing for exotic catches or crafting new boats, there are tales waiting to be written.",
+      "action": {
+        "type": "take",
+        "object": "fishing rod"
+      }
+    },
+    {
+      "character": {
+        "name": "Elara",
+        "age": 27,
+        "interests": ["Gardening", "Botany", "Herbalism"],
+        "description": "Elara is a gentle soul who tends to her garden with love and care, harnessing the power of nature's bounty.",
+        "morning_routine": ["Elara begins her day by tending to her garden, nurturing her plants and herbs."],
+        "evening_routine": ["Elara spends her evenings concocting herbal remedies and meditating amidst her flourishing garden."]
+      },
+      "question": "what to do today",
+      "memory": [
+        {
+          "date_created": "2023-02-02 07:00:00",
+          "recency": 0.9,
+          "importance": 0.8,
+          "relevance": 0.9,
+          "activity": "Harvesting a bountiful crop of herbs and flowers under the warm sun"
+        },
+        {
+          "date_created": "2023-02-01 09:00:00",
+          "recency": 0.8,
+          "importance": 0.7,
+          "relevance": 0.8,
+          "activity": "Protecting her garden from a sudden hailstorm, shielding delicate plants from harm"
+        },
+        {
+          "date_created": "2023-01-31 11:00:00",
+          "recency": 0.7,
+          "importance": 0.6,
+          "relevance": 0.7,
+          "activity": "Cultivating a new species of exotic flowers brought from distant lands"
+        },
+        {
+          "date_created": "2023-01-30 13:00:00",
+          "recency": 0.6,
+          "importance": 0.5,
+          "relevance": 0.6,
+          "activity": "Exploring the forest to gather rare herbs and medicinal plants for her garden"
+        },
+        {
+          "date_created": "2023-01-29 15:00:00",
+          "recency": 0.5,
+          "importance": 0.4,
+          "relevance": 0.5,
+          "activity": "Sharing her knowledge of herbalism with fellow gardeners and enthusiasts"
+        },
+        {
+          "date_created": "2023-02-02 07:00:00",
+          "recency": 0.6,
+          "importance": 0.5,
+          "relevance": 0.7,
+          "activity": "Sunny day with occasional clouds and a light breeze"
+        }
+      ],
+      "response": "Today beckons with the gentle embrace of nature. Whether it's tending to her garden or exploring the wonders of the natural world, there are treasures waiting to be discovered amidst the beauty of the earth.",
+      "action": {
+        "type": "take",
+        "object": "gardening tools"
+      }
+    },
+    {
+      "character": {
+        "name": "Finn",
+        "age": 35,
+        "interests": ["Smithing", "Blacksmithing", "Metallurgy"],
+        "description": "Finn is a skilled blacksmith who forges weapons and armor with precision and expertise.",
+        "morning_routine": ["Finn begins his day by stoking the forge and preparing his tools for a day of crafting."],
+        "evening_routine": ["Finn spends his evenings shaping molten metal into works of art and strength, honing his craft with each strike of the hammer."]
+      },
+      "question": "what to do today",
+      "memory": [
+        {
+          "date_created": "2023-02-02 08:00:00",
+          "recency": 0.8,
+          "importance": 0.7,
+          "relevance": 0.9,
+          "activity": "Forging a custom sword for a noble knight, imbued with ancient enchantments"
+        },
+        {
+          "date_created": "2023-02-01 10:00:00",
+          "recency": 0.7,
+          "importance": 0.6,
+          "relevance": 0.8,
+          "activity": "Repairing a suit of armor worn by a brave warrior who fought valiantly in battle"
+        },
+        {
+          "date_created": "2023-01-31 12:00:00",
+          "recency": 0.6,
+          "importance": 0.5,
+          "relevance": 0.7,
+          "activity": "Crafting a set of horseshoes for a traveling merchant's loyal steed"
+        },
+        {
+          "date_created": "2023-01-30 14:00:00",
+          "recency": 0.5,
+          "importance": 0.4,
+          "relevance": 0.6,
+          "activity": "Creating intricate jewelry for a noble lady, adorned with precious gemstones"
+        },
+        {
+          "date_created": "2023-01-29 16:00:00",
+          "recency": 0.4,
+          "importance": 0.3,
+          "relevance": 0.5,
+          "activity": "Fashioning a set of keys for the town's locksmith, each designed with unique patterns"
+        }
+      ],
+      "response": "Today calls for the creation of masterpieces in the fires of the forge. Whether it's forging weapons for brave warriors or crafting intricate jewelry for noble ladies, there are wonders waiting to be shaped from molten metal.",
+      "action": {
+        "type": "move",
+        "location": "forge"
+      }
+    },
+    {
+      "character": {
+        "name": "Sylvia",
+        "age": 28,
+        "interests": ["Horseback Riding", "Animal Care", "Outdoor Exploration"],
+        "description": "Sylvia is a spirited equestrian who shares a deep bond with her horses and finds solace in the great outdoors.",
+        "morning_routine": ["Sylvia begins her day by tending to her horses, grooming them and preparing them for a day of riding."],
+        "evening_routine": ["Sylvia spends her evenings galloping across open fields and exploring the countryside on horseback, her loyal companions by her side."]
+      },
+      "question": "what to do today",
+      "memory": [
+        {
+          "date_created": "2023-02-02 07:00:00",
+          "recency": 0.9,
+          "importance": 0.8,
+          "relevance": 0.9,
+          "activity": "Embarking on a leisurely ride through the forest, basking in the beauty of nature"
+        },
+        {
+          "date_created": "2023-02-01 09:00:00",
+          "recency": 0.8,
+          "importance": 0.7,
+          "relevance": 0.8,
+          "activity": "Racing against the wind across vast plains, feeling the thrill of speed and freedom"
+        },
+        {
+          "date_created": "2023-01-31 11:00:00",
+          "recency": 0.7,
+          "importance": 0.6,
+          "relevance": 0.7,
+          "activity": "Exploring hidden trails and secret paths, uncovering the wonders of the wilderness"
+        },
+        {
+          "date_created": "2023-01-30 13:00:00",
+          "recency": 0.6,
+          "importance": 0.5,
+          "relevance": 0.6,
+          "activity": "Guiding a group of riders on a scenic tour of the countryside, sharing her love of horseback riding with others"
+        },
+        {
+          "date_created": "2023-01-29 15:00:00",
+          "recency": 0.5,
+          "importance": 0.4,
+          "relevance": 0.5,
+          "activity": "Training her horses in new tricks and techniques, strengthening the bond between rider and mount"
+        }
+      ],
+      "response": "Today promises another adventure on horseback, exploring the beauty of the natural world and forging deeper bonds with her beloved horses.",
+      "action": {
+        "type": "move",
+        "location": "stables"
+      }
+    },
+    {
+      "character": {
+        "name": "Ezra",
+        "age": 38,
+        "interests": ["Cooking", "Gastronomy", "Traveling"],
+        "description": "Ezra is a culinary enthusiast who traverses the world in search of exotic ingredients and flavors.",
+        "morning_routine": ["Ezra begins his day by preparing a hearty breakfast, savoring the aroma of freshly brewed coffee."],
+        "evening_routine": ["Ezra spends his evenings experimenting with new recipes and flavors, delighting in the art of gastronomy."]
+      },
+      "question": "what to do today",
+      "memory": [
+        {
+          "date_created": "2023-02-02 08:00:00",
+          "recency": 0.8,
+          "importance": 0.7,
+          "relevance": 0.9,
+          "activity": "Exploring a bustling marketplace in search of rare spices and ingredients"
+        },
+        {
+          "date_created": "2023-02-01 10:00:00",
+          "recency": 0.7,
+          "importance": 0.6,
+          "relevance": 0.8,
+          "activity": "Cooking a lavish feast for a gathering of friends and fellow food enthusiasts"
+        },
+        {
+          "date_created": "2023-01-31 12:00:00",
+          "recency": 0.6,
+          "importance": 0.5,
+          "relevance": 0.7,
+          "activity": "Sampling street food in a foreign city, immersing himself in the culinary culture of distant lands"
+        },
+        {
+          "date_created": "2023-01-30 14:00:00",
+          "recency": 0.5,
+          "importance": 0.4,
+          "relevance": 0.6,
+          "activity": "Attending a cooking class to learn new techniques and recipes from a master chef"
+        },
+        {
+          "date_created": "2023-01-29 16:00:00",
+          "recency": 0.4,
+          "importance": 0.3,
+          "relevance": 0.5,
+          "activity": "Hosting a dinner party at his home, showcasing his culinary creations to esteemed guests"
+        }
+      ],
+      "response": "Today presents an opportunity to embark on a culinary adventure, whether it's exploring vibrant markets or experimenting with new flavors in the kitchen.",
+      "action": {
+        "type": "move",
+        "location": "market"
+      }
+    },
+    {
+      "character": {
+        "name": "Evelyn",
+        "age": 29,
+        "interests": ["Reading", "Gardening", "Relaxing"],
+        "description": "Evelyn is a bookworm who finds solace in the pages of her favorite novels and the tranquility of her garden.",
+        "morning_routine": ["Evelyn begins her day by brewing a pot of herbal tea and curling up with a good book in her cozy reading nook."],
+        "evening_routine": ["Evelyn spends her evenings tending to her garden, surrounded by the soothing scents of flowers and the gentle rustle of leaves."]
+      },
+      "question": "what to do today",
+      "memory": [
+        {
+          "date_created": "2023-02-02 07:00:00",
+          "recency": 0.9,
+          "importance": 0.8,
+          "relevance": 0.9,
+          "activity": "Losing herself in the pages of a captivating novel, transported to faraway lands and thrilling adventures"
+        },
+        {
+          "date_created": "2023-02-01 09:00:00",
+          "recency": 0.8,
+          "importance": 0.7,
+          "relevance": 0.8,
+          "activity": "Planting a variety of flowers in her garden, creating a vibrant tapestry of colors and scents"
+        },
+        {
+          "date_created": "2023-01-31 11:00:00",
+          "recency": 0.7,
+          "importance": 0.6,
+          "relevance": 0.7,
+          "activity": "Attending a book club meeting, engaging in lively discussions about her favorite literary works"
+        },
+        {
+          "date_created": "2023-01-30 13:00:00",
+          "recency": 0.6,
+          "importance": 0.5,
+          "relevance": 0.6,
+          "activity": "Relaxing in her hammock, swaying gently in the breeze as she enjoys the peace and quiet of her garden"
+        },
+        {
+          "date_created": "2023-01-29 15:00:00",
+          "recency": 0.5,
+          "importance": 0.4,
+          "relevance": 0.5,
+          "activity": "Visiting the local library to borrow a stack of books, eager to dive into new stories and adventures"
+        }
+      ],
+      "response": "Today, Evelyn decides to continue sleeping, relishing in the comfort of her bed and the blissful embrace of dreams.",
+      "action": {
+        "type": "continiue",
+        "duration": 480
+      }
+    },
+    {
+      "character": {
+        "name": "Thorne",
+        "age": 45,
+        "interests": ["Falconry", "Hunting", "Outdoor Survival"],
+        "description": "Thorne is a seasoned hunter who has mastered the art of falconry and thrives in the wilderness.",
+        "morning_routine": ["Thorne begins his day by releasing his trained falcon, Zephyr, to scout for prey and assist in the hunt."],
+        "evening_routine": ["Thorne spends his evenings roasting game over an open fire, savoring the fruits of his labor amidst the tranquility of nature."]
+      },
+      "question": "what to do today",
+      "memory": [
+        {
+          "date_created": "2023-02-02 08:00:00",
+          "recency": 0.8,
+          "importance": 0.7,
+          "relevance": 0.9,
+          "activity": "Tracking a herd of deer through dense woodland, using his keen senses and Zephyr's aerial reconnaissance"
+        },
+        {
+          "date_created": "2023-02-01 10:00:00",
+          "recency": 0.7,
+          "importance": 0.6,
+          "relevance": 0.8,
+          "activity": "Training Zephyr to perform intricate aerial maneuvers, strengthening their bond and honing their skills"
+        },
+        {
+          "date_created": "2023-01-31 12:00:00",
+          "recency": 0.6,
+          "importance": 0.5,
+          "relevance": 0.7,
+          "activity": "Hunting wild game in the rugged mountains, relying on stealth and precision to make a clean kill"
+        },
+        {
+          "date_created": "2023-01-30 14:00:00",
+          "recency": 0.5,
+          "importance": 0.4,
+          "relevance": 0.6,
+          "activity": "Building a new perch for Zephyr, ensuring it provides optimal vantage points for hunting"
+        },
+        {
+          "date_created": "2023-01-29 16:00:00",
+          "recency": 0.4,
+          "importance": 0.3,
+          "relevance": 0.5,
+          "activity": "Falconry demonstration for local villagers, showcasing the ancient art of hunting with birds of prey"
+        }
+      ],
+      "response": "Thorne decides to continue tracking the herd of deer through the dense woodland, relying on his skills and Zephyr's keen eyes to lead him to a successful hunt.",
+      "action": {
+        "type": "continue"
+      }
+    },
+    {
+      "character": {
+        "name": "Lyra",
+        "age": 30,
+        "interests": ["Music", "Dancing", "Socializing"],
+        "description": "Lyra is a vivacious entertainer who captivates audiences with her enchanting melodies and graceful dance moves.",
+        "morning_routine": ["Lyra begins her day by practicing her music and dance routines, ensuring every performance is flawless and captivating."],
+        "evening_routine": ["Lyra spends her evenings performing at local taverns and inns, bringing joy and laughter to all who listen."]
+      },
+      "question": "what to do today",
+      "memory": [
+        {
+          "date_created": "2023-02-02 07:00:00",
+          "recency": 0.9,
+          "importance": 0.8,
+          "relevance": 0.9,
+          "activity": "Rehearsing a new musical composition, experimenting with different melodies and harmonies to create the perfect piece"
+        },
+        {
+          "date_created": "2023-02-01 09:00:00",
+          "recency": 0.8,
+          "importance": 0.7,
+          "relevance": 0.8,
+          "activity": "Teaching dance lessons to aspiring performers, imparting her knowledge and passion for movement and rhythm"
+        },
+        {
+          "date_created": "2023-01-31 11:00:00",
+          "recency": 0.7,
+          "importance": 0.6,
+          "relevance": 0.7,
+          "activity": "Performing a lively concert at a local festival, enchanting the crowd with her mesmerizing music and energetic dance routines"
+        },
+        {
+          "date_created": "2023-01-30 13:00:00",
+          "recency": 0.6,
+          "importance": 0.5,
+          "relevance": 0.6,
+          "activity": "Collaborating with fellow musicians and dancers on a new performance piece, blending their talents to create a truly magical experience"
+        },
+        {
+          "date_created": "2023-01-29 15:00:00",
+          "recency": 0.5,
+          "importance": 0.4,
+          "relevance": 0.5,
+          "activity": "Entertaining guests at a noble's banquet, charming them with her graceful movements and enchanting melodies"
+        }
+      ],
+      "response": "Lyra decides to continue rehearsing her new musical composition, immersing herself in the creative process and striving for perfection in her art.",
+      "action": {
+        "type": "continue"
+      }
+    },
+    {
+      "character": {
+        "name": "Thorne",
+        "age": 45,
+        "interests": ["Falconry", "Hunting", "Outdoor Survival"],
+        "description": "Thorne is a seasoned hunter who navigates the wilderness with skill and precision, accompanied by his loyal falcon.",
+        "morning_routine": ["Thorne begins his day by training with his falcon, honing their bond and preparing for the hunt."],
+        "evening_routine": ["Thorne spends his evenings crafting traps and preparing game for cooking, recounting tales of his adventures under the starry sky."]
+      },
+      "question": "what to do today",
+      "memory": [
+        {
+          "date_created": "2023-02-02 08:00:00",
+          "recency": 0.8,
+          "importance": 0.7,
+          "relevance": 0.9,
+          "activity": "Tracking a deer through the dense forest, relying on his keen senses and intimate knowledge of the land"
+        },
+        {
+          "date_created": "2023-02-01 10:00:00",
+          "recency": 0.7,
+          "importance": 0.6,
+          "relevance": 0.8,
+          "activity": "Setting up camp by a serene lake, cooking freshly caught fish over an open fire"
+        },
+        {
+          "date_created": "2023-01-31 12:00:00",
+          "recency": 0.6,
+          "importance": 0.5,
+          "relevance": 0.7,
+          "activity": "Navigating through a thick fog, relying on his falcon's keen eyesight to guide him safely home"
+        },
+        {
+          "date_created": "2023-01-30 14:00:00",
+          "recency": 0.5,
+          "importance": 0.4,
+          "relevance": 0.6,
+          "activity": "Building a shelter from fallen branches and leaves, taking refuge from a sudden downpour"
+        },
+        {
+          "date_created": "2023-01-29 16:00:00",
+          "recency": 0.4,
+          "importance": 0.3,
+          "relevance": 0.5,
+          "activity": "Training his falcon to hunt with precision, teaching it to dive and strike with deadly accuracy"
+        },
+        {
+          "date_created": "2023-02-02 08:00:00",
+          "recency": 0.9,
+          "importance": 0.8,
+          "relevance": 0.9,
+          "activity": "Clear sky with a gentle breeze"
+        }
+      ],
+      "response": "Thorne decides to continue tracking the deer through the dense forest, taking advantage of the clear sky and gentle breeze to navigate with ease.",
+      "action": {
+        "type": "continue"
+      }
+    },
+    {
+      "character": {
+        "name": "Seraphina",
+        "age": 32,
+        "interests": ["Alchemy", "Herbalism", "Mysticism"],
+        "description": "Seraphina is a mystical alchemist who delves into the secrets of nature to unlock its hidden powers.",
+        "morning_routine": ["Seraphina begins her day by gathering rare herbs and plants from the forest, attuning herself to the energies of the earth."],
+        "evening_routine": ["Seraphina spends her evenings in her alchemy lab, brewing potions and elixirs infused with magic and mysticism."]
+      },
+      "question": "what to do today",
+      "memory": [
+        {
+          "date_created": "2023-02-02 07:00:00",
+          "recency": 0.9,
+          "importance": 0.8,
+          "relevance": 0.9,
+          "activity": "Harvesting moonlit mushrooms from a hidden grove, imbued with ethereal energies"
+        },
+        {
+          "date_created": "2023-02-01 09:00:00",
+          "recency": 0.8,
+          "importance": 0.7,
+          "relevance": 0.8,
+          "activity": "Communing with ancient spirits in a sacred grove, seeking guidance and wisdom"
+        },
+        {
+          "date_created": "2023-01-31 11:00:00",
+          "recency": 0.7,
+          "importance": 0.6,
+          "relevance": 0.7,
+          "activity": "Experimenting with a new formula for an invisibility potion, blending rare ingredients under the light of the full moon"
+        },
+        {
+          "date_created": "2023-01-30 13:00:00",
+          "recency": 0.6,
+          "importance": 0.5,
+          "relevance": 0.6,
+          "activity": "Seeking out a mystical spring rumored to possess healing properties, collecting its sacred waters in vials"
+        },
+        {
+          "date_created": "2023-01-29 15:00:00",
+          "recency": 0.5,
+          "importance": 0.4,
+          "relevance": 0.5,
+          "activity": "Consulting ancient texts and grimoires for forgotten spells and incantations, unlocking the secrets of the arcane"
+        },
+        {
+          "date_created": "2023-02-02 07:00:00",
+          "recency": 0.6,
+          "importance": 0.5,
+          "relevance": 0.7,
+          "activity": "Partly cloudy with a chance of rain"
+        }
+      ],
+      "response": "Seraphina decides to continue harvesting moonlit mushrooms from the hidden grove, embracing the mystical energy of the forest under the partly cloudy sky.",
+      "action": {
+        "type": "continue"
+      }
+    },
+    {
+      "character": {
+        "name": "Rowan",
+        "age": 27,
+        "interests": ["Archery", "Exploration", "Survival"],
+        "description": "Rowan is an adventurous explorer who thrives in the wilderness, armed with his trusty bow and a spirit of curiosity.",
+        "morning_routine": ["Rowan begins his day by practicing archery, honing his skills with each precise shot."],
+        "evening_routine": ["Rowan spends his evenings mapping uncharted territories and documenting his discoveries, fueled by the thrill of exploration."]
+      },
+      "question": "what to do today",
+      "memory": [
+        {
+          "date_created": "2023-02-02 08:00:00",
+          "recency": 0.8,
+          "importance": 0.7,
+          "relevance": 0.9,
+          "activity": "Navigating through dense foliage, forging a path through the untamed wilderness"
+        },
+        {
+          "date_created": "2023-02-01 10:00:00",
+          "recency": 0.7,
+          "importance": 0.6,
+          "relevance": 0.8,
+          "activity": "Scaling towering cliffs, reveling in the breathtaking vistas that unfold before him"
+        },
+        {
+          "date_created": "2023-01-31 12:00:00",
+          "recency": 0.6,
+          "importance": 0.5,
+          "relevance": 0.7,
+          "activity": "Traversing treacherous swamps, wary of lurking dangers beneath murky waters"
+        },
+        {
+          "date_created": "2023-01-30 14:00:00",
+          "recency": 0.5,
+          "importance": 0.4,
+          "relevance": 0.6,
+          "activity": "Exploring ancient ruins, deciphering forgotten glyphs and unraveling mysteries of the past"
+        },
+        {
+          "date_created": "2023-01-29 16:00:00",
+          "recency": 0.4,
+          "importance": 0.3,
+          "relevance": 0.5,
+          "activity": "Surviving a fierce storm, seeking shelter and braving the elements with unwavering determination"
+        },
+        {
+          "date_created": "2023-02-02 08:00:00",
+          "recency": 0.9,
+          "importance": 0.8,
+          "relevance": 0.9,
+          "activity": "Partly cloudy with occasional showers"
+        }
+      ],
+      "response": "Rowan decides to continue navigating through dense foliage, taking caution amidst the partly cloudy weather and occasional showers.",
+      "action": {
+        "type": "continue"
+      }
+    },
+    {
+      "character": {
+        "name": "Aria",
+        "age": 24,
+        "interests": ["Singing", "Dancing", "Performance"],
+        "description": "Aria is a talented performer who enchants audiences with her mesmerizing voice and graceful movements.",
+        "morning_routine": ["Aria begins her day by practicing her vocal exercises, warming up her voice for a day of performances."],
+        "evening_routine": ["Aria spends her evenings captivating audiences with her enchanting performances, transporting them to realms of beauty and emotion."]
+      },
+      "question": "what to do today",
+      "memory": [
+        {
+          "date_created": "2023-02-02 07:00:00",
+          "recency": 0.9,
+          "importance": 0.8,
+          "relevance": 0.9,
+          "activity": "Rehearsing a new song, infusing each note with passion and emotion"
+        },
+        {
+          "date_created": "2023-02-01 09:00:00",
+          "recency": 0.8,
+          "importance": 0.7,
+          "relevance": 0.8,
+          "activity": "Choreographing a dance routine, synchronizing movements with precision and grace"
+        },
+        {
+          "date_created": "2023-01-31 11:00:00",
+          "recency": 0.7,
+          "importance": 0.6,
+          "relevance": 0.7,
+          "activity": "Performing at a grand ball, enchanting guests with her mesmerizing voice and captivating presence"
+        },
+        {
+          "date_created": "2023-01-30 13:00:00",
+          "recency": 0.6,
+          "importance": 0.5,
+          "relevance": 0.6,
+          "activity": "Teaching singing lessons to aspiring vocalists, sharing her expertise and passion for music"
+        },
+        {
+          "date_created": "2023-01-29 15:00:00",
+          "recency": 0.5,
+          "importance": 0.4,
+          "relevance": 0.5,
+          "activity": "Attending a dance workshop to learn new techniques and styles, expanding her repertoire as a performer"
+        },
+        {
+          "date_created": "2023-02-02 07:00:00",
+          "recency": 0.6,
+          "importance": 0.5,
+          "relevance": 0.7,
+          "activity": "Sunny with scattered clouds"
+        }
+      ],
+      "response": "Aria decides to continue rehearsing her new song, drawing inspiration from the sunny weather and scattered clouds.",
+      "action": {
+        "type": "continue"
+      }
+    },
+    {
+      "character": {
+        "name": "Gareth",
+        "age": 35,
+        "interests": ["Swordsmanship", "Strategy", "Combat"],
+        "description": "Gareth is a skilled swordsman who has honed his craft through years of rigorous training and battlefield experience.",
+        "morning_routine": ["Gareth begins his day by practicing swordsmanship drills, sharpening his reflexes and mastering his technique."],
+        "evening_routine": ["Gareth spends his evenings strategizing for battles to come, studying maps and planning tactical maneuvers."]
+      },
+      "question": "what to do today",
+      "memory": [
+        {
+          "date_created": "2023-02-02 08:00:00",
+          "recency": 0.8,
+          "importance": 0.7,
+          "relevance": 0.9,
+          "activity": "Sparring with fellow warriors, testing his skills in simulated combat scenarios"
+        },
+        {
+          "date_created": "2023-02-01 10:00:00",
+          "recency": 0.7,
+          "importance": 0.6,
+          "relevance": 0.8,
+          "activity": "Leading a battalion into battle, rallying his troops with inspiring words and leading by example"
+        },
+        {
+          "date_created": "2023-01-31 12:00:00",
+          "recency": 0.6,
+          "importance": 0.5,
+          "relevance": 0.7,
+          "activity": "Defending a strategic outpost from enemy forces, repelling attacks with valor and determination"
+        },
+        {
+          "date_created": "2023-01-30 14:00:00",
+          "recency": 0.5,
+          "importance": 0.4,
+          "relevance": 0.6,
+          "activity": "Training new recruits, imparting his knowledge and experience to the next generation of warriors"
+        },
+        {
+          "date_created": "2023-01-29 16:00:00",
+          "recency": 0.4,
+          "importance": 0.3,
+          "relevance": 0.5,
+          "activity": "Engaging in a duel with a rival swordsman, testing his mettle and proving his skill in single combat"
+        }
+      ],
+      "response": "Gareth decides to launch an attack on the enemy encampment, leading his troops with precision and determination.",
+      "action": {
+        "type": "attack",
+        "target": "enemy encampment"
+      }
+    },
+    {
+      "character": {
+        "name": "Liliana",
+        "age": 28,
+        "interests": ["Stealth", "Assassination", "Espionage"],
+        "description": "Liliana is a master assassin who operates in the shadows, striking swiftly and silently to eliminate her targets.",
+        "morning_routine": ["Liliana begins her day by honing her stealth techniques, moving with cat-like grace and blending seamlessly into her surroundings."],
+        "evening_routine": ["Liliana spends her evenings planning her next assassination, gathering intel and analyzing her target's weaknesses."]
+      },
+      "question": "what to do today",
+      "memory": [
+        {
+          "date_created": "2023-02-02 07:00:00",
+          "recency": 0.9,
+          "importance": 0.8,
+          "relevance": 0.9,
+          "activity": "Infiltrating a heavily guarded fortress, evading patrols and bypassing security measures"
+        },
+        {
+          "date_created": "2023-02-01 09:00:00",
+          "recency": 0.8,
+          "importance": 0.7,
+          "relevance": 0.8,
+          "activity": "Eliminating a high-profile target with surgical precision, leaving no trace of her presence behind"
+        },
+        {
+          "date_created": "2023-01-31 11:00:00",
+          "recency": 0.7,
+          "importance": 0.6,
+          "relevance": 0.7,
+          "activity": "Gathering intel on a rival assassin's movements, plotting to eliminate the competition and establish dominance"
+        },
+        {
+          "date_created": "2023-01-30 13:00:00",
+          "recency": 0.6,
+          "importance": 0.5,
+          "relevance": 0.6,
+          "activity": "Infiltrating a noble's mansion to steal valuable artifacts, navigating traps and evading guards"
+        },
+        {
+          "date_created": "2023-01-29 15:00:00",
+          "recency": 0.5,
+          "importance": 0.4,
+          "relevance": 0.5,
+          "activity": "Assassinating a corrupt official to serve justice and restore balance to the realm"
+        }
+      ],
+      "response": "Liliana decides to launch an attack on her target, striking with lethal precision and disappearing into the shadows before her presence is ever known.",
+      "action": {
+        "type": "attack",
+        "target": "high-profile target"
+      }
+    }
+  ]
