@@ -1968,5 +1968,114 @@
         "type": "attack",
         "target": "high-profile target"
       }
-    }
+    },
+    [
+      {
+        "character": {
+          "name": "Elena",
+          "age": 30,
+          "interests": ["Cooking", "Gardening", "Reading"],
+          "description": "Elena is a homemaker who enjoys tending to her garden, experimenting with new recipes, and immersing herself in books.",
+          "morning_routine": ["Elena begins her day by watering her garden and harvesting fresh produce for her meals."],
+          "evening_routine": ["Elena spends her evenings preparing dinner with the ingredients from her garden and curling up with a good book by the fireplace."]
+        },
+        "question": "what to do today",
+        "memory": [
+          {
+            "date_created": "2023-02-02 08:00:00",
+            "recency": 0.8,
+            "importance": 0.7,
+            "relevance": 0.9,
+            "activity": "Noticing that the fridge is empty and needs restocking with fresh groceries"
+          },
+          {
+            "date_created": "2023-02-01 10:00:00",
+            "recency": 0.7,
+            "importance": 0.6,
+            "relevance": 0.8,
+            "activity": "Organizing the pantry and taking inventory of essential supplies"
+          },
+          {
+            "date_created": "2023-01-31 12:00:00",
+            "recency": 0.6,
+            "importance": 0.5,
+            "relevance": 0.7,
+            "activity": "Cleaning the kitchen and tidying up the living space for a cozy atmosphere"
+          },
+          {
+            "date_created": "2023-01-30 14:00:00",
+            "recency": 0.5,
+            "importance": 0.4,
+            "relevance": 0.6,
+            "activity": "Running errands in town to purchase household necessities and fresh ingredients"
+          },
+          {
+            "date_created": "2023-01-29 16:00:00",
+            "recency": 0.4,
+            "importance": 0.3,
+            "relevance": 0.5,
+            "activity": "Noticing the garden needs weeding and tending to it to ensure healthy growth"
+          }
+        ],
+        "response": "Elena decides to go grocery shopping and restock the fridge with fresh groceries to prepare delicious meals for the upcoming days.",
+        "action": {
+          "type": "move",
+          "location": "grocery store",
+          "duration": 60
+        }
+      },
+      {
+        "character": {
+          "name": "Marcus",
+          "age": 42,
+          "interests": ["DIY Projects", "Woodworking", "Home Improvement"],
+          "description": "Marcus is a handyman who enjoys working on DIY projects and transforming his home with his craftsmanship.",
+          "morning_routine": ["Marcus begins his day by checking his toolbox and planning the day's DIY projects."],
+          "evening_routine": ["Marcus spends his evenings working on his latest woodworking project and admiring his handiwork."]
+        },
+        "question": "what to do today",
+        "memory": [
+          {
+            "date_created": "2023-02-02 07:00:00",
+            "recency": 0.9,
+            "importance": 0.8,
+            "relevance": 0.9,
+            "activity": "Noticing a leaky faucet in the kitchen that needs fixing"
+          },
+          {
+            "date_created": "2023-02-01 09:00:00",
+            "recency": 0.8,
+            "importance": 0.7,
+            "relevance": 0.8,
+            "activity": "Inspecting the roof for any damage after a recent storm"
+          },
+          {
+            "date_created": "2023-01-31 11:00:00",
+            "recency": 0.7,
+            "importance": 0.6,
+            "relevance": 0.7,
+            "activity": "Noticing the paint is chipping on the front door and planning to repaint it"
+          },
+          {
+            "date_created": "2023-01-30 13:00:00",
+            "recency": 0.6,
+            "importance": 0.5,
+            "relevance": 0.6,
+            "activity": "Repairing a squeaky floorboard in the hallway to prevent further damage"
+          },
+          {
+            "date_created": "2023-01-29 15:00:00",
+            "recency": 0.5,
+            "importance": 0.4,
+            "relevance": 0.5,
+            "activity": "Noticing a loose doorknob in the bedroom and tightening it to ensure security"
+          }
+        ],
+        "response": "Marcus decides to fix the leaky faucet in the kitchen to prevent any water damage and ensure everything in the house is in proper working order.",
+        "action": {
+          "type": "fix",
+          "target": "leaky faucet"
+        }
+      }
+    ]    
   ]
