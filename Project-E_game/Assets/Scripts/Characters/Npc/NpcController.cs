@@ -43,6 +43,11 @@ public class NpcController : Agent
     [Header("Rendering")]
     SpriteRenderer npcSpriteRenderer;
     SpriteRenderer goalSpriteRenderer;
+
+    [Header("Navigation helper")]
+    [SerializeField] GameObject[] waypoints;
+    [SerializeField] GameObject[] passways;
+
     public override void Initialize()
     {
         startingNpcPos = transform.localPosition;
@@ -52,6 +57,7 @@ public class NpcController : Agent
         npcAnimator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         numberOfLayers = arenaLayers.Length;
+
     }
     public override void CollectObservations(VectorSensor sensor)
     {
@@ -67,6 +73,14 @@ public class NpcController : Agent
         foreach (var arena in arenaLayers)
         {
             arena.SpawnObstacles();
+        }
+        foreach (var waypoint in waypoints)
+        {
+            waypoint.SetActive(true);
+        }
+        foreach (var passway in passways)
+        {
+            passway.SetActive(true);
         }
         if (!randomPos)
         {
@@ -196,28 +210,31 @@ public class NpcController : Agent
         {
             ReachGoal();
         }
+        else if (collision.CompareTag("Road"))
+        {
+            AddReward(0.1f);
+            collision.gameObject.SetActive(false);
+        }
+        else if (collision.CompareTag("Pass"))
+        {
+            AddReward(0.3f);
+            collision.gameObject.SetActive(false);
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        ChangeTilemapColor(failureColor);
-        AddReward(-0.5f);
-    }
-
-    private void OnCollisionStay2D(Collision2D collision)
-    {
-        AddReward(-0.1f * Time.fixedDeltaTime);
-    }
-
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        AddReward(0.1f);
+        if (!collision.gameObject.CompareTag("Pass") && !collision.gameObject.CompareTag("Road") && !collision.gameObject.CompareTag("MovableProp"))
+        {
+            ChangeTilemapColor(failureColor);
+            AddReward(-1f);
+            EndEpisode();
+        }
     }
 
     private void ReachGoal()
     {
         AddReward(1f);
-        AddReward(0.001f * (this.MaxStep - this.StepCount));
         ChangeTilemapColor(successColor);
         EndEpisode();    
     }
