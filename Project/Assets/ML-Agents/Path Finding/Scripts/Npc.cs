@@ -53,6 +53,13 @@ public class Npc : Agent
 
     public override void OnActionReceived(ActionBuffers actionBuffers)
     {
+        if (Physics.Raycast(transform.position, -Vector3.up, out RaycastHit hit, 1f))
+        {
+            if (hit.collider.gameObject.CompareTag("road"))
+            {
+                SetReward(0.1f); // small reward for being on the road
+            }
+        }
         AddReward(-1f / MaxStep);
         MoveAgent(actionBuffers.DiscreteActions);
     }

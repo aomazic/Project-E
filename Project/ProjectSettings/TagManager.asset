@@ -30,6 +30,18 @@ TagManager:
   - purpleAgent
   - purpleGoal
   - tile
+  - ex
+  - key
+  - blockLarge
+  - blockSmall
+  - blockVeryLarge
+  - lock
+  - dragon
+  - portal
+  - plus
+  - prop
+  - movableProp
+  - road
   layers:
   - Default
   - TransparentFX

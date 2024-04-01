@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 39170504388208644}
   m_Layer: 0
   m_Name: MovableProp
-  m_TagString: MovableProp
+  m_TagString: movableProp
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

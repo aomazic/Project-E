@@ -72,7 +72,7 @@ public class TestArea : MonoBehaviour
     private void CleanArena()
     {
         foreach (Transform child in transform)
-            if (child.CompareTag("Prop") || child.CompareTag("MovableProp"))
+            if (child.CompareTag("prop") || child.CompareTag("movableProp"))
             {
                 Destroy(child.gameObject);
             }
