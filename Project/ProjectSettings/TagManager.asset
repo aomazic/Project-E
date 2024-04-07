@@ -42,6 +42,9 @@ TagManager:
   - prop
   - movableProp
   - road
+  - door
+  - npc
+  - house
   layers:
   - Default
   - TransparentFX
