@@ -1,0 +1,7 @@
+water-
+fetch,
+storage,
+drink
+
+food
+sleep

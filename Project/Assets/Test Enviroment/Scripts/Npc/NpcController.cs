@@ -1,27 +1,29 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 public class NpcController : MonoBehaviour
 {
-    private UnityEnvironment _environment;
+    private UnityEnvironment environment;
     public float speed = 3.0f;
     public float jumpHeight = 2.0f;
-    private InputAction _moveAction;
-    private Rigidbody _rb;
-
+    private InputAction moveAction;
+    private Rigidbody rb;
+    private Inventory inventory;
     private void Awake()
     {
-        _environment = new UnityEnvironment();
-        _rb = GetComponent<Rigidbody>();
+        environment = new UnityEnvironment();
+        rb = GetComponent<Rigidbody>();
+        inventory = GetComponent<Inventory>();
     }
 
     public void OnJump(InputAction.CallbackContext context)
     {
         if (IsGrounded())
         {
-            _rb.AddForce(new Vector3(0, jumpHeight, 0), ForceMode.Impulse);
+            rb.AddForce(new Vector3(0, jumpHeight, 0), ForceMode.Impulse);
         }
     }
     private bool IsGrounded()
@@ -29,26 +31,68 @@ public class NpcController : MonoBehaviour
         return Physics.Raycast(transform.position, -Vector3.up, 0.1f);
     }
 
+    public void OnAddItem(InputAction.CallbackContext context)
+    {
+        if (inventory == null)
+        {
+            Debug.LogError("Inventory is null");
+            return;
+        }
+
+        float pickupRange = 5f; // Set the range for picking up items
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, pickupRange);
+        foreach (var hitCollider in hitColliders)
+        {
+            Item item = hitCollider.GetComponent<Item>();
+            if (item != null)
+            {
+                inventory.AddItem(item, 1); // Add each item in range to the inventory
+            }
+            else
+            {
+                Debug.LogError("Item is null");
+            }
+        }
+    }
+
+    public void OnDropItem(InputAction.CallbackContext context)
+    {
+        foreach (var item in inventory.items.Keys.ToList()) // Loop through all items in the inventory
+        {
+            while (inventory.items[item] > 0) // Drop each item until its quantity is 0
+            {
+                inventory.DropItem(item);
+            }
+        }
+    }
+
     private void FixedUpdate()
     {
-        Vector2 moveDirection = _environment.Player.Move.ReadValue<Vector2>();
+        Vector2 moveDirection = environment.Player.Move.ReadValue<Vector2>();
         float speedDeltaTime = speed * Time.fixedDeltaTime;
         Vector3 movement = new Vector3(moveDirection.x, 0, moveDirection.y) * speedDeltaTime;
-        _rb.MovePosition(_rb.position + movement);
+        rb.MovePosition(rb.position + movement);
     }
 
     private void OnEnable()
     {
-        _environment.Player.Move.Enable();
-        _environment.Player.Jump.performed += OnJump;
-        _environment.Player.Jump.Enable();
-
+        environment.Player.Move.Enable();
+        environment.Player.Jump.performed += OnJump;
+        environment.Player.Jump.Enable();
+        environment.Player.AddItem.performed += OnAddItem;
+        environment.Player.AddItem.Enable();
+        environment.Player.DropItem.performed += OnDropItem;
+        environment.Player.DropItem.Enable();
     }
 
     private void OnDisable()
     {
-        _environment.Player.Move.Disable();
-        _environment.Player.Jump.performed -= OnJump;
-        _environment.Player.Jump.Disable();
+        environment.Player.Move.Disable();
+        environment.Player.Jump.performed -= OnJump;
+        environment.Player.Jump.Disable();
+        environment.Player.AddItem.performed -= OnAddItem;
+        environment.Player.AddItem.Disable();
+        environment.Player.DropItem.performed -= OnDropItem;
+        environment.Player.DropItem.Disable();
     }
 }
