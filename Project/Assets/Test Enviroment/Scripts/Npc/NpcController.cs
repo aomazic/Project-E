@@ -12,14 +12,18 @@ public class NpcController : MonoBehaviour
     private InputAction moveAction;
     private Rigidbody rb;
     private Inventory inventory;
+    private ThirstControll thirstControll;
+    public float drinkingRate = 1f;
+    private Item EquippedItem { get; set; }
     private void Awake()
     {
         environment = new UnityEnvironment();
         rb = GetComponent<Rigidbody>();
         inventory = GetComponent<Inventory>();
+        thirstControll = GetComponent<ThirstControll>();
     }
 
-    public void OnJump(InputAction.CallbackContext context)
+    private void OnJump(InputAction.CallbackContext context)
     {
         if (IsGrounded())
         {
@@ -31,46 +35,21 @@ public class NpcController : MonoBehaviour
         return Physics.Raycast(transform.position, -Vector3.up, 0.1f);
     }
 
-    public void OnAddItem(InputAction.CallbackContext context)
+    public void DrinkItem(String itemName)
     {
-        if (inventory == null)
+        var item = inventory.GetItemByName(itemName);
+        if (!(item is LiquidStorage liquid))
         {
-            Debug.LogError("Inventory is null");
             return;
         }
 
-        float pickupRange = 5f; // Set the range for picking up items
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, pickupRange);
-        foreach (var hitCollider in hitColliders)
-        {
-            Item item = hitCollider.GetComponent<Item>();
-            if (item != null)
-            {
-                inventory.AddItem(item, 1); // Add each item in range to the inventory
-            }
-            else
-            {
-                Debug.LogError("Item is null");
-            }
-        }
+        thirstControll.DrinkWater(liquid.RemoveLiquid(drinkingRate));
     }
-
-    public void OnDropItem(InputAction.CallbackContext context)
-    {
-        foreach (var item in inventory.items.Keys.ToList()) // Loop through all items in the inventory
-        {
-            while (inventory.items[item] > 0) // Drop each item until its quantity is 0
-            {
-                inventory.DropItem(item);
-            }
-        }
-    }
-
     private void FixedUpdate()
     {
-        Vector2 moveDirection = environment.Player.Move.ReadValue<Vector2>();
-        float speedDeltaTime = speed * Time.fixedDeltaTime;
-        Vector3 movement = new Vector3(moveDirection.x, 0, moveDirection.y) * speedDeltaTime;
+        var moveDirection = environment.Player.Move.ReadValue<Vector2>();
+        var speedDeltaTime = speed * Time.fixedDeltaTime;
+        var movement = new Vector3(moveDirection.x, 0, moveDirection.y) * speedDeltaTime;
         rb.MovePosition(rb.position + movement);
     }
 
@@ -79,10 +58,6 @@ public class NpcController : MonoBehaviour
         environment.Player.Move.Enable();
         environment.Player.Jump.performed += OnJump;
         environment.Player.Jump.Enable();
-        environment.Player.AddItem.performed += OnAddItem;
-        environment.Player.AddItem.Enable();
-        environment.Player.DropItem.performed += OnDropItem;
-        environment.Player.DropItem.Enable();
     }
 
     private void OnDisable()
@@ -90,9 +65,5 @@ public class NpcController : MonoBehaviour
         environment.Player.Move.Disable();
         environment.Player.Jump.performed -= OnJump;
         environment.Player.Jump.Disable();
-        environment.Player.AddItem.performed -= OnAddItem;
-        environment.Player.AddItem.Disable();
-        environment.Player.DropItem.performed -= OnDropItem;
-        environment.Player.DropItem.Disable();
     }
 }

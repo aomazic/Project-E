@@ -778,15 +778,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4521296116772160, guid: 70d695e1d8399400bb0f2873bdf29bb0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 90.03
+      value: 93.542
       objectReference: {fileID: 0}
     - target: {fileID: 4521296116772160, guid: 70d695e1d8399400bb0f2873bdf29bb0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 23.41
+      value: 22.964
       objectReference: {fileID: 0}
     - target: {fileID: 4521296116772160, guid: 70d695e1d8399400bb0f2873bdf29bb0, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 21.3
+      value: 14.041
       objectReference: {fileID: 0}
     - target: {fileID: 4521296116772160, guid: 70d695e1d8399400bb0f2873bdf29bb0, type: 3}
       propertyPath: m_LocalRotation.w
@@ -836,6 +836,14 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1788729666}
+    - targetCorrespondingSourceObject: {fileID: 1293290366791352, guid: 70d695e1d8399400bb0f2873bdf29bb0,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1788729667}
+    - targetCorrespondingSourceObject: {fileID: 1293290366791352, guid: 70d695e1d8399400bb0f2873bdf29bb0,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1788729670}
   m_SourcePrefab: {fileID: 100100000, guid: 70d695e1d8399400bb0f2873bdf29bb0, type: 3}
 --- !u!1001 &109173488
 PrefabInstance:
@@ -2238,6 +2246,50 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 272116677}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &285874361
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 285874362}
+  - component: {fileID: 285874363}
+  m_Layer: 0
+  m_Name: ItemController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &285874362
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 285874361}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &285874363
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 285874361}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f59133683b61c2c44ac5a4655ccd8092, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &289230055
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4820,6 +4872,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weight: 100
+  itemName: Barrel
   liquid: {fileID: 11400000, guid: 3a6021adbb0bbef438aab21ad449e0fe, type: 2}
   liquidLevel: 500
   capacity: 500
@@ -5030,7 +5083,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4380562535923756, guid: 05723fa5edef5fa4ab72eb90ae0bf7b0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 16.503
+      value: 17.605
       objectReference: {fileID: 0}
     - target: {fileID: 4380562535923756, guid: 05723fa5edef5fa4ab72eb90ae0bf7b0, type: 3}
       propertyPath: m_LocalPosition.y
@@ -5038,7 +5091,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4380562535923756, guid: 05723fa5edef5fa4ab72eb90ae0bf7b0, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -16.721
+      value: -16.655
       objectReference: {fileID: 0}
     - target: {fileID: 4380562535923756, guid: 05723fa5edef5fa4ab72eb90ae0bf7b0, type: 3}
       propertyPath: m_LocalRotation.w
@@ -5110,8 +5163,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weight: 50
-  liquid: {fileID: 0}
-  liquidLevel: 0
+  itemName: WaterContainer
+  liquid: {fileID: 11400000, guid: 3a6021adbb0bbef438aab21ad449e0fe, type: 2}
+  liquidLevel: 10
   capacity: 200
 --- !u!65 &588676894
 BoxCollider:
@@ -15071,6 +15125,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 3
   jumpHeight: 2
+  drinkingRate: 1
 --- !u!4 &1788729663 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4521296116772160, guid: 70d695e1d8399400bb0f2873bdf29bb0,
@@ -15138,6 +15193,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weightLimit: 1000
+  environment: {fileID: 285874363}
+--- !u!114 &1788729667
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1788729659}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c40f67ac7dc9a1a41ba14ed4a8e16995, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1788729670
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1788729659}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ffd93df2b5b72a45a7ad62eec54f224, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thirst: 100
+  thirstDecreaseRate: 1
 --- !u!1001 &1794643109
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17989,3 +18071,4 @@ SceneRoots:
   - {fileID: 8399616014735653235}
   - {fileID: 1163898796}
   - {fileID: 1840631779}
+  - {fileID: 285874362}

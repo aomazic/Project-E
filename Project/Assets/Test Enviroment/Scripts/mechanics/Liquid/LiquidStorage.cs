@@ -41,7 +41,7 @@ public class LiquidStorage : Item
         }
     }
 
-    public void RemoveLiquid(float volume)
+    public float RemoveLiquid(float volume)
     {
         if (liquidLevel >= volume)
         {
@@ -49,13 +49,12 @@ public class LiquidStorage : Item
             liquidLevel -= volume;
             if (liquidLevel == 0)
             {
-                liquid = null; // Reset the liquid if the barrel is empty
+                liquid = null;
             }
+            return volume;
         }
-        else
-        {
-            Debug.LogError("Not enough liquid in the storage");
-        }
+        Debug.LogError("Not enough liquid in the storage");
+        return 0;
     }
 
 }

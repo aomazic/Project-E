@@ -7,6 +7,15 @@ public class Item : MonoBehaviour
     [SerializeField]
     protected float weight;
 
+    [SerializeField]
+    protected string itemName;
+
+    public string Name
+    {
+        get => name;
+        set => name = value;
+    }
+
     public float Weight
     {
         get => weight;

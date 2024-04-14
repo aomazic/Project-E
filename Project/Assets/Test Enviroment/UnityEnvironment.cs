@@ -80,6 +80,33 @@ public partial class @UnityEnvironment: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Drink Water"",
+                    ""type"": ""Button"",
+                    ""id"": ""d4afb330-b036-4bcc-b5dd-df3e01b1838f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Fill Liquid"",
+                    ""type"": ""Button"",
+                    ""id"": ""4de0e2df-8731-40f2-866d-578eef08a86c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Equip item"",
+                    ""type"": ""Button"",
+                    ""id"": ""a5f5178b-3a94-4f65-8dff-39084870b120"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -333,6 +360,39 @@ public partial class @UnityEnvironment: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Drop Item"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0be36677-6d66-40d4-a25d-be8b6b537280"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Drink Water"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""55607397-b205-44de-b674-2466fde02151"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Fill Liquid"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c90dbcea-eee9-42c9-a4ca-c9c1cefac457"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Equip item"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -926,6 +986,9 @@ public partial class @UnityEnvironment: IInputActionCollection2, IDisposable
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_AddItem = m_Player.FindAction("Add Item", throwIfNotFound: true);
         m_Player_DropItem = m_Player.FindAction("Drop Item", throwIfNotFound: true);
+        m_Player_DrinkWater = m_Player.FindAction("Drink Water", throwIfNotFound: true);
+        m_Player_FillLiquid = m_Player.FindAction("Fill Liquid", throwIfNotFound: true);
+        m_Player_Equipitem = m_Player.FindAction("Equip item", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1005,6 +1068,9 @@ public partial class @UnityEnvironment: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_AddItem;
     private readonly InputAction m_Player_DropItem;
+    private readonly InputAction m_Player_DrinkWater;
+    private readonly InputAction m_Player_FillLiquid;
+    private readonly InputAction m_Player_Equipitem;
     public struct PlayerActions
     {
         private @UnityEnvironment m_Wrapper;
@@ -1015,6 +1081,9 @@ public partial class @UnityEnvironment: IInputActionCollection2, IDisposable
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputAction @AddItem => m_Wrapper.m_Player_AddItem;
         public InputAction @DropItem => m_Wrapper.m_Player_DropItem;
+        public InputAction @DrinkWater => m_Wrapper.m_Player_DrinkWater;
+        public InputAction @FillLiquid => m_Wrapper.m_Player_FillLiquid;
+        public InputAction @Equipitem => m_Wrapper.m_Player_Equipitem;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1042,6 +1111,15 @@ public partial class @UnityEnvironment: IInputActionCollection2, IDisposable
             @DropItem.started += instance.OnDropItem;
             @DropItem.performed += instance.OnDropItem;
             @DropItem.canceled += instance.OnDropItem;
+            @DrinkWater.started += instance.OnDrinkWater;
+            @DrinkWater.performed += instance.OnDrinkWater;
+            @DrinkWater.canceled += instance.OnDrinkWater;
+            @FillLiquid.started += instance.OnFillLiquid;
+            @FillLiquid.performed += instance.OnFillLiquid;
+            @FillLiquid.canceled += instance.OnFillLiquid;
+            @Equipitem.started += instance.OnEquipitem;
+            @Equipitem.performed += instance.OnEquipitem;
+            @Equipitem.canceled += instance.OnEquipitem;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -1064,6 +1142,15 @@ public partial class @UnityEnvironment: IInputActionCollection2, IDisposable
             @DropItem.started -= instance.OnDropItem;
             @DropItem.performed -= instance.OnDropItem;
             @DropItem.canceled -= instance.OnDropItem;
+            @DrinkWater.started -= instance.OnDrinkWater;
+            @DrinkWater.performed -= instance.OnDrinkWater;
+            @DrinkWater.canceled -= instance.OnDrinkWater;
+            @FillLiquid.started -= instance.OnFillLiquid;
+            @FillLiquid.performed -= instance.OnFillLiquid;
+            @FillLiquid.canceled -= instance.OnFillLiquid;
+            @Equipitem.started -= instance.OnEquipitem;
+            @Equipitem.performed -= instance.OnEquipitem;
+            @Equipitem.canceled -= instance.OnEquipitem;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -1252,6 +1339,9 @@ public partial class @UnityEnvironment: IInputActionCollection2, IDisposable
         void OnJump(InputAction.CallbackContext context);
         void OnAddItem(InputAction.CallbackContext context);
         void OnDropItem(InputAction.CallbackContext context);
+        void OnDrinkWater(InputAction.CallbackContext context);
+        void OnFillLiquid(InputAction.CallbackContext context);
+        void OnEquipitem(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
