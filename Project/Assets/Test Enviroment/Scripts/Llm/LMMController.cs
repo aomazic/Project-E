@@ -1,28 +1,40 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 using UnityEngine;
 using Unity.Sentis;
 
 public class LMMController : MonoBehaviour
 {
-    public class ActionData
+    private class ResponseAction
     {
-        public string type;
-        public string item;
+        public string Type { get; set; }
+        public ItemData Item { get; set; }
+        public int Duration { get; set; }
     }
 
-    public class ResponseData
+    private class ParsedObject
     {
-        public string response;
-        public ActionData action;
+        public string Response { get; set; }
+        public ResponseAction Action { get; set; }
+    }
+
+    private class ItemData
+    {
+        public string Source { get; set; }
+        public string Target { get; set; }
     }
 
     private string testEquipContainerInput = @"{
     ""response"": ""A moment's respite is due. A visit to the tavern with a trusted companion may yield fruitful conversation."",
     ""action"": {
         ""type"": ""equip"",
-        ""item"": ""waterContainer""
+        ""item"": {
+            ""source"": ""waterContainer"",
+            ""target"": null
+            },
+        ""duration"": 1
         }
     }";
 
@@ -30,7 +42,11 @@ public class LMMController : MonoBehaviour
     ""response"": ""The weight of the container is too much to bear. It is best to unequip it."",
     ""action"": {
         ""type"": ""unequip"",
-        ""item"": ""waterContainer""
+        ""item"": {
+            ""source"": ""equipedItem"",
+            ""target"": null
+            },
+        ""duration"": 1
         }
     }";
 
@@ -38,7 +54,11 @@ public class LMMController : MonoBehaviour
     ""response"": ""The water is refreshing. It is best to drink it slowly."",
     ""action"": {
         ""type"": ""drink"",
-        ""item"": ""waterContainer""
+        ""item"": {
+            ""source"": ""waterContainer"",
+            ""target"": null
+            },
+        ""duration"": 1
         }
     }";
 
@@ -46,25 +66,46 @@ public class LMMController : MonoBehaviour
     ""response"": ""The container is dropped."",
     ""action"": {
         ""type"": ""drop"",
-        ""item"": ""waterContainer""
+        ""item"": {
+            ""source"": ""waterContainer"",
+            ""target"": null
+            },
+        ""duration"": 1
         }
     }";
 
     private string testPickupContainer = @"{
-    ""response"": ""Ti should pick up the container."",
+    ""response"": ""I should pick up the container."",
     ""action"": {
         ""type"": ""pickup"",
-        ""item"": ""waterContainer""
+        ""item"": {
+            ""source"": ""waterContainer"",
+            ""target"": null
+            },
+        ""duration"": 1
         }
     }";
+
+    private string testFillContainer = @"{
+    ""response"": ""The container is filled with water."",
+    ""action"": {
+        ""type"": ""transfer"",
+        ""item"": {
+            ""source"": ""waterSource"",
+            ""target"": ""waterContainer""
+            },
+        ""duration"": 2
+        }
+    }";
+
 
 
     private List<string> testInputs;
     private NpcController npcController;
     private Inventory inventory;
-    private ResponseData ParseResponseData(string jsonString)
+    private ParsedObject ParseResponseData(string jsonString)
     {
-        return JsonUtility.FromJson<ResponseData>(jsonString);
+        return JsonConvert.DeserializeObject<ParsedObject>(jsonString);
     }
 
 
@@ -78,10 +119,11 @@ public class LMMController : MonoBehaviour
             testUnequipContainerInput,
             testDrinkWaterInput,
             testDropContainerInput,
-            testPickupContainer
+            testPickupContainer,
+            testFillContainer
         };
         StartCoroutine(testRun());
-   //     StartCoroutine(ParseRandomInput());
+        StartCoroutine(ParseRandomInput());
 
     }
     private IEnumerator testRun()
@@ -89,44 +131,53 @@ public class LMMController : MonoBehaviour
         yield return new WaitForSeconds(2);
         inventory.PickupItem("waterContainer");
         inventory.EquipItem("waterContainer");
-        npcController.DrinkItem("waterContainer");
+        inventory.TransferLiquid("waterContainer", "waterSource", 1);
     }
 
     private IEnumerator ParseRandomInput()
     {
         while (true)
         {
-            yield return new WaitForSeconds(2);
+            yield return new WaitForSeconds(5);
 
-            string randomInput = testInputs[UnityEngine.Random.Range(0, testInputs.Count)];
+            var randomInput = testInputs[UnityEngine.Random.Range(0, testInputs.Count)];
 
-            ResponseData data = ParseResponseData(randomInput);
-            PerformAction(data.action);
+            ParsedObject data = ParseResponseData(randomInput);
+            PerformAction(data.Action);
 
         }
     }
 
-    private void PerformAction(ActionData action)
+    private void PerformAction(ResponseAction action)
     {
-        switch (action.type)
+        switch (action.Type)
         {
             case "equip":
-                inventory.EquipItem(action.item);
+                inventory.EquipItem(action.Item.Source);
+                Debug.Log("Equip");
                 break;
             case "unequip":
+                inventory.UnequipItem();
                 Debug.Log("Unequip");
                 break;
             case "drink":
-                npcController.DrinkItem(action.item);
+                Debug.Log("Drink");
+                npcController.DrinkItem(action.Item.Source);
                 break;
             case "drop":
                 Debug.Log("Drop");
+                inventory.DropItem(action.Item.Source);
                 break;
             case "pickup":
-                inventory.PickupItem(action.item);
+                Debug.Log("Pickup");
+                inventory.PickupItem(action.Item.Source);
+                break;
+            case "transfer":
+                Debug.Log("Transfer");
+                inventory.TransferLiquid(action.Item.Target, action.Item.Source, 1);
                 break;
             default:
-                Debug.LogError("Unknown action type: " + action.type);
+                Debug.LogError("Unknown action type: " + action.Type);
                 break;
         }
     }

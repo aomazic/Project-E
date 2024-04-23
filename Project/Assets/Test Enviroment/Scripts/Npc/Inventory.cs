@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Drawing.Printing;
 using System.Linq;
 using UnityEngine;
 
@@ -10,6 +11,7 @@ public class Inventory : MonoBehaviour
     private Transform npcTransform;
     private Item eqipedItem;
     [SerializeField] private EnviromentItemControll environment;
+    [SerializeField] private float itemInteractionRange = 2f;
 
     private void Start()
     {
@@ -26,7 +28,7 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public void AddItem(Item item, int amount)
+    private void AddItem(Item item, int amount)
     {
         var totalWeight = TotalWeight();
         if (totalWeight + item.Weight > weightLimit)
@@ -38,17 +40,12 @@ public class Inventory : MonoBehaviour
         item.gameObject.SetActive(false); // Disable the game object when the item is added to the inventory
     }
 
-    public void DropItem(Item item)
+    public void DropItem(string itemName)
     {
-        if (!items.ContainsKey(item))
+        var item = GetItemByName(itemName);
+        if (item is null)
         {
             return;
-        }
-
-        items[item] -= 1;
-        if (items[item] == 0)
-        {
-            items.Remove(item);
         }
         item.transform.position = npcTransform.position + npcTransform.forward;
         item.gameObject.SetActive(true);
@@ -57,6 +54,11 @@ public class Inventory : MonoBehaviour
     public void EquipItem(String itemName)
     {
         var item = GetItemByName(itemName);
+        if (item is null)
+        {
+            return;
+        }
+        item.gameObject.SetActive(true);
         eqipedItem = item;
     }
 
@@ -66,20 +68,62 @@ public class Inventory : MonoBehaviour
         return totalWeight;
     }
 
-    public void PickupItem(String itemName)
+    public void PickupItem(string itemName)
     {
-        var itemsInRange = environment.GetItemsInRange(npcTransform.position, 2f);
+        var itemsInRange = environment.GetItemsByNameInRange(itemName, npcTransform.position, itemInteractionRange);
+        var firstItem = itemsInRange.FirstOrDefault();
 
-        var itemsWithName = itemsInRange.Where(item => item.Name == itemName);
-
-        if (itemsWithName.Any())
+        if (firstItem)
         {
-            AddItem(itemsWithName.First(), 1);
+            AddItem(firstItem, 1);
         }
+    }
+
+    public void TransferLiquid(string targetLiquid, string sourceLiquid, float volume)
+    {
+        var target = environment.GetItemByName(targetLiquid) as LiquidStorage;
+        var source = environment.GetItemByName(sourceLiquid) as LiquidStorage;
+
+        if (!target || !source)
+        {
+            Debug.LogError("Source or target is not of type LiquidStorage");
+            return;
+        }
+
+        if (eqipedItem != source && eqipedItem != target)
+        {
+            Debug.LogError("At least one of the items should be equipped");
+            return;
+        }
+
+        if (ItemExistsInInventory(sourceLiquid) && !ItemExistsInRange(sourceLiquid, 2f) &&
+            ItemExistsInInventory(targetLiquid) && !ItemExistsInRange(targetLiquid, 2f))
+        {
+            Debug.LogError("At least one of the items should be in the environment and within range");
+            return;
+        }
+
+        source.TransferLiquid(target, volume);
+    }
+
+    public void UnequipItem()
+    {
+        eqipedItem = null;
     }
 
     public Item GetItemByName(string itemName)
     {
-        return items.Keys.FirstOrDefault(item => item.Name == itemName);
+        return items.Keys.FirstOrDefault(item => item.ItemName == itemName);
+    }
+
+    private bool ItemExistsInInventory(string itemName)
+    {
+        return items.Keys.Any(item => item.ItemName == itemName);
+    }
+
+    private bool ItemExistsInRange(string itemName, float range)
+    {
+        var itemsInRange = environment.GetItemsByNameInRange(itemName, npcTransform.position, range);
+        return itemsInRange.Any();
     }
 }

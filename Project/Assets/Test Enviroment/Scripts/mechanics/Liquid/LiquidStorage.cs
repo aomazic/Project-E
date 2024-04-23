@@ -9,7 +9,6 @@ public class LiquidStorage : Item
     [SerializeField] float liquidLevel = 0f;
     [SerializeField] private float capacity;
 
-
     public void Start()
     {
         weight += liquidLevel;
@@ -20,9 +19,15 @@ public class LiquidStorage : Item
 
     }
 
-    public void AddLiquid(Liquid newLiquid, float volume)
+    public void TransferLiquid(LiquidStorage target, float volume)
     {
-        if (liquid == null || liquid.Type == newLiquid.Type)
+        target.AddLiquid(liquid, volume);
+        RemoveLiquid(volume);
+    }
+
+    private void AddLiquid(Liquid newLiquid, float volume)
+    {
+        if (!liquid || liquid.Type == newLiquid.Type)
         {
             if (liquidLevel + volume <= capacity)
             {

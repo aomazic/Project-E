@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor;
 using UnityEngine;
 
 public class EnviromentItemControll : MonoBehaviour
@@ -12,14 +13,19 @@ public class EnviromentItemControll : MonoBehaviour
         items = new List<Item>(FindObjectsByType<Item>(FindObjectsSortMode.None));
     }
 
-    public IEnumerable<Item> GetItemsInRange(Vector3 position, float range)
+    public IEnumerable<Item> GetAllItemsInRange(Vector3 position, float range)
     {
         return items.Where(item => item.gameObject.activeInHierarchy && Vector3.Distance(position, item.transform.position) <= range);
     }
 
-    public IEnumerable<Item> GetItemsByName(string name)
+    public IEnumerable<Item> GetItemsByNameInRange(string itemName, Vector3 position, float range)
     {
-        return items.Where(item => item.Name == name);
+        return items.Where(item => item.ItemName == itemName && item.gameObject.activeInHierarchy && Vector3.Distance(position, item.transform.position) <= range);
+    }
+
+    public Item GetItemByName(string name)
+    {
+        return items.FirstOrDefault(item => item.ItemName == name);
     }
 
 }

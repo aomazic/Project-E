@@ -10,10 +10,10 @@ public class Item : MonoBehaviour
     [SerializeField]
     protected string itemName;
 
-    public string Name
+    public string ItemName
     {
-        get => name;
-        set => name = value;
+        get => itemName;
+        set => itemName = value;
     }
 
     public float Weight
