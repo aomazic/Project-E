@@ -12,11 +12,13 @@ public class Inventory : MonoBehaviour
     private Item eqipedItem;
     [SerializeField] private EnviromentItemControll environment;
     [SerializeField] private float itemInteractionRange = 2f;
+    private HungerControll hungerControll;
 
     private void Start()
     {
         items = new Dictionary<Item, int>();
         npcTransform = GetComponent<Transform>();
+        hungerControll = GetComponent<HungerControll>();
     }
 
     private void Update()
@@ -70,23 +72,22 @@ public class Inventory : MonoBehaviour
 
     public void PickupItem(string itemName)
     {
-        var itemsInRange = environment.GetItemsByNameInRange(itemName, npcTransform.position, itemInteractionRange);
-        var firstItem = itemsInRange.FirstOrDefault();
+        var item = environment.GetItemByNameInRange(itemName, npcTransform.position, itemInteractionRange);
 
-        if (firstItem)
+        if (item)
         {
-            AddItem(firstItem, 1);
+            AddItem(item, 1);
         }
     }
 
     public void TransferLiquid(string targetLiquid, string sourceLiquid, float volume)
     {
-        var target = environment.GetItemByName(targetLiquid) as LiquidStorage;
-        var source = environment.GetItemByName(sourceLiquid) as LiquidStorage;
+        var target = environment.GetItemByNameInRange(targetLiquid, npcTransform.position, itemInteractionRange) as LiquidStorage;
+        var source = environment.GetItemByNameInRange(sourceLiquid, npcTransform.position, itemInteractionRange) as LiquidStorage;
 
         if (!target || !source)
         {
-            Debug.LogError("Source or target is not of type LiquidStorage");
+            Debug.LogError("Source or target liquid storage not found");
             return;
         }
 
@@ -96,14 +97,17 @@ public class Inventory : MonoBehaviour
             return;
         }
 
-        if (ItemExistsInInventory(sourceLiquid) && !ItemExistsInRange(sourceLiquid, 2f) &&
-            ItemExistsInInventory(targetLiquid) && !ItemExistsInRange(targetLiquid, 2f))
-        {
-            Debug.LogError("At least one of the items should be in the environment and within range");
-            return;
-        }
-
         source.TransferLiquid(target, volume);
+    }
+
+    public void EatFood(string itemName)
+    {
+        var foodItem = environment.GetItemByNameInRange(itemName, npcTransform.position, itemInteractionRange) as FoodItem;
+        if (!foodItem)
+        {
+            Debug.LogError("Food item not found");
+        }
+        hungerControll.Eat(foodItem);
     }
 
     public void UnequipItem()
@@ -121,9 +125,4 @@ public class Inventory : MonoBehaviour
         return items.Keys.Any(item => item.ItemName == itemName);
     }
 
-    private bool ItemExistsInRange(string itemName, float range)
-    {
-        var itemsInRange = environment.GetItemsByNameInRange(itemName, npcTransform.position, range);
-        return itemsInRange.Any();
-    }
 }

@@ -18,9 +18,9 @@ public class EnviromentItemControll : MonoBehaviour
         return items.Where(item => item.gameObject.activeInHierarchy && Vector3.Distance(position, item.transform.position) <= range);
     }
 
-    public IEnumerable<Item> GetItemsByNameInRange(string itemName, Vector3 position, float range)
+    public Item GetItemByNameInRange(string itemName, Vector3 position, float range)
     {
-        return items.Where(item => item.ItemName == itemName && item.gameObject.activeInHierarchy && Vector3.Distance(position, item.transform.position) <= range);
+        return items.FirstOrDefault(item => item.ItemName == itemName && item.gameObject.activeInHierarchy && Vector3.Distance(position, item.transform.position) <= range);
     }
 
     public Item GetItemByName(string name)

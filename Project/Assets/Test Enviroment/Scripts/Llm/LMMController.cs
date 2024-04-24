@@ -99,6 +99,18 @@ public class LMMController : MonoBehaviour
     }";
 
 
+    private string testEatFood = @"{
+     ""response"": ""Time to eat some food"",
+        ""action"": {
+            ""type"": ""eat"",
+            ""item"": {
+                ""source"": ""batak"",
+                ""target"": ""null""
+                },
+            ""duration"": 1
+            }
+        }";
+
 
     private List<string> testInputs;
     private NpcController npcController;
@@ -120,7 +132,9 @@ public class LMMController : MonoBehaviour
             testDrinkWaterInput,
             testDropContainerInput,
             testPickupContainer,
-            testFillContainer
+            testFillContainer,
+            testEatFood,
+
         };
         StartCoroutine(testRun());
         StartCoroutine(ParseRandomInput());
@@ -131,7 +145,8 @@ public class LMMController : MonoBehaviour
         yield return new WaitForSeconds(2);
         inventory.PickupItem("waterContainer");
         inventory.EquipItem("waterContainer");
-        inventory.TransferLiquid("waterContainer", "waterSource", 1);
+        inventory.EatFood("batak");
+
     }
 
     private IEnumerator ParseRandomInput()
