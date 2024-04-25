@@ -111,10 +111,22 @@ public class LMMController : MonoBehaviour
             }
         }";
 
+    private string testStartRest = @"{
+     ""response"": ""Time for a quickNap"",
+        ""action"": {
+            ""type"": ""useItem"",
+            ""item"": {
+                ""source"": ""bench"",
+                ""target"": ""null""
+                },
+            ""duration"": 1
+            }
+        }";
 
     private List<string> testInputs;
     private NpcController npcController;
     private Inventory inventory;
+    private EnergyControll energyControll;
     private ParsedObject ParseResponseData(string jsonString)
     {
         return JsonConvert.DeserializeObject<ParsedObject>(jsonString);
@@ -125,6 +137,7 @@ public class LMMController : MonoBehaviour
     {
         inventory = GetComponent<Inventory>();
         npcController = GetComponent<NpcController>();
+        energyControll = GetComponent<EnergyControll>();
         testInputs = new List<string>
         {
             testEquipContainerInput,
@@ -134,7 +147,7 @@ public class LMMController : MonoBehaviour
             testPickupContainer,
             testFillContainer,
             testEatFood,
-
+            testStartRest
         };
         StartCoroutine(testRun());
         StartCoroutine(ParseRandomInput());
@@ -143,10 +156,8 @@ public class LMMController : MonoBehaviour
     private IEnumerator testRun()
     {
         yield return new WaitForSeconds(2);
-        inventory.PickupItem("waterContainer");
-        inventory.EquipItem("waterContainer");
-        inventory.EatFood("batak");
-
+        energyControll.EnterRest("Bench");
+        energyControll.LeaveRest();
     }
 
     private IEnumerator ParseRandomInput()

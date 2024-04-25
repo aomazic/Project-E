@@ -10,8 +10,7 @@ public class Inventory : MonoBehaviour
     [SerializeField] private float weightLimit;
     private Transform npcTransform;
     private Item eqipedItem;
-    [SerializeField] private EnviromentItemControll environment;
-    [SerializeField] private float itemInteractionRange = 2f;
+    private NpcController npcController;
     private HungerControll hungerControll;
 
     private void Start()
@@ -19,6 +18,7 @@ public class Inventory : MonoBehaviour
         items = new Dictionary<Item, int>();
         npcTransform = GetComponent<Transform>();
         hungerControll = GetComponent<HungerControll>();
+        npcController = GetComponent<NpcController>();
     }
 
     private void Update()
@@ -72,7 +72,7 @@ public class Inventory : MonoBehaviour
 
     public void PickupItem(string itemName)
     {
-        var item = environment.GetItemByNameInRange(itemName, npcTransform.position, itemInteractionRange);
+        var item = npcController.itemEnvironmentControll.GetItemByNameInRange(itemName, npcTransform.position, npcController.itemInteractionRange);
 
         if (item)
         {
@@ -82,8 +82,9 @@ public class Inventory : MonoBehaviour
 
     public void TransferLiquid(string targetLiquid, string sourceLiquid, float volume)
     {
-        var target = environment.GetItemByNameInRange(targetLiquid, npcTransform.position, itemInteractionRange) as LiquidStorage;
-        var source = environment.GetItemByNameInRange(sourceLiquid, npcTransform.position, itemInteractionRange) as LiquidStorage;
+        var npcPosition = npcTransform.position;
+        var target = npcController.itemEnvironmentControll.GetItemByNameInRange(targetLiquid, npcPosition, npcController.itemInteractionRange) as LiquidStorage;
+        var source = npcController.itemEnvironmentControll.GetItemByNameInRange(sourceLiquid, npcPosition, npcController.itemInteractionRange) as LiquidStorage;
 
         if (!target || !source)
         {
@@ -102,7 +103,7 @@ public class Inventory : MonoBehaviour
 
     public void EatFood(string itemName)
     {
-        var foodItem = environment.GetItemByNameInRange(itemName, npcTransform.position, itemInteractionRange) as FoodItem;
+        var foodItem = npcController.itemEnvironmentControll.GetItemByNameInRange(itemName, npcTransform.position, npcController.itemInteractionRange) as FoodItem;
         if (!foodItem)
         {
             Debug.LogError("Food item not found");
