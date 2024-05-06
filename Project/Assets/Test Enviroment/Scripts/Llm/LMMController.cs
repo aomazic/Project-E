@@ -98,7 +98,6 @@ public class LMMController : MonoBehaviour
         }
     }";
 
-
     private string testEatFood = @"{
      ""response"": ""Time to eat some food"",
         ""action"": {
@@ -123,10 +122,22 @@ public class LMMController : MonoBehaviour
             }
         }";
 
+    private string testDialogue = @"{
+     ""response"": ""Are you sure?"",
+        ""action"": {
+            ""type"": ""speak"",
+            ""item"": {
+                ""source"": ""null"",
+                ""target"": ""null""
+                },
+            ""duration"": 2
+            }
+        }";
     private List<string> testInputs;
     private NpcController npcController;
     private Inventory inventory;
     private EnergyControll energyControll;
+    private DialogueController dialogueController;
     private ParsedObject ParseResponseData(string jsonString)
     {
         return JsonConvert.DeserializeObject<ParsedObject>(jsonString);
@@ -138,6 +149,7 @@ public class LMMController : MonoBehaviour
         inventory = GetComponent<Inventory>();
         npcController = GetComponent<NpcController>();
         energyControll = GetComponent<EnergyControll>();
+        dialogueController = GetComponent<DialogueController>();
         testInputs = new List<string>
         {
             testEquipContainerInput,
@@ -147,7 +159,8 @@ public class LMMController : MonoBehaviour
             testPickupContainer,
             testFillContainer,
             testEatFood,
-            testStartRest
+            testStartRest,
+            testDialogue
         };
         StartCoroutine(testRun());
         StartCoroutine(ParseRandomInput());
@@ -156,8 +169,7 @@ public class LMMController : MonoBehaviour
     private IEnumerator testRun()
     {
         yield return new WaitForSeconds(2);
-        energyControll.EnterRest("Bench");
-        energyControll.LeaveRest();
+        dialogueController.Speak(new Dialogue(npcController.Name, "Hello"));
     }
 
     private IEnumerator ParseRandomInput()

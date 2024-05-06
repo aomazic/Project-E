@@ -18,9 +18,18 @@ public class EnviromentItemControll : MonoBehaviour
         return items.Where(item => item.gameObject.activeInHierarchy && Vector3.Distance(position, item.transform.position) <= range);
     }
 
-    public Item GetItemByNameInRange(string itemName, Vector3 position, float range)
+    public Item GetItemByNameInRange(string itemName, Collider npcCollider)
     {
-        return items.FirstOrDefault(item => item.ItemName == itemName && item.gameObject.activeInHierarchy && Vector3.Distance(position, item.transform.position) <= range);
+        return items.FirstOrDefault(item =>
+        {
+            if (item.ItemName != itemName || !item.gameObject.activeInHierarchy)
+            {
+                return false;
+            }
+
+            var itemCollider = item.gameObject.GetComponent<Collider>();
+            return npcCollider.bounds.Intersects(itemCollider.bounds);
+        });
     }
 
     public Item GetItemByName(string name)

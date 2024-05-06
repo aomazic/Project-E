@@ -15,8 +15,10 @@ public class NpcController : MonoBehaviour
     private ThirstControll thirstControll;
     public float drinkingRate = 1f;
     private Item EquippedItem { get; set; }
-    public float itemInteractionRange = 2f;
     public EnviromentItemControll itemEnvironmentControll;
+    public Collider itemInteractCollider;
+    public string Name { get; set; }
+
     private void Awake()
     {
         environment = new UnityEnvironment();

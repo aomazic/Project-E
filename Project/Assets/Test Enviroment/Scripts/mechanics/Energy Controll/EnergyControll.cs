@@ -49,7 +49,7 @@ public class EnergyControll : MonoBehaviour
 
     public void EnterRest(string itemName)
     {
-        var item = npcController.itemEnvironmentControll.GetItemByNameInRange(itemName, transform.position, npcController.itemInteractionRange) as RestingItem;
+        var item = npcController.itemEnvironmentControll.GetItemByNameInRange(itemName, npcController.itemInteractCollider) as RestingItem;
         if (!item)
         {
             return;

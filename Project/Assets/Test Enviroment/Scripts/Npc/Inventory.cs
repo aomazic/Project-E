@@ -72,7 +72,7 @@ public class Inventory : MonoBehaviour
 
     public void PickupItem(string itemName)
     {
-        var item = npcController.itemEnvironmentControll.GetItemByNameInRange(itemName, npcTransform.position, npcController.itemInteractionRange);
+        var item = npcController.itemEnvironmentControll.GetItemByNameInRange(itemName, npcController.itemInteractCollider);
 
         if (item)
         {
@@ -82,9 +82,8 @@ public class Inventory : MonoBehaviour
 
     public void TransferLiquid(string targetLiquid, string sourceLiquid, float volume)
     {
-        var npcPosition = npcTransform.position;
-        var target = npcController.itemEnvironmentControll.GetItemByNameInRange(targetLiquid, npcPosition, npcController.itemInteractionRange) as LiquidStorage;
-        var source = npcController.itemEnvironmentControll.GetItemByNameInRange(sourceLiquid, npcPosition, npcController.itemInteractionRange) as LiquidStorage;
+        var target = npcController.itemEnvironmentControll.GetItemByNameInRange(targetLiquid, npcController.itemInteractCollider) as LiquidStorage;
+        var source = npcController.itemEnvironmentControll.GetItemByNameInRange(sourceLiquid, npcController.itemInteractCollider) as LiquidStorage;
 
         if (!target || !source)
         {
@@ -103,7 +102,7 @@ public class Inventory : MonoBehaviour
 
     public void EatFood(string itemName)
     {
-        var foodItem = npcController.itemEnvironmentControll.GetItemByNameInRange(itemName, npcTransform.position, npcController.itemInteractionRange) as FoodItem;
+        var foodItem = npcController.itemEnvironmentControll.GetItemByNameInRange(itemName, npcController.itemInteractCollider) as FoodItem;
         if (!foodItem)
         {
             Debug.LogError("Food item not found");
