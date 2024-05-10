@@ -1,40 +1,41 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEditor;
 using UnityEngine;
 
 public class EnviromentItemControll : MonoBehaviour
 {
-    private List<Item> items;
+    private Dictionary<string, Item> items;
 
     private void Start()
     {
-        items = new List<Item>(FindObjectsByType<Item>(FindObjectsSortMode.None));
+        items = new Dictionary<string, Item>();
+        foreach (var item in FindObjectsOfType<Item>())
+        {
+            items[item.ItemName] = item;
+        }
     }
 
     public IEnumerable<Item> GetAllItemsInRange(Vector3 position, float range)
     {
-        return items.Where(item => item.gameObject.activeInHierarchy && Vector3.Distance(position, item.transform.position) <= range);
+        return items.Values.Where(item => item.gameObject.activeInHierarchy && Vector3.Distance(position, item.transform.position) <= range);
     }
 
     public Item GetItemByNameInRange(string itemName, Collider npcCollider)
     {
-        return items.FirstOrDefault(item =>
+        if (items.TryGetValue(itemName, out var item) && item.gameObject.activeInHierarchy)
         {
-            if (item.ItemName != itemName || !item.gameObject.activeInHierarchy)
-            {
-                return false;
-            }
-
             var itemCollider = item.gameObject.GetComponent<Collider>();
-            return npcCollider.bounds.Intersects(itemCollider.bounds);
-        });
+            if (npcCollider.bounds.Intersects(itemCollider.bounds))
+            {
+                return item;
+            }
+        }
+        return null;
     }
 
     public Item GetItemByName(string name)
     {
-        return items.FirstOrDefault(item => item.ItemName == name);
+        items.TryGetValue(name, out var item);
+        return item;
     }
-
 }

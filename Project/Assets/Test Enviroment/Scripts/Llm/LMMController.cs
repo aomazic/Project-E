@@ -10,7 +10,7 @@ public class LMMController : MonoBehaviour
     private class ResponseAction
     {
         public string Type { get; set; }
-        public ItemData Item { get; set; }
+        public ActionDetail ActionDetail { get; set; }
         public int Duration { get; set; }
     }
 
@@ -20,7 +20,7 @@ public class LMMController : MonoBehaviour
         public ResponseAction Action { get; set; }
     }
 
-    private class ItemData
+    private class ActionDetail
     {
         public string Source { get; set; }
         public string Target { get; set; }
@@ -30,7 +30,7 @@ public class LMMController : MonoBehaviour
     ""response"": ""A moment's respite is due. A visit to the tavern with a trusted companion may yield fruitful conversation."",
     ""action"": {
         ""type"": ""equip"",
-        ""item"": {
+        ""actionDetail"": {
             ""source"": ""waterContainer"",
             ""target"": null
             },
@@ -42,7 +42,7 @@ public class LMMController : MonoBehaviour
     ""response"": ""The weight of the container is too much to bear. It is best to unequip it."",
     ""action"": {
         ""type"": ""unequip"",
-        ""item"": {
+        ""actionDetail"": {
             ""source"": ""equipedItem"",
             ""target"": null
             },
@@ -54,7 +54,7 @@ public class LMMController : MonoBehaviour
     ""response"": ""The water is refreshing. It is best to drink it slowly."",
     ""action"": {
         ""type"": ""drink"",
-        ""item"": {
+        ""actionDetail"": {
             ""source"": ""waterContainer"",
             ""target"": null
             },
@@ -66,7 +66,7 @@ public class LMMController : MonoBehaviour
     ""response"": ""The container is dropped."",
     ""action"": {
         ""type"": ""drop"",
-        ""item"": {
+        ""actionDetail"": {
             ""source"": ""waterContainer"",
             ""target"": null
             },
@@ -78,7 +78,7 @@ public class LMMController : MonoBehaviour
     ""response"": ""I should pick up the container."",
     ""action"": {
         ""type"": ""pickup"",
-        ""item"": {
+        ""actionDetail"": {
             ""source"": ""waterContainer"",
             ""target"": null
             },
@@ -90,7 +90,7 @@ public class LMMController : MonoBehaviour
     ""response"": ""The container is filled with water."",
     ""action"": {
         ""type"": ""transfer"",
-        ""item"": {
+        ""actionDetail"": {
             ""source"": ""waterSource"",
             ""target"": ""waterContainer""
             },
@@ -102,7 +102,7 @@ public class LMMController : MonoBehaviour
      ""response"": ""Time to eat some food"",
         ""action"": {
             ""type"": ""eat"",
-            ""item"": {
+            ""actionDetail"": {
                 ""source"": ""batak"",
                 ""target"": ""null""
                 },
@@ -114,7 +114,7 @@ public class LMMController : MonoBehaviour
      ""response"": ""Time for a quickNap"",
         ""action"": {
             ""type"": ""useItem"",
-            ""item"": {
+            ""actionDetail"": {
                 ""source"": ""bench"",
                 ""target"": ""null""
                 },
@@ -126,11 +126,23 @@ public class LMMController : MonoBehaviour
      ""response"": ""Are you sure?"",
         ""action"": {
             ""type"": ""speak"",
-            ""item"": {
+            ""actionDetail"": {
                 ""source"": ""null"",
                 ""target"": ""null""
                 },
             ""duration"": 2
+            }
+        }";
+
+    private string testGoTo = @"{
+     ""response"": ""I should go to the market"",
+        ""action"": {
+            ""type"": ""goTo"",
+            ""actionDetail"": {
+                ""source"": ""tavern"",
+                ""target"": ""null""
+                },
+            ""duration"": 1
             }
         }";
     private List<string> testInputs;
@@ -138,6 +150,7 @@ public class LMMController : MonoBehaviour
     private Inventory inventory;
     private EnergyControll energyControll;
     private DialogueController dialogueController;
+    private Pathfinding pathfinding;
     private ParsedObject ParseResponseData(string jsonString)
     {
         return JsonConvert.DeserializeObject<ParsedObject>(jsonString);
@@ -150,6 +163,7 @@ public class LMMController : MonoBehaviour
         npcController = GetComponent<NpcController>();
         energyControll = GetComponent<EnergyControll>();
         dialogueController = GetComponent<DialogueController>();
+        pathfinding = GetComponent<Pathfinding>();
         testInputs = new List<string>
         {
             testEquipContainerInput,
@@ -160,7 +174,8 @@ public class LMMController : MonoBehaviour
             testFillContainer,
             testEatFood,
             testStartRest,
-            testDialogue
+            testDialogue,
+            testGoTo
         };
         StartCoroutine(testRun());
         StartCoroutine(ParseRandomInput());
@@ -170,6 +185,7 @@ public class LMMController : MonoBehaviour
     {
         yield return new WaitForSeconds(2);
         dialogueController.Speak(new Dialogue(npcController.Name, "Hello"));
+        pathfinding.goTo("market");
     }
 
     private IEnumerator ParseRandomInput()
@@ -191,7 +207,7 @@ public class LMMController : MonoBehaviour
         switch (action.Type)
         {
             case "equip":
-                inventory.EquipItem(action.Item.Source);
+                inventory.EquipItem(action.ActionDetail.Source);
                 Debug.Log("Equip");
                 break;
             case "unequip":
@@ -200,19 +216,19 @@ public class LMMController : MonoBehaviour
                 break;
             case "drink":
                 Debug.Log("Drink");
-                npcController.DrinkItem(action.Item.Source);
+                npcController.DrinkItem(action.ActionDetail.Source);
                 break;
             case "drop":
                 Debug.Log("Drop");
-                inventory.DropItem(action.Item.Source);
+                inventory.DropItem(action.ActionDetail.Source);
                 break;
             case "pickup":
                 Debug.Log("Pickup");
-                inventory.PickupItem(action.Item.Source);
+                inventory.PickupItem(action.ActionDetail.Source);
                 break;
             case "transfer":
                 Debug.Log("Transfer");
-                inventory.TransferLiquid(action.Item.Target, action.Item.Source, 1);
+                inventory.TransferLiquid(action.ActionDetail.Target, action.ActionDetail.Source, 1);
                 break;
             default:
                 Debug.LogError("Unknown action type: " + action.Type);
