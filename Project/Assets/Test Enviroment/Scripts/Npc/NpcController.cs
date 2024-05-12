@@ -17,6 +17,7 @@ public class NpcController : MonoBehaviour
     private Item EquippedItem { get; set; }
     public EnviromentItemControll itemEnvironmentControll;
     public Collider itemInteractCollider;
+    public MemoryDatabase memoryDb;
     public string Name { get; set; }
 
     private void Awake()
