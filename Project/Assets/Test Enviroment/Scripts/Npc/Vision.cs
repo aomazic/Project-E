@@ -10,7 +10,6 @@ public class Vision : MonoBehaviour
     public float visionDistance = 10f;
     public int numberOfRays = 10;
     public float saveCooldown = 1f; // Cooldown period in seconds
-
     private Dictionary<string, float> lastSeenTimes;
 
     private void Start()
@@ -22,23 +21,27 @@ public class Vision : MonoBehaviour
     void Update()
     {
         var stepAngleSize = fieldOfViewAngle / numberOfRays;
-
         for (int i = 0; i <= numberOfRays; i++)
         {
             var angle = transform.eulerAngles.y - fieldOfViewAngle / 2 + stepAngleSize * i;
             var direction = new Vector3(Mathf.Sin(angle * Mathf.Deg2Rad), 0, Mathf.Cos(angle * Mathf.Deg2Rad));
             direction = transform.TransformDirection(direction) * visionDistance;
-
             if (Physics.Raycast(transform.position, direction, out RaycastHit hit, visionDistance))
             {
-                string objectName = hit.transform.name;
+                var objectName = hit.transform.name;
                 if (!lastSeenTimes.ContainsKey(objectName) || Time.time - lastSeenTimes[objectName] >= saveCooldown)
                 {
-                    npcController.memoryDb.SaveVisionObservation(transform.name, objectName);
+                    if (!hit.transform.TryGetComponent<Region>(out var region))
+                    {
+                        if (hit.transform.parent != null)
+                        {
+                            hit.transform.parent.TryGetComponent(out region);
+                        }
+                    }
+                    npcController.memoryDb.SaveVisionObservation(transform.name, objectName, region);
                     lastSeenTimes[objectName] = Time.time;
                 }
             }
-
             Debug.DrawRay(transform.position, direction, Color.green);
         }
     }
