@@ -62,6 +62,7 @@ public class Inventory : MonoBehaviour
         }
         item.gameObject.SetActive(true);
         eqipedItem = item;
+        npcController.memoryDb.genericObsevation(transform.name, $"Equipped {itemName}", 5f);
     }
 
     private float TotalWeight()
@@ -77,8 +78,10 @@ public class Inventory : MonoBehaviour
         if (item)
         {
             AddItem(item, 1);
+            npcController.memoryDb.genericObsevation(transform.name, $"Picked up {itemName}", 5f);
         }
     }
+
 
     public void TransferLiquid(string targetLiquid, string sourceLiquid, float volume)
     {
@@ -98,6 +101,7 @@ public class Inventory : MonoBehaviour
         }
 
         source.TransferLiquid(target, volume);
+        npcController.memoryDb.genericObsevation(transform.name, $"Transferred {volume} from {sourceLiquid} to {targetLiquid}", 5f);
     }
 
     public void EatFood(string itemName)
@@ -112,9 +116,13 @@ public class Inventory : MonoBehaviour
 
     public void UnequipItem()
     {
-        eqipedItem = null;
+        if (eqipedItem)
+        {
+            var itemName = eqipedItem.ItemName;
+            eqipedItem = null;
+            npcController.memoryDb.genericObsevation(transform.name, $"Unequipped {itemName}", 5f);
+        }
     }
-
     public Item GetItemByName(string itemName)
     {
         return items.Keys.FirstOrDefault(item => item.ItemName == itemName);

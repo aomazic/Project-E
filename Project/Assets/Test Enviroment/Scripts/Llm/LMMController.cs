@@ -145,6 +145,18 @@ public class LMMController : MonoBehaviour
             ""duration"": 1
             }
         }";
+
+    private string testAskQuestion = @"{
+     ""response"": ""How is your day?"",
+        ""action"": {
+            ""type"": ""speak"",
+            ""actionDetail"": {
+                ""source"": ""null"",
+                ""target"": ""Ivan""
+                },
+            ""duration"": 1
+            }
+        }";
     private List<string> testInputs;
     private NpcController npcController;
     private Inventory inventory;
@@ -175,17 +187,16 @@ public class LMMController : MonoBehaviour
             testEatFood,
             testStartRest,
             testDialogue,
-            testGoTo
+            testGoTo,
+            testAskQuestion
         };
         StartCoroutine(testRun());
-        StartCoroutine(ParseRandomInput());
-
     }
     private IEnumerator testRun()
     {
         yield return new WaitForSeconds(2);
-        dialogueController.Speak(new Dialogue(npcController.Name, "Hello"));
-        pathfinding.goTo("market");
+        pathfinding.goTo("Ivan");
+        dialogueController.Speak("How is your day?", "Ivan");
     }
 
     private IEnumerator ParseRandomInput()
@@ -229,6 +240,14 @@ public class LMMController : MonoBehaviour
             case "transfer":
                 Debug.Log("Transfer");
                 inventory.TransferLiquid(action.ActionDetail.Target, action.ActionDetail.Source, 1);
+                break;
+            case "eat":
+                Debug.Log("Eat");
+                inventory.EatFood("batak");
+                break;
+            case "useItem":
+                Debug.Log("UseItem");
+                energyControll.EnterRest(action.ActionDetail.Source);
                 break;
             default:
                 Debug.LogError("Unknown action type: " + action.Type);

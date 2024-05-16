@@ -31,12 +31,10 @@ public class Vision : MonoBehaviour
                 var objectName = hit.transform.name;
                 if (!lastSeenTimes.ContainsKey(objectName) || Time.time - lastSeenTimes[objectName] >= saveCooldown)
                 {
-                    if (!hit.transform.TryGetComponent<Region>(out var region))
+                    Region region = null;
+                    if (hit.transform.parent)
                     {
-                        if (hit.transform.parent != null)
-                        {
-                            hit.transform.parent.TryGetComponent(out region);
-                        }
+                        region = hit.transform.parent.GetComponent<Region>();
                     }
                     npcController.memoryDb.SaveVisionObservation(transform.name, objectName, region);
                     lastSeenTimes[objectName] = Time.time;

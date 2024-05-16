@@ -5,27 +5,26 @@ using UnityEngine;
 public class Pathfinding : MonoBehaviour
 {
     private NavMeshAgent navMeshAgent;
-    [SerializeField] PoiController poiController;
 
     private void Start()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
-        poiController = FindObjectOfType<PoiController>();
     }
 
-    public void goTo(String destinationName)
+    public void goTo(string destinationName)
     {
-        var poi = poiController.GetPoiByName(destinationName);
-        if (poi)
+        GameObject destination = GameObject.Find(destinationName);
+        if (destination)
         {
-            Move(poi);
+            Vector3 offset = transform.forward * -2f;
+            Move(destination.transform.position + offset);
         }
     }
 
-    private void Move(PontOfInterest poi)
+    private void Move(Vector3 destination)
     {
-        navMeshAgent.SetDestination(poi.poiLocation.position);
-        transform.LookAt(poi.poiLocation.position);
+        navMeshAgent.SetDestination(destination);
+        transform.LookAt(destination);
     }
 
     public void Stop()
