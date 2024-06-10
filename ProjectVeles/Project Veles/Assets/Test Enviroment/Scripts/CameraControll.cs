@@ -5,15 +5,19 @@ using UnityEngine;
 public class CameraControll : MonoBehaviour
 {
     public Transform target;
-    private Vector3 offset;
+    public Vector3 offset = new Vector3(0, 10, -10); // Offset from the player
+    public float smoothSpeed = 0.125f; // Smoothing speed for camera movement
 
-    void Start()
+    void LateUpdate()
     {
-        offset = transform.position - target.position;
-    }
+        if (target)
+        {
+            Vector3 desiredPosition = target.position + offset;
+            Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
+            transform.position = smoothedPosition;
 
-    void Update()
-    {
-        transform.position = target.position + offset;
+            // Make the camera look at the player
+            transform.LookAt(target);
+        }
     }
 }

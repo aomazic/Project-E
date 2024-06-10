@@ -51,7 +51,7 @@ public class ModelInference : MonoBehaviour
         switch (action.Type)
         {
             case "equip":
-                inventory.EquipItem(action.ActionDetail.Source);
+                inventory.EquipItem(action.ActionDetail.Source.ToLower());
                 Debug.Log("Equip");
                 break;
             case "unequip":
@@ -60,19 +60,19 @@ public class ModelInference : MonoBehaviour
                 break;
             case "drink":
                 Debug.Log("Drink");
-                npcController.DrinkItem(action.ActionDetail.Source);
+                npcController.DrinkItem(action.ActionDetail.Source.ToLower());
                 break;
             case "drop":
                 Debug.Log("Drop");
-                inventory.DropItem(action.ActionDetail.Source);
+                inventory.DropItem(action.ActionDetail.Source.ToLower());
                 break;
             case "pickup":
                 Debug.Log("Pickup");
-                inventory.PickupItem(action.ActionDetail.Source);
+                inventory.PickupItem(action.ActionDetail.Source.ToLower());
                 break;
             case "transfer":
                 Debug.Log("Transfer");
-                inventory.TransferLiquid(action.ActionDetail.Target, action.ActionDetail.Source, 1);
+                inventory.TransferLiquid(action.ActionDetail.Target.ToLower(), action.ActionDetail.Source.ToLower(), 1);
                 break;
             case "eat":
                 Debug.Log("Eat");
@@ -80,15 +80,15 @@ public class ModelInference : MonoBehaviour
                 break;
             case "useItem":
                 Debug.Log("UseItem");
-                energyControll.EnterRest(action.ActionDetail.Source);
+                energyControll.EnterRest(action.ActionDetail.Source.ToLower());
                 break;
             case "talkTo":
                 Debug.Log("TalkTo");
-                SetRecipient(action.ActionDetail.Target);
+                SetRecipient(action.ActionDetail.Target.ToLower());
                 break;
             case "goTo":
                 Debug.Log("GoTo");
-                pathfinding.GoTo(action.ActionDetail.Target);
+                pathfinding.GoTo(action.ActionDetail.Target.ToLower());
                 break;
             default:
                 recipient = null;

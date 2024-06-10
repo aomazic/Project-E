@@ -31,3 +31,13 @@ l
 <Assets/Test Enviroment/Scripts/Enviroment/LocationManager.cs,5\e\5e0af9ecef2c235274159e3a8730517fb3bb1ca3
 h
 8Assets/Test Enviroment/Scripts/Enviroment/TimeManager.cs,5\1\510be595c740736e51461cd4c01b36838aefd6cd
+o
+?Assets/Test Enviroment/Scripts/mechanics/Food/HungerControll.cs,8\9\8942ab9c8ec05138853707b3a842ec35b2dced4a
+_
+/Assets/Test Enviroment/Scripts/Npc/Inventory.cs,b\4\b4e57380003fe8051a42ebfb6132195183c37d1e
+c
+3Assets/Test Enviroment/Scripts/mechanics/Storage.cs,9\b\9b9b01eb4d1f75bc9ce452c1d541b9265d37ca62
+]
+-Assets/Test Enviroment/Scripts/Npc/TextBox.cs,4\4\4473c19700b4253f3114f22b57ff6d627e571f44
+`
+0Assets/Test Enviroment/Scripts/CameraControll.cs,5\b\5babc5b2cb538a755cdccd0819047f6961f7fde7
