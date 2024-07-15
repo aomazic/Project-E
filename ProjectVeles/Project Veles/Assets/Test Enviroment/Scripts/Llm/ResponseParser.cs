@@ -48,21 +48,21 @@ namespace Test_Enviroment.Scripts.Llm
     {
         public static Response ParseResponse(string response)
         {
-            var responseMatch = Regex.Match(response, @"##response:(.*?),");
-            var actionTypeMatch = Regex.Match(response, @"##type : (.*?),");
-            var sourceMatch = Regex.Match(response, @"##source:(.*?),");
-            var targetMatch = Regex.Match(response, @"##target:(.*?)}");
+            var responseMatch = Regex.Match(response, @"##response:(.*?)(,|$)");
+            var actionTypeMatch = Regex.Match(response, @"##type:(.*?)(,|$)");
+            var sourceMatch = Regex.Match(response, @"##source:(.*?)(,|$)");
+            var targetMatch = Regex.Match(response, @"##target:(.*?)(,|$)");
 
             return new Response
             {
                 ResponseText = responseMatch.Groups[1].Value,
                 ResponseAction = new ResponseAction
                 {
-                    Type = actionTypeMatch.Groups[1].Value,
+                    Type = actionTypeMatch.Groups[1].Value.ToLower(),
                     ActionDetail = new ActionDetail
                     {
-                        Source = sourceMatch.Groups[1].Value,
-                        Target = targetMatch.Groups[1].Value
+                        Source = sourceMatch.Groups[1].Value.ToLower(),
+                        Target = targetMatch.Groups[1].Value.ToLower()
                     }
                 }
             };
@@ -70,7 +70,10 @@ namespace Test_Enviroment.Scripts.Llm
         
         public static string ConstructPrompt(Prompt prompt)
         {
-            return "##location : " + prompt.CurrentLocation + ", ##dateAndTime : " + prompt.DateAndTime + ", ##npcName : " + prompt.NpcName + ", ##npcDescription : " + prompt.NpcDescription + ", ##systemPrompt : " + prompt.SystemPrompt + ", ##memory1 : " + prompt.Memory1 + ", ##memory2 : " + prompt.Memory2 + ", ##memory3 : " + prompt.Memory3;
+            return "##location : " + prompt.CurrentLocation + ", ##dateAndTime : " + prompt.DateAndTime + 
+                   ", ##npcName : " + prompt.NpcName + ", ##npcDescription : " + prompt.NpcDescription + 
+                   ", ##systemPrompt : " + prompt.SystemPrompt + ", ##memory1 : " + prompt.Memory1 + 
+                   ", ##memory2 : " + prompt.Memory2 + ", ##memory3 : " + prompt.Memory3;
         }
     }
 }

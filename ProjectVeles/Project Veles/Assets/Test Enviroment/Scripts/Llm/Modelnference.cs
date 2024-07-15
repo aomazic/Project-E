@@ -56,38 +56,38 @@ public class ModelInference : MonoBehaviour
                 break;
             case "unequip":
                 inventory.UnequipItem();
-                Debug.Log("Unequip");
+                Debug.Log("unequip");
                 break;
             case "drink":
-                Debug.Log("Drink");
+                Debug.Log("drink");
                 npcController.DrinkItem(action.ActionDetail.Source.ToLower());
                 break;
             case "drop":
-                Debug.Log("Drop");
+                Debug.Log("drop");
                 inventory.DropItem(action.ActionDetail.Source.ToLower());
                 break;
             case "pickup":
-                Debug.Log("Pickup");
+                Debug.Log("pickup");
                 inventory.PickupItem(action.ActionDetail.Source.ToLower());
                 break;
             case "transfer":
-                Debug.Log("Transfer");
+                Debug.Log("transfer");
                 inventory.TransferLiquid(action.ActionDetail.Target.ToLower(), action.ActionDetail.Source.ToLower(), 1);
                 break;
             case "eat":
-                Debug.Log("Eat");
-                inventory.EatFood("batak");
+                Debug.Log("eat");
+                inventory.EatFood(action.ActionDetail.Source.ToLower());
                 break;
-            case "useItem":
-                Debug.Log("UseItem");
+            case "useitem":
+                Debug.Log("useitem");
                 energyControll.EnterRest(action.ActionDetail.Source.ToLower());
                 break;
-            case "talkTo":
-                Debug.Log("TalkTo");
+            case "talkto":
+                Debug.Log("talkto");
                 SetRecipient(action.ActionDetail.Target.ToLower());
                 break;
-            case "goTo":
-                Debug.Log("GoTo");
+            case "goto":
+                Debug.Log("goto");
                 pathfinding.GoTo(action.ActionDetail.Target.ToLower());
                 break;
             default:
@@ -114,9 +114,9 @@ public class ModelInference : MonoBehaviour
     }
     
     void ReplyCompleted(){
-        // do something when the reply from the model is complete
         Debug.Log("The AI replied");
         Response response = ResponseParser.ParseResponse(reply);
+        npcTextBox.text = response.ResponseText;
         PerformAction(response.ResponseAction);
         if (recipient)
         { 
