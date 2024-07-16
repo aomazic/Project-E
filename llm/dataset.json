@@ -1209,8 +1209,7 @@
       }
     ],
     "response": "Ensuring my spell components are prepared and accessible will be key.",
-    "action": 
-      {
+    "action": {
         "type": "pickUpItem",
         "target": "Spell Components Pouch"
       }
