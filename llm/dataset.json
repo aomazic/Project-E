@@ -1213,6 +1213,6 @@
       {
         "type": "pickUpItem",
         "target": "Spell Components Pouch"
-      },
+      }
   }
 ]
