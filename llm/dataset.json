@@ -1209,23 +1209,10 @@
       }
     ],
     "response": "Ensuring my spell components are prepared and accessible will be key.",
-    "action": [
+    "action": 
       {
         "type": "pickUpItem",
         "target": "Spell Components Pouch"
       },
-      {
-        "type": "EquipItem",
-        "target": "Arcane Focus"
-      }
-    ],
-    "memory_addition": {
-      "date_created": "1210-12-27 10:00:00",
-      "recency": 1.0,
-      "importance": 0.9,
-      "activity": "Spotted an Arcane Focus at the local mage's market",
-      "item_spotted": "Arcane Focus"
-    }
   }
-
 ]
