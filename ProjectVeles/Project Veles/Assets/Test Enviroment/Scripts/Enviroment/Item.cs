@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -7,16 +8,7 @@ public class Item : MonoBehaviour
 {
     [SerializeField]
     protected float weight;
-
-    [SerializeField]
-    protected string itemName;
-
-    public string ItemName
-    {
-        get => itemName;
-        set => itemName = value;
-    }
-
+    
     public float Weight
     {
         get => weight;

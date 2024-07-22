@@ -11,7 +11,7 @@ public class EnviromentItemControll : MonoBehaviour
         items = new Dictionary<string, Item>();
         foreach (var item in FindObjectsOfType<Item>())
         {
-            items[item.ItemName] = item;
+            items[item.name] = item;
         }
     }
 

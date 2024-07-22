@@ -19,6 +19,7 @@ public class NpcController : MonoBehaviour
     public EnviromentItemControll itemEnvironmentControll;
     public Collider itemInteractCollider;
     public MemoryDatabase memoryDb;
+    [TextArea]
     public string description;
 
     private void Awake()

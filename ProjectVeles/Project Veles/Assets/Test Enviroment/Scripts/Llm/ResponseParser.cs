@@ -2,16 +2,11 @@
 
 namespace Test_Enviroment.Scripts.Llm
 {
-    public class ActionDetail
-    {
-        public string Source { get; set; }
-        public string Target { get; set; }
-    }
-
     public class ResponseAction
     {
         public string Type { get; set; }
-        public ActionDetail ActionDetail { get; set; }
+        
+        public string Target { get; set; }
     }
 
     public class Response
@@ -48,32 +43,32 @@ namespace Test_Enviroment.Scripts.Llm
     {
         public static Response ParseResponse(string response)
         {
-            var responseMatch = Regex.Match(response, @"##response:(.*?)(,|$)");
-            var actionTypeMatch = Regex.Match(response, @"##type:(.*?)(,|$)");
-            var sourceMatch = Regex.Match(response, @"##source:(.*?)(,|$)");
-            var targetMatch = Regex.Match(response, @"##target:(.*?)(,|$)");
+            var responseMatch = Regex.Match(response, @"response:(.*?)(,|$)");
+            var actionTypeMatch = Regex.Match(response, @"type:(.*?)(,|$)");
+            var targetMatch = Regex.Match(response, @"target:(.*?)(,|$)");
+
+            // Trim leading and trailing spaces and remove non-alphabet characters
+            var cleanedResponseText = Regex.Replace(responseMatch.Groups[1].Value.Trim(), @"[^a-zA-Z\s]", "");
+            var cleanedActionType = Regex.Replace(actionTypeMatch.Groups[1].Value.Trim(), @"[^a-zA-Z\s]", "");
+            var cleanedTarget = Regex.Replace(targetMatch.Groups[1].Value.Trim(), @"[^a-zA-Z\s]", "");
 
             return new Response
             {
-                ResponseText = responseMatch.Groups[1].Value,
+                ResponseText = cleanedResponseText,
                 ResponseAction = new ResponseAction
                 {
-                    Type = actionTypeMatch.Groups[1].Value.ToLower(),
-                    ActionDetail = new ActionDetail
-                    {
-                        Source = sourceMatch.Groups[1].Value.ToLower(),
-                        Target = targetMatch.Groups[1].Value.ToLower()
-                    }
+                    Type = cleanedActionType.ToLower(),
+                    Target = cleanedTarget.ToLower()
                 }
             };
-        }  
+        }
         
         public static string ConstructPrompt(Prompt prompt)
         {
-            return "##location : " + prompt.CurrentLocation + ", ##dateAndTime : " + prompt.DateAndTime + 
-                   ", ##npcName : " + prompt.NpcName + ", ##npcDescription : " + prompt.NpcDescription + 
-                   ", ##systemPrompt : " + prompt.SystemPrompt + ", ##memory1 : " + prompt.Memory1 + 
-                   ", ##memory2 : " + prompt.Memory2 + ", ##memory3 : " + prompt.Memory3;
+            return "location : " + prompt.CurrentLocation + ", dateAndTime : " + prompt.DateAndTime + 
+                   ", npcName : " + prompt.NpcName + ", npcDescription : " + prompt.NpcDescription + 
+                   ", systemPrompt : " + prompt.SystemPrompt + ", memory1 : " + prompt.Memory1 + 
+                   ", memory2 : " + prompt.Memory2 + ", memory3 : " + prompt.Memory3;
         }
     }
 }

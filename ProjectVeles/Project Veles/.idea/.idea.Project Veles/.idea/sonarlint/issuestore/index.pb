@@ -41,3 +41,17 @@ c
 -Assets/Test Enviroment/Scripts/Npc/TextBox.cs,4\4\4473c19700b4253f3114f22b57ff6d627e571f44
 `
 0Assets/Test Enviroment/Scripts/CameraControll.cs,5\b\5babc5b2cb538a755cdccd0819047f6961f7fde7
+w
+GAssets/Test Enviroment/Scripts/mechanics/Energy Controll/RestingItem.cs,7\d\7de25d4ab36766fe96cca7694872fdb21e614b29
+a
+1Assets/Test Enviroment/Scripts/Enviroment/Item.cs,c\1\c1ee44eabd6b8824048bc3d11361d3b5f9245e90
+s
+CAssets/Test Enviroment/Scripts/Enviroment/EnviromentItemControll.cs,1\5\157f786f130fcec9e96d4191262f27b4bf70038c
+p
+@Assets/LLMUnity/Samples/MultipleCharacters/MultipleCharacters.cs,b\4\b43f90cda5cf9b729176016de13e227a6b37e5cf
+W
+'Assets/LLMUnity/Runtime/LLMCharacter.cs,8\d\8dad120df54cf8152f84a532ed47bdf68958e0fa
+Y
+)Assets/LLMUnity/Editor/LLMClientEditor.cs,b\b\bbf348db5c2f89708ec76f8ea3dd26c7b2c27f88
+n
+>Assets/LLMUnity/Samples/KnowledgeBaseGame/KnowledgeBaseGame.cs,6\7\6753ea06a1156f01b7616a2df291a8e175fc5bcf

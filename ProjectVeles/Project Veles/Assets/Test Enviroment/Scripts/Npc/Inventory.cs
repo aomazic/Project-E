@@ -117,19 +117,19 @@ public class Inventory : MonoBehaviour
     {
         if (eqipedItem)
         {
-            var itemName = eqipedItem.ItemName;
+            var itemName = eqipedItem.name;
             eqipedItem = null;
             npcController.memoryDb.genericObsevation(transform.name, $"Unequipped {itemName}", 5f);
         }
     }
     public Item GetItemByName(string itemName)
     {
-        return items.Keys.FirstOrDefault(item => item.ItemName == itemName);
+        return items.Keys.FirstOrDefault(item => item.name == itemName);
     }
 
     private bool ItemExistsInInventory(string itemName)
     {
-        return items.Keys.Any(item => item.ItemName == itemName);
+        return items.Keys.Any(item => item.name == itemName);
     }
 
 }

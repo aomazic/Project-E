@@ -97,7 +97,17 @@ GameObject:
   - component: {fileID: 706387989131976253}
   - component: {fileID: 2040829552138004992}
   - component: {fileID: 8334349369800176839}
+  - component: {fileID: 861403127263589034}
+  - component: {fileID: 1939645161858304796}
   - component: {fileID: 6555805691994062220}
+  - component: {fileID: 6273247799150236747}
+  - component: {fileID: 2483695919845553534}
+  - component: {fileID: 555736943089101055}
+  - component: {fileID: 3848990470949265254}
+  - component: {fileID: 8157743089342142999}
+  - component: {fileID: 2759729789595208799}
+  - component: {fileID: 8652590870646858490}
+  - component: {fileID: 7855325499951481127}
   m_Layer: 0
   m_Name: Jan
   m_TagString: npc
@@ -115,7 +125,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -10.74, y: 2.99, z: -24.38}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4393857591315624433}
@@ -204,6 +214,41 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &861403127263589034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1483581218393632328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18de87e736ba71d45996ebb42e2e4141, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  npcController: {fileID: 0}
+  fieldOfViewAngle: 110
+  visionDistance: 10
+  numberOfRays: 10
+  saveCooldown: 1
+--- !u!114 &1939645161858304796
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1483581218393632328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2712ae8bda4f7b49abd8bcf40b2e86f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxEnergy: 100
+  energyLevel: 0
+  restEnergyRate: 1
+  walkEnergyRate: 2
+  runEnergyRate: 5
+  currentState: 1
 --- !u!65 &6555805691994062220
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -225,6 +270,133 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6273247799150236747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1483581218393632328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73d4212c8d6a1c447b3491aebb037f50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weightLimit: 200
+--- !u!114 &2483695919845553534
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1483581218393632328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6881072e441a204386a897aba26e3b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 3
+  jumpHeight: 2
+  drinkingRate: 1
+  itemEnvironmentControll: {fileID: 0}
+  itemInteractCollider: {fileID: 253253458632226911}
+  memoryDb: {fileID: 0}
+  description: 'Role: Village Healer Personality: Kind, gentle, and wise. Background:
+    Ban is the village healer who has a deep knowledge of herbs and medicinal practices.
+    He is known for his calm demeanor and ability to soothe both physical and emotional
+    wounds. Villagers often seek his counsel for various ailments and advice. Appearance:
+    Medium height with a slender build. He wears simple robes with various pouches
+    filled with herbs. Ban has long, silver hair and a serene expression, exuding
+    an aura of tranquility.'
+--- !u!114 &555736943089101055
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1483581218393632328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ffd93df2b5b72a45a7ad62eec54f224, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thirst: 100
+  maxThirst: 100
+  thirstDecreaseRate: 1
+--- !u!114 &3848990470949265254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1483581218393632328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e19e62d9ed67fc4a8b519111a47033e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8157743089342142999
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1483581218393632328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6da4c867ae8e5d478a9a46fc2b02a50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hunger: 100
+  maxHunger: 100
+  hungerRate: 1
+--- !u!114 &2759729789595208799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1483581218393632328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a3c6b296b4144f0a682eb6c1e95b84b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  llm: {fileID: 0}
+  npcTextBox: {fileID: 0}
+  recipient: {fileID: 0}
+  systemPrompt: What to do today
+  timeManager: {fileID: 0}
+  memoryDb: {fileID: 0}
+  worldInfo: 
+--- !u!114 &8652590870646858490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1483581218393632328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc30733b7429d4445a41f2d8f670abcb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentRegion: 
+--- !u!114 &7855325499951481127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1483581218393632328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b92c9350f6b0fa45879bcea9a2433f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  panel: {fileID: 0}
+  playerCamera: {fileID: 0}
+  offset: {x: 0, y: 2, z: 0}
 --- !u!1 &2231424533033926124
 GameObject:
   m_ObjectHideFlags: 0

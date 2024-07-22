@@ -5,14 +5,23 @@ using UnityEngine;
 public class Storage : MonoBehaviour
 {
     private List<object> items = new List<object>();
+    [SerializeField] private float maxWeight;
+    private float currentWeight;
 
-    public void AddItem(object item)
+    public void AddItem(Item item)
     {
+        currentWeight += item.Weight;
+        if (currentWeight > maxWeight)
+        {
+            currentWeight -= item.Weight;
+            return;
+        }
         items.Add(item);
     }
 
-    public bool RemoveItem(object item)
+    public bool RemoveItem(Item item)
     {
+        currentWeight -= item.Weight;
         return items.Remove(item);
     }
 

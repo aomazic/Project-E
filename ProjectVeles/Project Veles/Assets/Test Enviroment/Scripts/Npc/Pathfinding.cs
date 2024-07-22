@@ -17,7 +17,16 @@ public class Pathfinding : MonoBehaviour
         if (destination)
         {
             Vector3 offset = transform.forward * -2f;
-            Move(destination.transform.position + offset);
+            Vector3 destinationPosition = destination.transform.position + offset;
+
+            // Try to find a point on the NavMesh within a certain radius
+            Vector3 randomPoint = destinationPosition + UnityEngine.Random.insideUnitSphere * 10f;
+            NavMeshHit hit;
+            if (NavMesh.SamplePosition(randomPoint, out hit, 10f, NavMesh.AllAreas))
+            {
+                // If a point is found, move to that point
+                Move(hit.position);
+            }
         }
     }
     

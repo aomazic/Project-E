@@ -60,8 +60,30 @@ public class MemoryDatabase : MonoBehaviour
         string currentTime = timeManager.GetGameDateTime();
         string regionName = !region ? "Somewhere" : region.name;
         string observationText = objectName + " spotted at " + currentTime + " at location " + regionName;
+
         dbCommand.CommandText =
-            "INSERT INTO Observations (NPCName, Observation, RecencyScore, Created) VALUES ('" + NPCName + "', '" + observationText + "', " + 10f + ", '" + currentTime + "')";
+            "INSERT INTO Observations (NPCName, Observation, RecencyScore, Created) VALUES (@NPCName, @Observation, @RecencyScore, @Created)";
+
+        IDbDataParameter paramNPCName = dbCommand.CreateParameter();
+        paramNPCName.ParameterName = "@NPCName";
+        paramNPCName.Value = NPCName;
+        dbCommand.Parameters.Add(paramNPCName);
+
+        IDbDataParameter paramObservation = dbCommand.CreateParameter();
+        paramObservation.ParameterName = "@Observation";
+        paramObservation.Value = observationText;
+        dbCommand.Parameters.Add(paramObservation);
+
+        IDbDataParameter paramRecencyScore = dbCommand.CreateParameter();
+        paramRecencyScore.ParameterName = "@RecencyScore";
+        paramRecencyScore.Value = 10f;
+        dbCommand.Parameters.Add(paramRecencyScore);
+
+        IDbDataParameter paramCreated = dbCommand.CreateParameter();
+        paramCreated.ParameterName = "@Created";
+        paramCreated.Value = currentTime;
+        dbCommand.Parameters.Add(paramCreated);
+
         dbCommand.ExecuteReader();
     }
 

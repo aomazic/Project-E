@@ -11,7 +11,7 @@ using UnityEngine.UI;
 
 public class ModelInference : MonoBehaviour
 {
-    [SerializeField] private LLMClient llm;
+    [SerializeField] private LLMCharacter llm;
     [SerializeField] TextMeshProUGUI npcTextBox;
     private string prompt = "";
     public ModelInference recipient;
@@ -25,6 +25,8 @@ public class ModelInference : MonoBehaviour
     [SerializeField] private TimeManager timeManager;
     [SerializeField] MemoryDatabase memoryDb;
     List<string> importantRecords = new List<string>();
+    [TextArea] 
+    [SerializeField] private string worldInfo = "Key locations include the Kitchen, Main Hall, Main Hallway,Hallway to Ban House, Hallway to Jan house,Jan House , and Ban House.";
 
     public ModelInference(TextMeshProUGUI npcTextBox, LLMClient llm)
     {
@@ -39,19 +41,18 @@ public class ModelInference : MonoBehaviour
         energyControll = GetComponent<EnergyControll>();
         pathfinding = GetComponent<Pathfinding>();
         locationManager = GetComponent<LocationManager>();
-        const string worldInfo = "The following is a information about the Cika village. This is a small settlement with basic amenities. " +
-                           "The village consists of five houses, a market for trading goods, a chief's house which serves as the administrative center, " +
-                           "a town well that provides water for the villagers, and a tavern where villagers gather to relax and socialize.";
         prompt = worldInfo;
+        WorldInfoInference();
         Inference();
     }
     
     private void PerformAction(ResponseAction action)
     {
+        string target = action.Target.ToLower();
         switch (action.Type)
         {
             case "equip":
-                inventory.EquipItem(action.ActionDetail.Source.ToLower());
+                inventory.EquipItem(target.ToLower());
                 Debug.Log("Equip");
                 break;
             case "unequip":
@@ -60,35 +61,35 @@ public class ModelInference : MonoBehaviour
                 break;
             case "drink":
                 Debug.Log("drink");
-                npcController.DrinkItem(action.ActionDetail.Source.ToLower());
+                npcController.DrinkItem(target.ToLower());
                 break;
             case "drop":
                 Debug.Log("drop");
-                inventory.DropItem(action.ActionDetail.Source.ToLower());
+                inventory.DropItem(target.ToLower());
                 break;
             case "pickup":
                 Debug.Log("pickup");
-                inventory.PickupItem(action.ActionDetail.Source.ToLower());
-                break;
-            case "transfer":
-                Debug.Log("transfer");
-                inventory.TransferLiquid(action.ActionDetail.Target.ToLower(), action.ActionDetail.Source.ToLower(), 1);
+                inventory.PickupItem(target.ToLower());
                 break;
             case "eat":
                 Debug.Log("eat");
-                inventory.EatFood(action.ActionDetail.Source.ToLower());
+                inventory.EatFood(target.ToLower());
                 break;
-            case "useitem":
-                Debug.Log("useitem");
-                energyControll.EnterRest(action.ActionDetail.Source.ToLower());
+            case "rest":
+                Debug.Log("rest");
+                energyControll.EnterRest(target.ToLower());
+                break;
+            case "leaveRest":
+                Debug.Log("leaveRest");
+                energyControll.LeaveRest();
                 break;
             case "talkto":
                 Debug.Log("talkto");
-                SetRecipient(action.ActionDetail.Target.ToLower());
+                SetRecipient(target.ToLower());
                 break;
             case "goto":
                 Debug.Log("goto");
-                pathfinding.GoTo(action.ActionDetail.Target.ToLower());
+                pathfinding.GoTo(target.ToLower());
                 break;
             default:
                 recipient = null;
@@ -96,7 +97,14 @@ public class ModelInference : MonoBehaviour
                 break;
         }
     }
-    public void Inference()
+    
+    private void WorldInfoInference()
+    {
+        prompt = worldInfo;
+        npcTextBox.text = "";
+        _ = llm.Chat(prompt, HandleReply, ReplyCompleted);
+    }
+    private void Inference()
     {
         importantRecords = memoryDb.FetchImportantRecords(3, npcController.name);
         prompt = ResponseParser.ConstructPrompt(new Prompt(
@@ -115,8 +123,7 @@ public class ModelInference : MonoBehaviour
     
     void ReplyCompleted(){
         Debug.Log("The AI replied");
-        Response response = ResponseParser.ParseResponse(reply);
-        npcTextBox.text = response.ResponseText;
+        Response response = ResponseParser.ParseResponse(reply); ;
         PerformAction(response.ResponseAction);
         if (recipient)
         { 

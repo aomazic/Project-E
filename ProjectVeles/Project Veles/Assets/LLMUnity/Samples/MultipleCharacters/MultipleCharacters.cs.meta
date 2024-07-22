@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: e018d41899d97471396b24cf39b897f8
+guid: 0ddea206563459a4aa07bb3423a66ba8
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
@@ -13,6 +13,6 @@ AssetOrigin:
   serializedVersion: 1
   productId: 273604
   packageName: LLM for Unity
-  packageVersion: 1.2.9
-  assetPath: Assets/LLMUnity/Editor/LLMClientEditor.cs
-  uploadId: 667067
+  packageVersion: 2.0.3
+  assetPath: Assets/LLMUnity/Samples/MultipleCharacters/MultipleCharacters.cs
+  uploadId: 677145

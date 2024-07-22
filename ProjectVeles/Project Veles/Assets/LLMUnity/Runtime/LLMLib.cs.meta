@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 0ddea206563459a4aa07bb3423a66ba8
+guid: bce72731fae1ccb80b4a12f3d616f1ee
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
@@ -13,6 +13,6 @@ AssetOrigin:
   serializedVersion: 1
   productId: 273604
   packageName: LLM for Unity
-  packageVersion: 1.2.9
-  assetPath: Assets/LLMUnity/Samples/ServerClient/ServerClient.cs
-  uploadId: 667067
+  packageVersion: 2.0.3
+  assetPath: Assets/LLMUnity/Runtime/LLMLib.cs
+  uploadId: 677145
