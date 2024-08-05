@@ -64,6 +64,7 @@ public class EnergyControll : MonoBehaviour
         var item = npcController.itemEnvironmentControll.GetItemByNameInRange(itemName, npcController.itemInteractCollider) as RestingItem;
         if (!item)
         {
+            npcController.memoryDb.genericObsevation(transform.name, itemName + " not found", 2f);
             return;
         }
 
@@ -79,6 +80,10 @@ public class EnergyControll : MonoBehaviour
             transform.rotation = closestSlot.position.rotation;
             ChangeState(State.Resting);
             npcController.memoryDb.genericObsevation(transform.name, "Entered rest at " + Time.time + "on " + restPoint.name, 2f);
+        }
+        else
+        {
+            npcController.memoryDb.genericObsevation(transform.name, itemName + "is full", 2f);
         }
     }
 

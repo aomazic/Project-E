@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿using System;
+using System.Text.RegularExpressions;
 
 namespace Test_Enviroment.Scripts.Llm
 {
@@ -19,42 +20,41 @@ namespace Test_Enviroment.Scripts.Llm
     {
         public string CurrentLocation { get; set; }
         public string DateAndTime { get; set; }
-        public string NpcName { get; set; }
         public string NpcDescription { get; set; }
         public string SystemPrompt { get; set; }
         public string Memory1 { get; set; }
         public string Memory2 { get; set; }
         public string Memory3 { get; set; }
         
-        public Prompt (string currentLocation, string dateAndTime, string npcName, string npcDescription, string systemPrompt, string memory1, string memory2, string memory3)
+        public Prompt (string currentLocation, string dateAndTime, string npcDescription, string systemPrompt, string memory1, string memory2)
         {
             CurrentLocation = currentLocation;
             DateAndTime = dateAndTime;
-            NpcName = npcName;
             NpcDescription = npcDescription;
             SystemPrompt = systemPrompt;
             Memory1 = memory1;
             Memory2 = memory2;
-            Memory3 = memory3;
         }
     }
     
     public static class ResponseParser
     {
+        
         public static Response ParseResponse(string response)
         {
-            var responseMatch = Regex.Match(response, @"response:(.*?)(,|$)");
-            var actionTypeMatch = Regex.Match(response, @"type:(.*?)(,|$)");
-            var targetMatch = Regex.Match(response, @"target:(.*?)(,|$)");
+            var parts = response.Split(new[] { "action: " }, StringSplitOptions.None);
+            var responsePart = parts[0].Replace("response: ", "").Trim().Replace("\"", "");
+            var actionPart = parts.Length > 1 ? parts[1] : "";
 
-            // Trim leading and trailing spaces and remove non-alphabet characters
-            var cleanedResponseText = Regex.Replace(responseMatch.Groups[1].Value.Trim(), @"[^a-zA-Z\s]", "");
-            var cleanedActionType = Regex.Replace(actionTypeMatch.Groups[1].Value.Trim(), @"[^a-zA-Z\s]", "");
-            var cleanedTarget = Regex.Replace(targetMatch.Groups[1].Value.Trim(), @"[^a-zA-Z\s]", "");
+            var actionTypeMatch = Regex.Match(actionPart, @"type: (.*?),");
+            var targetMatch = Regex.Match(actionPart, @"target: (.*?)}");
+
+            var cleanedActionType = actionTypeMatch.Groups[1].Value.Trim();
+            var cleanedTarget = targetMatch.Groups[1].Value.Trim();
 
             return new Response
             {
-                ResponseText = cleanedResponseText,
+                ResponseText = responsePart.ToLower(),
                 ResponseAction = new ResponseAction
                 {
                     Type = cleanedActionType.ToLower(),
@@ -62,12 +62,11 @@ namespace Test_Enviroment.Scripts.Llm
                 }
             };
         }
-        
         public static string ConstructPrompt(Prompt prompt)
         {
             return "location : " + prompt.CurrentLocation + ", dateAndTime : " + prompt.DateAndTime + 
-                   ", npcName : " + prompt.NpcName + ", npcDescription : " + prompt.NpcDescription + 
-                   ", systemPrompt : " + prompt.SystemPrompt + ", memory1 : " + prompt.Memory1 + 
+                   ", Who am i : " + prompt.NpcDescription + ",\n" +
+                    prompt.SystemPrompt + ", memory1 : " + prompt.Memory1 + 
                    ", memory2 : " + prompt.Memory2 + ", memory3 : " + prompt.Memory3;
         }
     }

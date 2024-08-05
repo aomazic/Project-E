@@ -108,6 +108,7 @@ GameObject:
   - component: {fileID: 2759729789595208799}
   - component: {fileID: 8652590870646858490}
   - component: {fileID: 7855325499951481127}
+  - component: {fileID: 7862652025506640960}
   m_Layer: 0
   m_Name: Jan
   m_TagString: npc
@@ -301,13 +302,7 @@ MonoBehaviour:
   itemEnvironmentControll: {fileID: 0}
   itemInteractCollider: {fileID: 253253458632226911}
   memoryDb: {fileID: 0}
-  description: 'Role: Village Healer Personality: Kind, gentle, and wise. Background:
-    Ban is the village healer who has a deep knowledge of herbs and medicinal practices.
-    He is known for his calm demeanor and ability to soothe both physical and emotional
-    wounds. Villagers often seek his counsel for various ailments and advice. Appearance:
-    Medium height with a slender build. He wears simple robes with various pouches
-    filled with herbs. Ban has long, silver hair and a serene expression, exuding
-    an aura of tranquility.'
+  description: 'Name: Jan,  Kind, gentle loves talking to Jan in the kitchen'
 --- !u!114 &555736943089101055
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -368,7 +363,6 @@ MonoBehaviour:
   systemPrompt: What to do today
   timeManager: {fileID: 0}
   memoryDb: {fileID: 0}
-  worldInfo: 
 --- !u!114 &8652590870646858490
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -397,6 +391,28 @@ MonoBehaviour:
   panel: {fileID: 0}
   playerCamera: {fileID: 0}
   offset: {x: 0, y: 2, z: 0}
+--- !u!195 &7862652025506640960
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1483581218393632328}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.49999997
+  m_Speed: 7
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 1
+  m_BaseOffset: 0.5
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &2231424533033926124
 GameObject:
   m_ObjectHideFlags: 0
@@ -492,6 +508,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2509844137765675050}
   - component: {fileID: 253253458632226911}
+  - component: {fileID: 4500823902477602170}
   m_Layer: 2
   m_Name: ItemInteractionRadius
   m_TagString: Untagged
@@ -533,8 +550,21 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 2.5
+  m_Radius: 8
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4500823902477602170
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2541781940499900968}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc30733b7429d4445a41f2d8f670abcb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentRegion: 
 --- !u!1 &2827957663638482386
 GameObject:
   m_ObjectHideFlags: 0

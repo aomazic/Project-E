@@ -6,7 +6,7 @@ using LLMUnity;
 using NUnit.Framework;
 using Test_Enviroment.Scripts.Llm;
 using TMPro;
-using UnityEngine;
+using UnityEngine;  
 using UnityEngine.UI;
 
 public class ModelInference : MonoBehaviour
@@ -23,17 +23,10 @@ public class ModelInference : MonoBehaviour
     private LocationManager locationManager;
     [SerializeField] private string systemPrompt = "Hmmm what to do next?";
     [SerializeField] private TimeManager timeManager;
-    [SerializeField] MemoryDatabase memoryDb;
+    private bool canTalk = true;
+    private float delay = 5f;
     List<string> importantRecords = new List<string>();
-    [TextArea] 
-    [SerializeField] private string worldInfo = "Key locations include the Kitchen, Main Hall, Main Hallway,Hallway to Ban House, Hallway to Jan house,Jan House , and Ban House.";
-
-    public ModelInference(TextMeshProUGUI npcTextBox, LLMClient llm)
-    {
-        this.npcTextBox = npcTextBox;
-        this.llm = llm;
-    }
-
+    
     private void Start()
     {
         npcController = GetComponent<NpcController>();
@@ -41,8 +34,6 @@ public class ModelInference : MonoBehaviour
         energyControll = GetComponent<EnergyControll>();
         pathfinding = GetComponent<Pathfinding>();
         locationManager = GetComponent<LocationManager>();
-        prompt = worldInfo;
-        WorldInfoInference();
         Inference();
     }
     
@@ -75,7 +66,7 @@ public class ModelInference : MonoBehaviour
                 Debug.Log("eat");
                 inventory.EatFood(target.ToLower());
                 break;
-            case "rest":
+            case "enterrest":
                 Debug.Log("rest");
                 energyControll.EnterRest(target.ToLower());
                 break;
@@ -98,41 +89,53 @@ public class ModelInference : MonoBehaviour
         }
     }
     
-    private void WorldInfoInference()
-    {
-        prompt = worldInfo;
-        npcTextBox.text = "";
-        _ = llm.Chat(prompt, HandleReply, ReplyCompleted);
-    }
     private void Inference()
     {
-        importantRecords = memoryDb.FetchImportantRecords(3, npcController.name);
+        importantRecords = npcController.memoryDb.FetchImportantRecords(2, npcController.name);
         prompt = ResponseParser.ConstructPrompt(new Prompt(
-            locationManager.currentRegion, timeManager.GetGameDateTime(), npcController.name, 
+            locationManager.currentRegion, timeManager.GetGameDateTime(), 
             npcController.description, systemPrompt, importantRecords[0], 
-            importantRecords[1], importantRecords[2]));
+            importantRecords[1]));
         npcTextBox.text = "";
         _ = llm.Chat(prompt, HandleReply, ReplyCompleted);
     }
 
-    public void SetRecipient(string recipientName)
+    private void SetRecipient(string recipientName)
     {
         var recipientObject = GameObject.Find(recipientName).GetComponent<ModelInference>();
+        if (!recipientObject)
+        {
+            npcController.memoryDb.genericObsevation(npcController.name, $"Tried to talk to {recipientName} but they do not exist", 10f);
+            return;
+        }
+
+        var recipientCollider = recipientObject.GetComponent<NpcController>().itemInteractCollider;
+        if (!npcController.itemInteractCollider.bounds.Intersects(recipientCollider.bounds))
+        {
+            npcController.memoryDb.genericObsevation(npcController.name, $"Tried to talk to {recipientName} but they are too far away", 10f);
+            return;
+        }
         recipient = recipientObject;
+        recipient.StopCurrentAction();
     }
-    
     void ReplyCompleted(){
+        if (!canTalk)
+        {
+            return;
+        }
+        systemPrompt = "Hmmm what to do next?";
         Debug.Log("The AI replied");
         Response response = ResponseParser.ParseResponse(reply); ;
         PerformAction(response.ResponseAction);
         if (recipient)
         { 
-            SendMessageToRecipient(response.ResponseText);
+            delay = 10f;
+            recipient.ReceiveMessage(response.ResponseText, npcController.name);
         }
         else
         {
-            prompt = "Hmmm what to do next?";
-            StartCoroutine(DelayedInference(5f));
+            delay = 5f;
+            StartCoroutine(DelayedInference());
         }
     }
 
@@ -140,22 +143,24 @@ public class ModelInference : MonoBehaviour
         npcTextBox.text = reply;
         this.reply = reply;
     }
-
-    private void SendMessageToRecipient(string message)
-    {
-        recipient.ReceiveMessage(message);
-    }
-
-    public void ReceiveMessage(string message)
-    {
-        // Process the received message
-       prompt = systemPrompt;
-       StartCoroutine(DelayedInference(1f));
+    
+    
+    private void ReceiveMessage(string message, string sender)
+    { 
+        systemPrompt = $"{sender} said {message}, what is your response to {sender}?";
+        delay = 5f;
+        StartCoroutine(DelayedInference());
     }
     
-    private IEnumerator DelayedInference(float delay)
+    private void StopCurrentAction()
     {
-        yield return new WaitForSeconds(delay);
+        canTalk = false;
+        StopAllCoroutines();
+    }
+    private IEnumerator DelayedInference()
+    {
+        canTalk = true;
+        yield return new WaitForSeconds(delay);       
         Inference();
     }
 

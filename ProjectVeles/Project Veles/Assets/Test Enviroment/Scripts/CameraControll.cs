@@ -6,20 +6,10 @@ using UnityEngine.UI;
 public class CameraControll : MonoBehaviour
 {
     public List<Transform> targets;
-    public List<Image> textBoxes; 
     public Vector3 offset = new Vector3(0, 10, -10); 
     public float smoothSpeed = 0.125f;
     private int currentTargetIndex = 0;
-
-    void Start()
-    {
-        if (targets.Count != textBoxes.Count)
-        {
-            Debug.LogError("Targets and text boxes count mismatch");
-            return;
-        }
-    }
-
+    
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space)) 
@@ -29,11 +19,6 @@ public class CameraControll : MonoBehaviour
             {
                 currentTargetIndex = 0;
             }
-        }
-
-        for (int i = 0; i < textBoxes.Count; i++)
-        {
-            textBoxes[i].gameObject.SetActive(i == currentTargetIndex);
         }
     }
 

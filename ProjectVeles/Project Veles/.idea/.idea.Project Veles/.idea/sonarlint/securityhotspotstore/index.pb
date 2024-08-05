@@ -3,8 +3,6 @@ l
 <Assets/Test Enviroment/Scripts/BuildingEntranceController.cs,b\c\bc57d9db6c71355a64707ed5aeb857f5dc6fa9aa
 |
 LLibrary/PackageCache/com.unity.ugui@2.0.0/Runtime/UGUI/UI/Core/InputField.cs,b\7\b7249a4dbb50a97694e993ab8425e7d160764522
-d
-4Assets/LLMUnity/Samples/ServerClient/ServerClient.cs,e\d\ed362b8f95e8c376ee0020a8e2d6e7ff119f3652
 c
 3Assets/Test Enviroment/Scripts/Llm/Modelnference.cs,c\8\c86deae81391d88c99c1cc44dd8d4548a0cb3d47
 c
@@ -51,7 +49,5 @@ p
 @Assets/LLMUnity/Samples/MultipleCharacters/MultipleCharacters.cs,b\4\b43f90cda5cf9b729176016de13e227a6b37e5cf
 W
 'Assets/LLMUnity/Runtime/LLMCharacter.cs,8\d\8dad120df54cf8152f84a532ed47bdf68958e0fa
-Y
-)Assets/LLMUnity/Editor/LLMClientEditor.cs,b\b\bbf348db5c2f89708ec76f8ea3dd26c7b2c27f88
-n
->Assets/LLMUnity/Samples/KnowledgeBaseGame/KnowledgeBaseGame.cs,6\7\6753ea06a1156f01b7616a2df291a8e175fc5bcf
+Z
+*Assets/Test Enviroment/UnityEnvironment.cs,4\6\46700025e45bb2ae70d877ac8eaf8e3620688755

@@ -46,6 +46,8 @@ public class Inventory : MonoBehaviour
         var item = GetItemByName(itemName);
         if (item is null)
         {
+            Debug.LogError("Item not found");
+            npcController.memoryDb.genericObsevation(transform.name, $"Tried to drop {itemName} but it is not in the inventory", 5f);
             return;
         }
         item.transform.position = npcTransform.position + npcTransform.forward;
@@ -79,6 +81,11 @@ public class Inventory : MonoBehaviour
             AddItem(item, 1);
             npcController.memoryDb.genericObsevation(transform.name, $"Picked up {itemName}", 5f);
         }
+        else
+        {
+            Debug.LogError("Item not found");
+            npcController.memoryDb.genericObsevation(transform.name, $"Tried to pick up {itemName} but it is not in the vicinity", 5f);
+        }
     }
 
 
@@ -108,7 +115,9 @@ public class Inventory : MonoBehaviour
         var foodItem = npcController.itemEnvironmentControll.GetItemByNameInRange(itemName, npcController.itemInteractCollider) as FoodItem;
         if (!foodItem)
         {
+            npcController.memoryDb.genericObsevation(transform.name, $"Tried to eat {itemName} but it is not in the vicinity", 5f);
             Debug.LogError("Food item not found");
+            return;
         }
         hungerControll.Eat(foodItem);
     }

@@ -101,7 +101,7 @@ public class MemoryDatabase : MonoBehaviour
     {
         IDbCommand dbCommandUpdateImportance = dbConnection.CreateCommand();
         dbCommandUpdateImportance.CommandText =
-            $"UPDATE Observations SET ImportanceScore = ImportanceScore - (ImportanceScore * {importanceReinforcementFactor}) WHERE NPCName = '{NPCName}' AND Observation LIKE '{observationType} level at%'";
+            $"UPDATE Observations SET ImportanceScore = 0 WHERE NPCName = '{NPCName}' AND Observation LIKE '{observationType} level at%'";
         dbCommandUpdateImportance.ExecuteReader();
 
         IDbCommand dbCommand = dbConnection.CreateCommand();
