@@ -1,3 +1,70 @@
+## v2.2.3
+#### 🚀 Features
+
+- LlamaLib v1.1.12: SSL certificate & API key for server, Support more AMD GPUs (PR: #241)
+- Server security with API key and SSL (PR: #238)
+- Show server command for easier deployment (PR #239)
+
+#### 🐛 Fixes
+
+- Fix multiple LLM crash on Windows (PR: #242)
+- Exclude system prompt from saving of chat history (PR: #240)
+
+
+## v2.2.2
+#### 🚀 Features
+
+- Allow to set the LLMCharacter slot (PR: #231)
+
+#### 🐛 Fixes
+
+- fix adding grammar from StreamingAssets (PR: #229)
+- fix library setup restart when interrupted (PR: #232)
+- Remove unnecessary Android linking in IL2CPP builds (PR: #233)
+
+
+## v2.2.1
+#### 🐛 Fixes
+
+- Fix naming showing full path when loading model (PR: #224)
+- Fix parallel prompts (PR: #226)
+
+
+## v2.2.0
+#### 🚀 Features
+
+- Implement embedding and lora adapter functionality (PR: #210)
+- Read context length and warn if it is very large (PR: #211)
+- Setup allowing to use extra features: flash attention and IQ quants (PR: #216)
+- Allow HTTP request retries for remote server (PR: #217)
+- Allow to set lora weights at startup, add unit test (PR: #219)
+- allow relative StreamingAssets paths for models (PR: #221)
+
+#### 🐛 Fixes
+
+- Fix set template for remote setup (PR: #208)
+- fix crash when stopping scene before LLM creation (PR: #214)
+
+#### 📦 General
+
+- Documentation/point to gguf format for lora (PR: #215)
+
+
+## v2.1.1
+#### 🐛 Fixes
+
+- Resolve build directory creation
+
+## v2.1.0
+#### 🚀 Features
+
+- Android deployment (PR: #194)
+- Allow to download models on startup with resumable download functionality (PR: #196)
+- LLM model manager (PR: #196)
+- Add Llama 3 7B and Qwen2 0.5B models (PR: #198)
+- Start LLM always asynchronously (PR: #199)
+- Add contributing guidelines (PR: #201)
+
 ## v2.0.3
 #### 🚀 Features
 

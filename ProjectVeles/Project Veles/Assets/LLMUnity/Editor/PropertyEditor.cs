@@ -8,7 +8,7 @@ namespace LLMUnity
 {
     public class PropertyEditor : Editor
     {
-        protected int buttonWidth = 150;
+        public static int buttonWidth = 150;
 
         public void AddScript(SerializedObject llmScriptSO)
         {
@@ -16,17 +16,11 @@ namespace LLMUnity
             EditorGUILayout.PropertyField(scriptProp);
         }
 
-        public void AddOptionsToggle(SerializedObject llmScriptSO, string propertyName, string name)
+        public bool ToggleButton(string text, bool activated)
         {
-            SerializedProperty advancedOptionsProp = llmScriptSO.FindProperty(propertyName);
-            string toggleText = (advancedOptionsProp.boolValue ? "Hide" : "Show") + " " + name;
             GUIStyle style = new GUIStyle("Button");
-            if (advancedOptionsProp.boolValue)
-                style.normal = new GUIStyleState() { background = Texture2D.grayTexture };
-            if (GUILayout.Button(toggleText, style, GUILayout.Width(buttonWidth)))
-            {
-                advancedOptionsProp.boolValue = !advancedOptionsProp.boolValue;
-            }
+            if (activated) style.normal = new GUIStyleState() { background = Texture2D.grayTexture };
+            return GUILayout.Button(text, style, GUILayout.Width(buttonWidth));
         }
 
         public void AddSetupSettings(SerializedObject llmScriptSO)
@@ -54,8 +48,12 @@ namespace LLMUnity
         public void AddOptionsToggles(SerializedObject llmScriptSO)
         {
             LLMUnitySetup.SetDebugMode((LLMUnitySetup.DebugModeType)EditorGUILayout.EnumPopup("Log Level", LLMUnitySetup.DebugMode));
+
             EditorGUILayout.BeginHorizontal();
-            AddOptionsToggle(llmScriptSO, "advancedOptions", "Advanced Options");
+            SerializedProperty advancedOptionsProp = llmScriptSO.FindProperty("advancedOptions");
+            string toggleText = (advancedOptionsProp.boolValue ? "Hide" : "Show") + " Advanced Options";
+            if (ToggleButton(toggleText, advancedOptionsProp.boolValue)) advancedOptionsProp.boolValue = !advancedOptionsProp.boolValue;
+            if (ToggleButton("Use extras", LLMUnitySetup.FullLlamaLib)) LLMUnitySetup.SetFullLlamaLib(!LLMUnitySetup.FullLlamaLib);
             EditorGUILayout.EndHorizontal();
             Space();
         }
@@ -94,10 +92,23 @@ namespace LLMUnity
             return properties;
         }
 
-        public void ShowPropertiesOfClass(string title, SerializedObject so, List<Type> attributeClasses, bool addSpace = true)
+        public void ShowPropertiesOfClass(string title, SerializedObject so, List<Type> attributeClasses, bool addSpace = true, List<Type> excludeAttributeClasses = null)
         {
             // display a property if it belongs to a certain class and/or has a specific attribute class
             List<SerializedProperty> properties = GetPropertiesOfClass(so, attributeClasses);
+            if (excludeAttributeClasses != null)
+            {
+                List<SerializedProperty> excludeProperties = GetPropertiesOfClass(so, excludeAttributeClasses);
+                List<SerializedProperty> removeProperties = new List<SerializedProperty>();
+                foreach (SerializedProperty excprop in excludeProperties)
+                {
+                    foreach (SerializedProperty prop in properties)
+                    {
+                        if (prop.displayName == excprop.displayName) removeProperties.Add(prop);
+                    }
+                }
+                foreach (SerializedProperty prop in removeProperties) properties.Remove(prop);
+            }
             if (properties.Count == 0) return;
             if (title != "") EditorGUILayout.LabelField(title, EditorStyles.boldLabel);
             foreach (SerializedProperty prop in properties)
@@ -141,7 +152,7 @@ namespace LLMUnity
                     {
                         foreach (Attribute attr in fieldInfo.GetCustomAttributes(attributeClass, true))
                         {
-                            if (attr.GetType() == attributeClass)
+                            if (attributeClass.IsAssignableFrom(attr.GetType()))
                                 return attr;
                         }
                     }

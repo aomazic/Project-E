@@ -104,6 +104,8 @@ namespace LLMUnity
                 handle = Linux.dlopen(libraryName);
             else if (Application.platform == RuntimePlatform.OSXEditor || Application.platform == RuntimePlatform.OSXPlayer)
                 handle = Mac.dlopen(libraryName);
+            else if (Application.platform == RuntimePlatform.Android)
+                handle = Android.dlopen(libraryName);
             else
                 throw new PlatformNotSupportedException($"Current platform is unknown, unable to load library '{libraryName}'.");
 
@@ -122,6 +124,8 @@ namespace LLMUnity
                 handle = Linux.dlsym(library, symbolName);
             else if (Application.platform == RuntimePlatform.OSXEditor || Application.platform == RuntimePlatform.OSXPlayer)
                 handle = Mac.dlsym(library, symbolName);
+            else if (Application.platform == RuntimePlatform.Android)
+                handle = Android.dlsym(library, symbolName);
             else
                 throw new PlatformNotSupportedException($"Current platform is unknown, unable to load symbol '{symbolName}' from library {library}.");
 
@@ -139,6 +143,8 @@ namespace LLMUnity
                 Linux.dlclose(library);
             else if (Application.platform == RuntimePlatform.OSXEditor || Application.platform == RuntimePlatform.OSXPlayer)
                 Mac.dlclose(library);
+            else if (Application.platform == RuntimePlatform.Android)
+                Android.dlclose(library);
             else
                 throw new PlatformNotSupportedException($"Current platform is unknown, unable to close library '{library}'.");
         }
@@ -231,35 +237,85 @@ namespace LLMUnity
             [DllImport(SystemLibrary, SetLastError = true, CharSet = CharSet.Ansi)]
             public static extern void FreeLibrary(IntPtr hModule);
         }
+
+        private static class Android
+        {
+            public static IntPtr dlopen(string path) => dlopen(path, 1);
+
+#if UNITY_ANDROID
+            // LoadLibrary for Android
+            [DllImport("__Internal")]
+            public static extern IntPtr dlopen(string filename, int flags);
+
+            // GetSymbol for Android
+            [DllImport("__Internal")]
+            public static extern IntPtr dlsym(IntPtr handle, string symbol);
+
+            // FreeLibrary for Android
+            [DllImport("__Internal")]
+            public static extern int dlclose(IntPtr handle);
+#else
+            public static IntPtr dlopen(string filename, int flags)
+            {
+                return default;
+            }
+
+            public static IntPtr dlsym(IntPtr handle, string symbol)
+            {
+                return default;
+            }
+
+            public static int dlclose(IntPtr handle)
+            {
+                return default;
+            }
+
+#endif
+        }
     }
 
     public class LLMLib
     {
-        static IntPtr archCheckerHandle = IntPtr.Zero;
         IntPtr libraryHandle = IntPtr.Zero;
+        static readonly object staticLock = new object();
+        static bool has_avx = false;
+        static bool has_avx2 = false;
+        static bool has_avx512 = false;
+        static bool has_avx_set = false;
 
         static LLMLib()
         {
-            string archCheckerPath = GetArchitectureCheckerPath();
-            if (archCheckerPath != null)
+            lock (staticLock)
             {
-                archCheckerHandle = LibraryLoader.LoadLibrary(archCheckerPath);
-                if (archCheckerHandle == IntPtr.Zero)
+                if (has_avx_set) return;
+                string archCheckerPath = GetArchitectureCheckerPath();
+                if (archCheckerPath != null)
                 {
-                    LLMUnitySetup.LogError($"Failed to load library {archCheckerPath}.");
+                    IntPtr archCheckerHandle = LibraryLoader.LoadLibrary(archCheckerPath);
+                    if (archCheckerHandle == IntPtr.Zero)
+                    {
+                        LLMUnitySetup.LogError($"Failed to load library {archCheckerPath}.");
+                    }
+                    else
+                    {
+                        try
+                        {
+                            has_avx = LibraryLoader.GetSymbolDelegate<HasArchDelegate>(archCheckerHandle, "has_avx")();
+                            has_avx2 = LibraryLoader.GetSymbolDelegate<HasArchDelegate>(archCheckerHandle, "has_avx2")();
+                            has_avx512 = LibraryLoader.GetSymbolDelegate<HasArchDelegate>(archCheckerHandle, "has_avx512")();
+                        }
+                        catch (Exception e)
+                        {
+                            LLMUnitySetup.LogError($"{e.GetType()}: {e.Message}");
+                        }
+                    }
                 }
-                else
-                {
-                    has_avx = LibraryLoader.GetSymbolDelegate<HasArchDelegate>(archCheckerHandle, "has_avx");
-                    has_avx2 = LibraryLoader.GetSymbolDelegate<HasArchDelegate>(archCheckerHandle, "has_avx2");
-                    has_avx512 = LibraryLoader.GetSymbolDelegate<HasArchDelegate>(archCheckerHandle, "has_avx512");
-                }
+                has_avx_set = true;
             }
         }
 
         public LLMLib(string arch)
         {
-            LLMUnitySetup.Log(GetArchitecturePath(arch));
             libraryHandle = LibraryLoader.LoadLibrary(GetArchitecturePath(arch));
             if (libraryHandle == IntPtr.Zero)
             {
@@ -274,8 +330,12 @@ namespace LLMUnity
             LLM_Started = LibraryLoader.GetSymbolDelegate<LLM_StartedDelegate>(libraryHandle, "LLM_Started");
             LLM_Stop = LibraryLoader.GetSymbolDelegate<LLM_StopDelegate>(libraryHandle, "LLM_Stop");
             LLM_SetTemplate = LibraryLoader.GetSymbolDelegate<LLM_SetTemplateDelegate>(libraryHandle, "LLM_SetTemplate");
+            LLM_SetSSL = LibraryLoader.GetSymbolDelegate<LLM_SetSSLDelegate>(libraryHandle, "LLM_SetSSL");
             LLM_Tokenize = LibraryLoader.GetSymbolDelegate<LLM_TokenizeDelegate>(libraryHandle, "LLM_Tokenize");
             LLM_Detokenize = LibraryLoader.GetSymbolDelegate<LLM_DetokenizeDelegate>(libraryHandle, "LLM_Detokenize");
+            LLM_Embeddings = LibraryLoader.GetSymbolDelegate<LLM_EmbeddingsDelegate>(libraryHandle, "LLM_Embeddings");
+            LLM_Lora_Weight = LibraryLoader.GetSymbolDelegate<LLM_LoraWeightDelegate>(libraryHandle, "LLM_Lora_Weight");
+            LLM_LoraList = LibraryLoader.GetSymbolDelegate<LLM_LoraListDelegate>(libraryHandle, "LLM_Lora_List");
             LLM_Completion = LibraryLoader.GetSymbolDelegate<LLM_CompletionDelegate>(libraryHandle, "LLM_Completion");
             LLM_Slot = LibraryLoader.GetSymbolDelegate<LLM_SlotDelegate>(libraryHandle, "LLM_Slot");
             LLM_Cancel = LibraryLoader.GetSymbolDelegate<LLM_CancelDelegate>(libraryHandle, "LLM_Cancel");
@@ -290,7 +350,6 @@ namespace LLMUnity
 
         public void Destroy()
         {
-            if (archCheckerHandle != IntPtr.Zero) LibraryLoader.FreeLibrary(libraryHandle);
             if (libraryHandle != IntPtr.Zero) LibraryLoader.FreeLibrary(libraryHandle);
         }
 
@@ -302,21 +361,23 @@ namespace LLMUnity
             {
                 if (gpu)
                 {
-                    architectures.Add("cuda-cu12.2.0");
-                    architectures.Add("cuda-cu11.7.1");
-                    architectures.Add("hip");
+                    if (LLMUnitySetup.FullLlamaLib)
+                    {
+                        architectures.Add("cuda-cu12.2.0-full");
+                        architectures.Add("cuda-cu11.7.1-full");
+                        architectures.Add("hip-full");
+                    }
+                    else
+                    {
+                        architectures.Add("cuda-cu12.2.0");
+                        architectures.Add("cuda-cu11.7.1");
+                        architectures.Add("hip");
+                    }
                     architectures.Add("vulkan");
                 }
-                try
-                {
-                    if (has_avx512()) architectures.Add("avx512");
-                    if (has_avx2()) architectures.Add("avx2");
-                    if (has_avx()) architectures.Add("avx");
-                }
-                catch (Exception e)
-                {
-                    LLMUnitySetup.LogError($"{e.GetType()}: {e.Message}");
-                }
+                if (has_avx512) architectures.Add("avx512");
+                if (has_avx2) architectures.Add("avx2");
+                if (has_avx) architectures.Add("avx");
                 architectures.Add("noavx");
             }
             else if (Application.platform == RuntimePlatform.OSXEditor || Application.platform == RuntimePlatform.OSXPlayer)
@@ -333,6 +394,10 @@ namespace LLMUnity
                     architectures.Add("x64-acc");
                     architectures.Add("x64-no_acc");
                 }
+            }
+            else if (Application.platform == RuntimePlatform.Android)
+            {
+                architectures.Add("android");
             }
             else
             {
@@ -376,6 +441,10 @@ namespace LLMUnity
             {
                 filename = $"macos-{arch}/libundreamai_macos-{arch}.dylib";
             }
+            else if (Application.platform == RuntimePlatform.Android)
+            {
+                return "libundreamai_android.so";
+            }
             else
             {
                 string error = "Unknown OS";
@@ -384,11 +453,6 @@ namespace LLMUnity
             }
             return Path.Combine(LLMUnitySetup.libraryPath, filename);
         }
-
-        public delegate bool HasArchDelegate();
-        public static HasArchDelegate has_avx;
-        public static HasArchDelegate has_avx2;
-        public static HasArchDelegate has_avx512;
 
         public string GetStringWrapperResult(IntPtr stringWrapper)
         {
@@ -410,6 +474,7 @@ namespace LLMUnity
             return result;
         }
 
+        public delegate bool HasArchDelegate();
         public delegate void LoggingDelegate(IntPtr stringWrapper);
         public delegate void StopLoggingDelegate();
         public delegate IntPtr LLM_ConstructDelegate(string command);
@@ -420,8 +485,12 @@ namespace LLMUnity
         public delegate bool LLM_StartedDelegate(IntPtr LLMObject);
         public delegate void LLM_StopDelegate(IntPtr LLMObject);
         public delegate void LLM_SetTemplateDelegate(IntPtr LLMObject, string chatTemplate);
+        public delegate void LLM_SetSSLDelegate(IntPtr LLMObject, string SSLCert, string SSLKey);
         public delegate void LLM_TokenizeDelegate(IntPtr LLMObject, string jsonData, IntPtr stringWrapper);
         public delegate void LLM_DetokenizeDelegate(IntPtr LLMObject, string jsonData, IntPtr stringWrapper);
+        public delegate void LLM_EmbeddingsDelegate(IntPtr LLMObject, string jsonData, IntPtr stringWrapper);
+        public delegate void LLM_LoraWeightDelegate(IntPtr LLMObject, string jsonData, IntPtr stringWrapper);
+        public delegate void LLM_LoraListDelegate(IntPtr LLMObject, IntPtr stringWrapper);
         public delegate void LLM_CompletionDelegate(IntPtr LLMObject, string jsonData, IntPtr stringWrapper);
         public delegate void LLM_SlotDelegate(IntPtr LLMObject, string jsonData, IntPtr stringWrapper);
         public delegate void LLM_CancelDelegate(IntPtr LLMObject, int idSlot);
@@ -441,9 +510,13 @@ namespace LLMUnity
         public LLM_StartedDelegate LLM_Started;
         public LLM_StopDelegate LLM_Stop;
         public LLM_SetTemplateDelegate LLM_SetTemplate;
+        public LLM_SetSSLDelegate LLM_SetSSL;
         public LLM_TokenizeDelegate LLM_Tokenize;
         public LLM_DetokenizeDelegate LLM_Detokenize;
         public LLM_CompletionDelegate LLM_Completion;
+        public LLM_EmbeddingsDelegate LLM_Embeddings;
+        public LLM_LoraWeightDelegate LLM_Lora_Weight;
+        public LLM_LoraListDelegate LLM_LoraList;
         public LLM_SlotDelegate LLM_Slot;
         public LLM_CancelDelegate LLM_Cancel;
         public LLM_StatusDelegate LLM_Status;

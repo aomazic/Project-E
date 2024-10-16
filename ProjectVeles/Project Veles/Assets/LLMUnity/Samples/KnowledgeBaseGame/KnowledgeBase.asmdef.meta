@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 42f2ee663135398278c988534b3ae0b3
+AssemblyDefinitionImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 273604
+  packageName: LLM for Unity
+  packageVersion: 2.2.3
+  assetPath: Assets/LLMUnity/Samples/KnowledgeBaseGame/KnowledgeBase.asmdef
+  uploadId: 691704

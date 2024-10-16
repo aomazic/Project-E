@@ -1,15 +1,10 @@
 ### 🚀 Features
 
-- Add LLM selector in Inspector mode (PR: #182)
-- Allow to save chat history at custom path (PR: #179)
-- Use asynchronous startup by default (PR: #186)
-- Assign LLM if not set according to the scene and hierarchy (PR: #187)
-- Allow to set log level (PR: #189)
-- Allow to add callback functions for error messages (PR: #190)
-- Allow to set a LLM base prompt for all LLMCharacter objects (PR: #192)
+- LlamaLib v1.1.12: SSL certificate & API key for server, Support more AMD GPUs (PR: #241)
+- Server security with API key and SSL (PR: #238)
+- Show server command for easier deployment (PR #239)
 
 ### 🐛 Fixes
 
-- set higher priority for mac build with Accelerate than without (PR: #180)
-- Fix duplicate bos warning
-
+- Fix multiple LLM crash on Windows (PR: #242)
+- Exclude system prompt from saving of chat history (PR: #240)
